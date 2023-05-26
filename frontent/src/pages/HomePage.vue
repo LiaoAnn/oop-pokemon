@@ -31,7 +31,7 @@
               tag="a"
               href="https://github.com/LiaoAnn/oop-pokemon"
               target="_blank"
-              ghost
+              secondary
             >
               <template #icon>
                 <n-icon class="mr:16px" size="32px">

@@ -1,8 +1,8 @@
 <template>
   <div
-    :class="`rel bg:${darkPrimaryColor} height:100vh overflow:hidden flex align-items:center justify-content:center`"
+    :class="`rel bg:${darkSecondaryColor} height:100vh overflow:hidden flex align-items:center justify-content:center`"
   >
-    <div :class="`f:${secondaryColor} font:8em font-weight:900 user-select:none`">
+    <div :class="`f:${primaryColor} font:8em font-weight:900 user-select:none`">
       404 Not Found...
     </div>
     <n-icon class="abs top:-10% right:-10% transform:rotate(-35deg)" size="500px">
@@ -20,5 +20,5 @@ import { NIcon } from 'naive-ui';
 import useTheme from '@/common/useTheme';
 import NormalBallIcon from '@/components/icons/NormalBallIcon.vue';
 import UltraBallIcon from '@/components/icons/UltraBallIcon.vue';
-const { darkPrimaryColor, secondaryColor } = useTheme();
+const { darkSecondaryColor, primaryColor } = useTheme();
 </script>

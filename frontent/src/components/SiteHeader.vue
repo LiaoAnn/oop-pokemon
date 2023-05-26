@@ -1,6 +1,6 @@
 <template>
   <n-layout-header>
-    <div :class="`p:.5em|0 bg:${darkPrimaryColor}`">
+    <div :class="`p:.5em|0 bg:${darkSecondaryColor}`">
       <div
         class="w:80% flex align-items:center justify-content:space-between margin:0|auto height:3em"
       >
@@ -39,7 +39,7 @@ const currMenuValue = computed(() => {
   const { name } = route;
   return name?.toString() || 'home';
 });
-const { darkPrimaryColor } = useTheme();
+const { darkSecondaryColor } = useTheme();
 const logoHeight = 32;
 const logoWidth = 100;
 const menuOptions: MenuOption[] = [

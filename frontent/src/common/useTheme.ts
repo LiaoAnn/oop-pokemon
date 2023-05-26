@@ -2,25 +2,25 @@ import { type GlobalThemeOverrides } from 'naive-ui';
 import { computed, ref } from 'vue';
 
 export default function useTheme() {
-  const primaryColor = '#3d7dca';
-  const darkPrimaryColor = '#003a70';
-  const secondaryColor = '#ffcb05';
+  const primaryColor = '#ffcb05';
+  const secondaryColor = '#3d7dca';
+  const darkSecondaryColor = '#003a70';
   type Theme = null | 'dark';
   const theme = ref<Theme>(null);
 
   const baseThemeOverrides: GlobalThemeOverrides = {
     common: {
-      primaryColor: primaryColor,
-      primaryColorHover: primaryColor,
-      primaryColorPressed: primaryColor,
-      primaryColorSuppl: primaryColor,
+      primaryColor: secondaryColor,
+      primaryColorHover: secondaryColor,
+      primaryColorPressed: secondaryColor,
+      primaryColorSuppl: secondaryColor,
       fontWeightStrong: '600'
     },
     Menu: {
       itemTextColorHorizontal: 'white',
-      itemTextColorActiveHorizontal: secondaryColor,
-      itemTextColorActiveHoverHorizontal: secondaryColor,
-      itemTextColorHoverHorizontal: secondaryColor
+      itemTextColorActiveHorizontal: primaryColor,
+      itemTextColorActiveHoverHorizontal: primaryColor,
+      itemTextColorHoverHorizontal: primaryColor
     }
   };
 
@@ -48,7 +48,7 @@ export default function useTheme() {
 
   return {
     primaryColor,
-    darkPrimaryColor,
+    darkSecondaryColor,
     secondaryColor,
     theme,
     themeOverrides,
