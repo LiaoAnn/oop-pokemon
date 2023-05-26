@@ -6,8 +6,8 @@
       >
         <div class="flex align-items:center">
           <router-link to="/">
-            <n-icon size="120px">
-              <PokemonLogo />
+            <n-icon :class="`height:${logoHeight}px width:${logoWidth}px`">
+              <PokemonLogo :height="logoHeight" :width="logoWidth" />
             </n-icon>
           </router-link>
           <n-menu
@@ -40,6 +40,8 @@ const currMenuValue = computed(() => {
   return name?.toString() || 'home';
 });
 const { darkPrimaryColor } = useTheme();
+const logoHeight = 32;
+const logoWidth = 100;
 const menuOptions: MenuOption[] = [
   {
     label: () =>

@@ -1,10 +1,9 @@
 <template>
   <svg
-    id="Layer_1"
+    id="pokemon-logo"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 269.5 98.8"
-    width="2500"
-    height="917"
+    :style="`height: ${height}px; width: ${width}px;`"
   >
     <linearGradient
       id="polygon16_1_"
@@ -334,6 +333,21 @@
     />
   </svg>
 </template>
+
+<script setup lang="ts">
+import { toRefs } from 'vue';
+//#region Props
+interface PokemonLogoProps {
+  width: number;
+  height: number;
+}
+const props = withDefaults(defineProps<PokemonLogoProps>(), {
+  width: 100,
+  height: 32
+});
+const { height, width } = toRefs(props);
+//#endregion
+</script>
 
 <style scoped>
 .st0 {
