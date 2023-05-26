@@ -1,11 +1,15 @@
 <template>
   <n-layout-header>
-    <div class="p:.5em|0">
+    <div :class="`p:.5em|0 bg:${darkPrimaryColor}`">
       <div
         class="w:80% flex align-items:center justify-content:space-between margin:0|auto height:3em"
       >
         <div class="flex align-items:center">
-          <div class="icon"></div>
+          <router-link to="/">
+            <n-icon size="120px">
+              <PokemonLogo />
+            </n-icon>
+          </router-link>
           <n-menu
             v-model:value="currMenuValue"
             :options="menuOptions"
@@ -20,10 +24,14 @@
 
 <script setup lang="ts">
 import type { MenuOption } from 'naive-ui';
-import { NLayoutHeader, NMenu } from 'naive-ui';
+import { NIcon, NLayoutHeader, NMenu } from 'naive-ui';
 import { computed, h } from 'vue';
 import { RouterLink } from 'vue-router';
 import { useRoute } from 'vue-router';
+
+import useTheme from '@/common/useTheme';
+
+import PokemonLogo from './icons/PokemonLogo.vue';
 
 const route = useRoute();
 const classStr = 'display:block padding:0|.5em color:inherit text-decoration:none';
@@ -31,6 +39,7 @@ const currMenuValue = computed(() => {
   const { name } = route;
   return name?.toString() || 'home';
 });
+const { darkPrimaryColor } = useTheme();
 const menuOptions: MenuOption[] = [
   {
     label: () =>
