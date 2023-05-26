@@ -17,20 +17,10 @@ export default function useTheme() {
       fontWeightStrong: '600'
     },
     Menu: {
-      itemTextColorHorizontal: secondaryColor,
-      itemTextColorHorizontalHover: secondaryColor,
-      itemTextColorHorizontalPressed: secondaryColor,
-      itemTextColorHorizontalActive: secondaryColor,
-      itemTextColorHorizontalActiveHover: secondaryColor,
-      itemTextColorHorizontalActivePressed: secondaryColor,
+      itemTextColorHorizontal: 'white',
       itemTextColorActiveHorizontal: secondaryColor,
-      itemTextColorActiveHorizontalHover: secondaryColor,
-      itemTextColorActiveHorizontalPressed: secondaryColor,
       itemTextColorActiveHoverHorizontal: secondaryColor,
-      itemTextColorActiveHoverHorizontalHover: secondaryColor,
-      itemTextColorActiveHoverHorizontalPressed: secondaryColor,
-      itemTextColorActivePressedHorizontal: secondaryColor,
-      itemTextColorActivePressedHorizontalHover: secondaryColor
+      itemTextColorHoverHorizontal: secondaryColor
     }
   };
 
