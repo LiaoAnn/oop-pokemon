@@ -4,7 +4,7 @@
       <div
         class="w:80% flex align-items:center justify-content:space-between margin:0|auto height:3em"
       >
-        <div class="flex align-items:center">
+        <div class="flex align-items:center gap:48px">
           <router-link to="/">
             <n-icon :class="`height:${logoHeight}px width:${logoWidth}px`">
               <PokemonLogo :height="logoHeight" :width="logoWidth" />
