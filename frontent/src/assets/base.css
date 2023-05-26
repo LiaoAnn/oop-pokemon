@@ -7,3 +7,7 @@
   margin: 0;
   font-weight: normal;
 }
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+}
