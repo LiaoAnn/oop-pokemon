@@ -55,6 +55,19 @@ const menuOptions: MenuOption[] = [
       ),
     name: 'Home',
     key: 'Home'
+  },
+  {
+    label: () =>
+      h(
+        RouterLink,
+        {
+          to: '/game',
+          class: classStr
+        },
+        'Game'
+      ),
+    name: 'Game',
+    key: 'Game'
   }
 ];
 </script>
