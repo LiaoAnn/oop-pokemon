@@ -3,14 +3,16 @@
     <div class="w:75% margin:2em|auto">
       <div class="grid-cols:2 h:100%">
         <div class="p:2em">
-          <div class="font:3em mt:1.5em font-weight:900">Project 3 | Pokémon</div>
-          <div class="font:1.2em mt:1em line-height:2em font-weight:500 f:#aaa">
-            融入線上對戰，與全球訓練家一較高下！，<br />
-            感受激烈的戰鬥，將你的寶可夢訓練到巔峰！<br />
-            絕妙的BGM伴隨著每場戰鬥，帶你進入寶可夢的音樂世界。<br />
-            攜手夥伴，征服世界各地的挑戰，將你的冒險完美結束！
+          <div class="font:3em mt:.75em font-weight:900">Project 3 | Pokémon</div>
+          <div class="font:1.2em mt:.5em line-height:2em font-weight:500 f:#aaa">
+            歡迎你進入寶可夢的世界，<br />
+            在這裡你將和全球頂尖的訓練家們展開刺激的對決。<br />
+            每一次的勝利，<br />
+            都將讓你與成為寶可夢大師的夢想更近一步。<br /><br />
+            你，準備好證明自己，<br />
+            成為最強大的寶可夢訓練家了嗎？
           </div>
-          <div class="mt:8em flex gap:8px">
+          <div class="mt:6em flex gap:8px">
             <n-button class="p:1em|2em font:2em font-weight:500" type="primary">
               <n-icon class="mr:8px" size="32px">
                 <PokemonBallIcon />
@@ -35,7 +37,7 @@
           </div>
         </div>
         <div
-          :class="`bg:url('${HomeImage}') height:600px background-size:150% bg:no-repeat background-position:0%|50%`"
+          :class="`bg:url('${HomeImage}') height:600px background-size:160% bg:no-repeat background-position:0%|50%`"
         ></div>
       </div>
     </div>
