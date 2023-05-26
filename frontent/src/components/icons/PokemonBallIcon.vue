@@ -1,4 +1,5 @@
-<svg
+<template>
+  <svg
     id="Layer_1"
     style="enable-background: new 0 0 100 100"
     version="1.1"
@@ -19,3 +20,4 @@
       <circle cx="50" cy="50" r="7" />
     </g>
   </svg>
+</template>
