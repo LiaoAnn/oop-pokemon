@@ -11,11 +11,16 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/pages/HomePage.vue')
       },
       {
-        path: '/game',
+        path: 'game',
         name: 'Game',
         component: () => import('@/pages/GamePage.vue')
       }
     ]
+  },
+  {
+    path: '/:catchAll(.*)*',
+    name: 'NotFound',
+    component: () => import('@/pages/NotFoundPage.vue')
   }
 ];
 
