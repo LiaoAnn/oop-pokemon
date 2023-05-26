@@ -6,7 +6,7 @@
           <n-icon :class="`height:${logoHeight} width:${logoWidth}`">
             <PokemonLogo :width="logoWidth" :height="logoHeight" />
           </n-icon>
-          <div :class="`f:${secondaryColor} font:2em font-weight:500`">Project 3 | Pokémon</div>
+          <div :class="`f:white font:2em font-weight:500`">Project 3 | Pokémon</div>
         </div>
         <div>
           <div :class="`f:${secondaryColor} font-weight:400 font:1em`">組員</div>
@@ -15,37 +15,37 @@
             <n-icon size="1.5em">
               <MasterBallIcon />
             </n-icon>
-            <div class="f:white font:1.5em p:4px">廖廷安</div>
-            <div :class="`f:${secondaryColor} font:1.5em p:4px`">| B11130237</div>
+            <div :class="`f:${secondaryColor} font:1.5em p:4px`">廖廷安</div>
+            <div :class="`f:white font:1.5em p:4px`">| B11130237</div>
           </div>
 
           <div class="flex align-items:center">
             <n-icon size="1.5em">
               <UltraBallIcon />
             </n-icon>
-            <div class="f:white font:1.5em p:4px">劉耀恩</div>
-            <div :class="`f:${secondaryColor} font:1.5em p:4px`">| B11115039</div>
+            <div :class="`f:${secondaryColor} font:1.5em p:4px`">劉耀恩</div>
+            <div :class="`f:white font:1.5em p:4px`">| B11115039</div>
           </div>
 
           <div class="flex align-items:center">
             <n-icon size="1.5em">
               <UltraBallIcon />
             </n-icon>
-            <div class="f:white font:1.5em p:4px">劉沛安</div>
-            <div :class="`f:${secondaryColor} font:1.5em p:4px`">| B11115034</div>
+            <div :class="`f:${secondaryColor} font:1.5em p:4px`">譚秉家</div>
+            <div :class="`f:white font:1.5em p:4px`">| B11115001</div>
           </div>
 
           <div class="flex align-items:center">
             <n-icon size="1.5em">
               <NormalBallIcon />
             </n-icon>
-            <div class="f:white font:1.5em p:4px">譚秉家</div>
-            <div :class="`f:${secondaryColor} font:1.5em p:4px`">| B11115001</div>
+            <div :class="`f:${secondaryColor} font:1.5em p:4px`">劉沛安</div>
+            <div :class="`f:white font:1.5em p:4px`">| B11115034</div>
           </div>
         </div>
       </div>
 
-      <div class="text-align:center f:white mt:16px">Made with ❤️ by Group 23</div>
+      <div class="text-align:center f:white mt:16px">Made with ❤️ by Group 14</div>
     </div>
   </n-layout-footer>
 </template>
