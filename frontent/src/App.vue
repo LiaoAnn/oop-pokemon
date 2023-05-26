@@ -1,5 +1,5 @@
 <template>
-  <n-config-provider>
+  <n-config-provider :theme-overrides="themeOverrides">
     <n-dialog-provider>
       <n-loading-bar-provider>
         <n-message-provider>
@@ -22,4 +22,7 @@ import {
   NMessageProvider,
   NNotificationProvider
 } from 'naive-ui';
+
+import useTheme from './common/useTheme';
+const { themeOverrides } = useTheme();
 </script>
