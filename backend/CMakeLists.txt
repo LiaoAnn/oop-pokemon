@@ -2,12 +2,26 @@ cmake_minimum_required(VERSION 3.12)
 project(MyProject)
 
 # 指定 Boost 庫的位置
-set(Boost_INCLUDE_DIR "path/to/boost/root/dir")
-set(Boost_LIBRARY_DIR "path/to/boost/libs/dir")
+set(Boost_INCLUDE_DIR
+	"path/to/boost/root/dir"
+	"C:/local/boost_1_82_0"
+	# Add your own Boost include path here
+)
+set(Boost_LIBRARY_DIR 
+	"path/to/boost/libs/dir"
+	"C:/local/boost_1_82_0/stage/lib"
+	# Add your own Boost library path here
+)
+set(WebSocketpp
+	"path/to/websocketpp/root/dir"
+	"C:/local/websocketpp-0.8.2"
+	# Add your own WebSocketpp include path here
+)
 
 # 添加 Boost 的庫和頭文件的搜索路徑
 link_directories(${Boost_LIBRARY_DIR})
 include_directories(${Boost_INCLUDE_DIR})
+include_directories(${WebSocketpp})
 
 # 設置項目的可執行文件
 add_executable(myapp "")
