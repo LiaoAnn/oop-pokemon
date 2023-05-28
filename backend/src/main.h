@@ -15,3 +15,4 @@ const string WEBROOT = "dist";
 
 void webServerThread();
 void webSocketServerThread();
+void gameThread();
