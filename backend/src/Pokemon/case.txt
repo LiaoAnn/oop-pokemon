@@ -1,0 +1,15 @@
+PokemonLib.txt
+MoveLib.txt
+GameData.txt
+Test
+Battle
+VineWhip
+WaterGun
+Status
+Bag
+Hyper Potion
+WaterPulse
+Battle
+SolarBeam
+FlashCannon
+DragonBreath
