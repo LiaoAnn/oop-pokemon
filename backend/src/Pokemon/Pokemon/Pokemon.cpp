@@ -5,19 +5,17 @@
 #include <map>
 #include <vector>
 #include <fstream>
-
-map<string, int> TypeMap = { {"Normal", 0}, {"Fire", 1}, {"Water", 2}, {"Electric", 3}, {"Grass", 4}, {"Ice", 5}, {"Fighting", 6}, {"Poison", 7}, {"Ground", 8}, {"Flying", 9}, {"Psychic", 10}, {"Bug", 11}, {"Rock", 12}, {"Ghost", 13}, {"Dragon", 14}, {"Dark", 15}, {"Steel", 16}, {"Fairy", 17} };
+#include "fileLoad.h"
 
 using namespace std;
 int main()
 {
-	ifstream in;
-	in.open("case.txt");
-	string MonsterLibName, MoveLibName, GameDataName;
-	in >> MonsterLibName;
-	in >> MoveLibName;
-	in >> GameDataName;
-	
+	string filename;
+	filename = "case.txt";
+	fileLoad filetest(filename);
+	filetest.openFile();
+	filetest.PokemonLibfile();
+	filetest.Movesfile();
 }
 
 // 執行程式: Ctrl + F5 或 [偵錯] > [啟動但不偵錯] 功能表
