@@ -1,3 +1,11 @@
+﻿/***********************************************************************
+ * File: Pokemon.h
+ * Author: 劉耀恩
+ * Create Date: 2023/05/30
+ * Editor: 劉耀恩
+ * Update Date: 2023/05/30
+ * Description: Definition of Pokemon class
+***********************************************************************/
 #pragma once
 #include <iostream>
 #include <vector>
