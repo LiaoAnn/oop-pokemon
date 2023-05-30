@@ -13,20 +13,6 @@
 using namespace std;
 
 class Skill {
-public:
-	Skill();
-	Skill(string name, int type, int category, int power, int accuracy, int pp, SkillEffect* effect);
-	~Skill();
-
-	string getName() const;
-	int getType() const;
-	int getCategory() const;
-	int getPower() const;
-	int getAccuracy() const;
-	int getPP() const;
-	SkillEffect* Skill::getEffect() const;
-
-	void reducePP();
 private:
 	string name;  // Name of the skill
 	int type;  // Type of the skill, e.g., Fire, Water, Grass, etc.
@@ -35,4 +21,29 @@ private:
 	int accuracy;  // Accuracy of the skill
 	int pp;  // PP value of the skill, indicating the number of times it can be used
 	SkillEffect* effect;  // Special effects of the skill, e.g. paralysis, Burn, Poison
+public:
+	// Default constructor
+	Skill();
+	// Constructor with parameters
+	Skill(string name, int type, int category, int power, int accuracy, int pp, SkillEffect* effect);
+	// Destructor
+	~Skill();
+
+	// Get Skill name
+	string getName() const;
+	// Get Skill type
+	int getType() const;
+	// Get Skill category
+	int getCategory() const;
+	// Get Skill power
+	int getPower() const;
+	// Get Skill accuracy
+	int getAccuracy() const;
+	// Get Skill PP
+	int getPP() const;
+	// Get Skill effect
+	SkillEffect* Skill::getEffect() const;
+
+	// Reduce PP by 1
+	void reducePP();
 };
