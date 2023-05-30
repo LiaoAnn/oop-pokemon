@@ -28,7 +28,8 @@ add_executable(myapp "")
 
 # 遞歸搜索並收集所有 .cpp 和 .h 文件
 file(GLOB_RECURSE CPP_SOURCES "src/*.cpp")
-file(GLOB_RECURSE HEADER_FILES "include/*.h")
+# file(GLOB_RECURSE HEADER_FILES "include/*.h")
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # 添加所有的 .cpp 和 .h 文件到可執行文件中
 target_sources(myapp PRIVATE ${CPP_SOURCES} ${HEADER_FILES})
