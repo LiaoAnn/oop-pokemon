@@ -8,13 +8,14 @@
 ************************************************************************/
 #pragma once
 #include <string>
+#include "SkillEffect.h"
 
 using namespace std;
 
 class Skill {
 public:
 	Skill();
-	Skill(string name, int type, int category, int power, int accuracy, int pp, int effect);
+	Skill(string name, int type, int category, int power, int accuracy, int pp, SkillEffect* effect);
 	~Skill();
 
 	string getName() const;
@@ -23,7 +24,7 @@ public:
 	int getPower() const;
 	int getAccuracy() const;
 	int getPP() const;
-	int getEffect() const;
+	SkillEffect* Skill::getEffect() const;
 
 	void reducePP();
 private:
@@ -33,5 +34,5 @@ private:
 	int power;  // Power of the skill
 	int accuracy;  // Accuracy of the skill
 	int pp;  // PP value of the skill, indicating the number of times it can be used
-	int effect;  // Special effects of the skill, e.g. paralysis, Burn, Poison
+	SkillEffect* effect;  // Special effects of the skill, e.g. paralysis, Burn, Poison
 };

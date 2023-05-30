@@ -31,13 +31,15 @@ Skill::Skill()
  * Pre: name is a string, type is an integer, power is an integer, accuracy is an integer, pp is an integer, effect is an integer
  * Post: Skill object
  */
-Skill::Skill(string name, int type, int category, int power, int accuracy, int pp, int effect) : name(name),
-type(type),
-category(category),
-power(power),
-accuracy(accuracy),
-pp(pp),
-effect(effect)
+Skill::Skill(string name, int type, int category, int power, int accuracy, int pp, SkillEffect* effect)
+	:
+	name(name),
+	type(type),
+	category(category),
+	power(power),
+	accuracy(accuracy),
+	pp(pp),
+	effect(effect)
 {}
 
 /**
@@ -115,7 +117,7 @@ int Skill::getPP() const
  * Pre: None
  * Post: Return the effect of the skill
  */
-int Skill::getEffect() const
+SkillEffect* Skill::getEffect() const
 {
 	return effect;
 }
