@@ -1,5 +1,7 @@
 #pragma once
+#pragma once
 #include <iostream>
+#include <vector>
 #include "Type.h"
 using namespace std;
 
@@ -16,9 +18,9 @@ private:
 	int level = 50;
 	vector<Type> typeList;
 public:
-	
-	PokemonCreature(string name, vector<Type> typeList, 
-		int HP, int atk, int def, int sPatk, int sPdef, int speed):
+
+	PokemonCreature(string name, vector<Type> typeList,
+		int HP, int atk, int def, int sPatk, int sPdef, int speed) :
 		name(name), typeList(typeList), maxHP(HP), HP(HP), ATK(atk),
 		DEF(def), SPatk(sPatk), SPdef(sPdef), speed(speed) {};
 };

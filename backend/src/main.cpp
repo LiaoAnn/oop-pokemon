@@ -1,8 +1,16 @@
-#include <iostream>
+﻿#include <iostream>
+#include <map>
+#include <vector>
+#include <fstream>
+#include "fileLoad.h"
 
+using namespace std;
 int main()
 {
-    std::cout << "OOP Pokémon" << std::endl;
-
-    return 0;
+	string filename;
+	filename = "case.txt";
+	fileLoad filetest(filename);
+	filetest.openFile();
+	filetest.PokemonLibfile();
+	filetest.Movesfile();
 }

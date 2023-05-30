@@ -1,5 +1,5 @@
 #include "fileLoad.h"
-#include "PokemonCreature.h"
+#include "Creature.h"
 #include "Move.h"
 #include <vector>
 #include <string>
@@ -13,9 +13,9 @@ void fileLoad::openFile() {
 	in >> MonsterLibName;
 	in >> MoveLibName;
 	in >> GameDataName;
-	
-	
-	
+
+
+
 }
 void fileLoad::PokemonLibfile() {
 	vector<PokemonCreature> MonsterLib;
@@ -67,7 +67,7 @@ void fileLoad::Movesfile() {
 				effect = PSN;
 			}
 		}
-		MoveLib.push_back(Move(movename, movetype, phs, power1,power2, power3, effect));
+		MoveLib.push_back(Move(movename, movetype, phs, power1, power2, power3, effect));
 	}
 	Moves.close();
 }
