@@ -1,9 +1,11 @@
 #include "fileLoad.h"
-#include "Creature.h"
+#include "Pokemon.h"
 #include "Move.h"
 #include <vector>
 #include <string>
 #include <sstream>
+#include "Type.h"
+
 fileLoad::fileLoad(string name) {
 	fileName = name;
 }
@@ -11,14 +13,15 @@ void fileLoad::openFile() {
 	ifstream in;
 	in.open(fileName);
 	in >> MonsterLibName;
+	cout << MonsterLibName;
 	in >> MoveLibName;
 	in >> GameDataName;
-
+	
 
 
 }
 void fileLoad::PokemonLibfile() {
-	vector<PokemonCreature> MonsterLib;
+	vector<Pokemon> Monster;
 	ifstream PokemonLib;
 	PokemonLib.open(MonsterLibName);
 	string Pname;
@@ -31,10 +34,11 @@ void fileLoad::PokemonLibfile() {
 			cnt++;
 			string typeName;
 			PokemonLib >> typeName;
-			typelist.push_back(Type(TypeMap[typeName]));
+			
+			typelist.insert(TypeMap[typeName]);
 		}
-		PokemonLib >> HP >> ATK >> DEF >> SPatk >> SPdef >> speed;
-		MonsterLib.push_back(PokemonCreature(Pname, typelist, HP, ATK, DEF, SPatk, SPdef, speed));
+		PokemonLib >> hp >> attack >> defence >> spAttack >> spDefence >> speed;
+		Monster.push_back(Pokemon(Pname, typelist, hp, attack, defence, spAttack, spDefence, speed));
 	}
 	PokemonLib.close();
 
@@ -43,17 +47,18 @@ void fileLoad::Movesfile() {
 	vector<Move> MoveLib;
 	ifstream Moves;
 	Moves.open(MoveLibName);
-	string line;
-	Type movetype;
+	string describe;
 	AdditionalEffect effect;
-	//PhysicalSpecial phys;
-	while (getline(Moves, line)) {
+	effect = NOR;
+	vector<string>properList;
+	type movetype;
+	while (getline(Moves, describe)) {
 		effect = NOR;
-		stringstream ss(line);
-		string movename, phs, ATKtype;
+		stringstream ss(describe);
+		string movename, propertys, ATKtype;
 		int power1, power2, power3;
-		ss >> movename >> phs >> ATKtype >> power1 >> power2 >> power3;
-		movetype = Type(TypeMap[phs]);
+		ss >> movename >> propertys >> ATKtype >> power1 >> power2 >> power3;
+		movetype = type(TypeMap[propertys]);
 		if (ATKtype == "Special") {
 			string temp;
 			ss >> temp;
@@ -67,7 +72,7 @@ void fileLoad::Movesfile() {
 				effect = PSN;
 			}
 		}
-		MoveLib.push_back(Move(movename, movetype, phs, power1, power2, power3, effect));
+		MoveLib.push_back(Move(movename, movetype, propertys, power1, power2, power3, effect));
 	}
 	Moves.close();
 }

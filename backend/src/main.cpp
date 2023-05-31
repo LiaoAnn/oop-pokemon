@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <map>
 #include <vector>
 #include <fstream>
@@ -8,7 +8,7 @@ using namespace std;
 int main()
 {
 	string filename;
-	filename = "case.txt";
+	filename = "../../../src/case.txt";
 	fileLoad filetest(filename);
 	filetest.openFile();
 	filetest.PokemonLibfile();
