@@ -17,7 +17,8 @@ SkillEffect::SkillEffect()
 	:
 	skillEffectAttack(0),
 	skillEffectName(""),
-	skillEffectDescription("")
+	skillEffectDescription(""),
+	skillEffectType(0)
 {
 }
 
@@ -26,11 +27,12 @@ SkillEffect::SkillEffect()
  * Pre: skillEffectAttack is an integer, skillEffectName and skillEffectDescription are strings
  * Post: A SkillEffect object
  */
-SkillEffect::SkillEffect(int skillEffectAttack, string skillEffectName, string skillEffectDescription)
+SkillEffect::SkillEffect(int skillEffectAttack,int skillEffectType, string skillEffectName, string skillEffectDescription)
 	:
 	skillEffectAttack(skillEffectAttack),
 	skillEffectName(skillEffectName),
-	skillEffectDescription(skillEffectDescription)
+	skillEffectDescription(skillEffectDescription),
+	skillEffectType(skillEffectType)
 {}
 
 /**
@@ -72,4 +74,13 @@ string SkillEffect::getSkillEffectDescription() const
 	return skillEffectDescription;
 }
 
+/**
+ * Intent: Get the type of the skill effect
+ * Pre: None
+ * Post: An integer
+ */
+int SkillEffect::getSkillEffectType() const
+{
+	return skillEffectType;
+}
 
