@@ -10,11 +10,14 @@
 
 #include "SkillEffect.h"
 
+ // All effect
+extern SkillEffect* SkillEffectList[3];
+
 // All type of skill effect
 enum SkillEffectType
 {
-	DAMAGE,
-	STUN,
+	DOT,
+	DEBUFF,
 };
 
 // All category of skill effect
@@ -23,12 +26,4 @@ enum SkillEffectCategory
 	PARALYSIS,
 	POISON,
 	BURN,
-};
-
-// All type of skill effect
-
-SkillEffect SkillEffectList[] = {
-	SkillEffect(0, SkillEffectType::STUN, "PAR", "Paralysis"),
-	SkillEffect(10, SkillEffectType::DAMAGE, "PSN", "Poison"),
-	SkillEffect(10, SkillEffectType::DAMAGE, "BRN", "Burn"),
 };

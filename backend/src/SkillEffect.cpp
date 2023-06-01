@@ -7,6 +7,7 @@
  * Description: Implementation for SkillEffect
 ************************************************************************/
 #include "SkillEffect.h"
+#include "SkillEffectList.h"
 
 /**
  * Intent: Default constructor
@@ -15,24 +16,21 @@
  */
 SkillEffect::SkillEffect()
 	:
-	skillEffectAttack(0),
-	skillEffectName(""),
-	skillEffectDescription(""),
-	skillEffectType(0)
-{
-}
+	name(""),
+	type(0),
+	leftRound(0)
+{}
 
 /**
  * Intent: Constructor
- * Pre: skillEffectAttack is an integer, skillEffectName and skillEffectDescription are strings
+ * Pre: skillEffectAttack is an integer, skillEffectName
  * Post: A SkillEffect object
  */
-SkillEffect::SkillEffect(int skillEffectAttack,int skillEffectType, string skillEffectName, string skillEffectDescription)
+SkillEffect::SkillEffect(int type, string name,int leftRound)
 	:
-	skillEffectAttack(skillEffectAttack),
-	skillEffectName(skillEffectName),
-	skillEffectDescription(skillEffectDescription),
-	skillEffectType(skillEffectType)
+	name(name),
+	type(type),
+	leftRound(leftRound)
 {}
 
 /**
@@ -45,33 +43,13 @@ SkillEffect::~SkillEffect()
 }
 
 /**
- * Intent: Get the attack of the skill effect
- * Pre: None
- * Post: An integer
- */
-int SkillEffect::getSkillEffectAttack() const
-{
-	return skillEffectAttack;
-}
-
-/**
  * Intent: Get the name of the skill effect
  * Pre: None
  * Post: A string
  */
 string SkillEffect::getSkillEffectName() const
 {
-	return skillEffectName;
-}
-
-/**
- * Intent: Get the description of the skill effect
- * Pre: None
- * Post: A string
- */
-string SkillEffect::getSkillEffectDescription() const
-{
-	return skillEffectDescription;
+	return name;
 }
 
 /**
@@ -81,6 +59,194 @@ string SkillEffect::getSkillEffectDescription() const
  */
 int SkillEffect::getSkillEffectType() const
 {
-	return skillEffectType;
+	return type;
 }
 
+/**
+ * Intent: Get the left round of the skill effect
+ * Pre: None
+ * Post: An integer
+ */
+int SkillEffect::getLeftRound() const
+{
+	return leftRound;
+}
+
+/**
+ * Intent: Reduce the left round of the skill effect
+ * Pre: None
+ * Post: None
+ */
+void SkillEffect::reduceLeftRound()
+{
+	leftRound--;
+}
+
+
+/**
+ * Intent: Print message when get skill effect
+ * Pre: None
+ * Post: None
+ */
+string SkillEffect::printGotMessage(string pokemonName) const
+{
+	return "";
+}
+
+/**
+ * Intent: Print message when skill effect affect
+ * Pre: None
+ * Post: None
+ */
+string SkillEffect::printAffactMessage(string pokemonName) const
+{
+	return "";
+}
+
+/**
+ * Intent: Default constructor
+ * Pre: None
+ * Post: A Poison object
+ */
+Poison::Poison()
+	:
+	SkillEffect(DOT, "Poison")
+{}
+
+/**
+ * Intent: Constructor
+ * Pre: leftRound is an integer
+ * Post: A Poison object
+ */
+Poison::Poison(int leftRound)
+	:
+	SkillEffect(DOT, "Poison", leftRound)
+{}
+
+/**
+ * Intent: Destructor
+ * Pre: None
+ * Post: None
+ */
+Poison::~Poison()
+{
+}
+
+/**
+ * Intent: Print message when get skill effect
+ * Pre: None
+ * Post: None
+ */
+string Poison::printGotMessage(string pokemonName) const
+{
+	return pokemonName + " was poisoned!";
+}
+
+/**
+ * Intent: Print message when skill effect affect
+ * Pre: None
+ * Post: None
+ */
+string Poison::printAffactMessage(string pokemonName) const
+{
+	return pokemonName + " is hurt by its poisoning!";
+}
+
+/**
+ * Intent: Default constructor
+ * Pre: None
+ * Post: A Burn object
+ */
+Burn::Burn()
+	:
+	SkillEffect(DOT, "Burn")
+{}
+
+/**
+ * Intent: Constructor
+ * Pre: leftRound is an integer
+ * Post: A Burn object
+ */
+Burn::Burn(int leftRound)
+	:
+	SkillEffect(DOT, "Burn", leftRound)
+{}
+
+/**
+ * Intent: Destructor
+ * Pre: None
+ * Post: None
+ */
+Burn::~Burn()
+{
+}
+
+/**
+ * Intent: Print message when get skill effect
+ * Pre: None
+ * Post: None
+ */
+string Burn::printGotMessage(string pokemonName) const
+{
+	return pokemonName + " was burned!";
+}
+
+/**
+ * Intent: Print message when skill effect affect
+ * Pre: None
+ * Post: None
+ */
+string Burn::printAffactMessage(string pokemonName) const
+{
+	return pokemonName + " is hurt by its burn!";
+}
+
+/**
+ * Intent: Default constructor
+ * Pre: None
+ * Post: A Paralysis object
+ */
+Paralysis::Paralysis()
+	:
+	SkillEffect(DEBUFF, "Paralysis")
+{}
+
+/**
+ * Intent: Constructor
+ * Pre: leftRound is an integer
+ * Post: A Paralysis object
+ */
+Paralysis::Paralysis(int leftRound)
+	:
+	SkillEffect(DEBUFF, "Paralysis", leftRound)
+{}
+
+/**
+ * Intent: Destructor
+ * Pre: None
+ * Post: None
+ */
+Paralysis::~Paralysis()
+
+{
+}
+
+/**
+ * Intent: Print message when get skill effect
+ * Pre: None
+ * Post: None
+ */
+string Paralysis::printGotMessage(string pokemonName) const
+{
+	return pokemonName + " is paralyzed, so it may be unable to move!";
+}
+
+/**
+ * Intent: Print message when skill effect affect
+ * Pre: None
+ * Post: None
+ */
+string Paralysis::printAffactMessage(string pokemonName) const
+{
+	return pokemonName + " is paralyzed!\r\nIt can't move!";
+}
