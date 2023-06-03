@@ -76,23 +76,29 @@ void fileLoad::Movesfile() {
 	}
 	Moves.close();
 }
-void fileLoad::test() {
+void fileLoad::opentest() {
 	ifstream in;
 	in.open(fileName);
 	in >> MonsterLibName;
-	//cout << MonsterLibName;
+	cout << MonsterLibName;
 	in >> MoveLibName;
 	in >> GameDataName;
 	string commend;
-	in >> commend;
-	if (commend == "test") {
-		in >> commend;
+	bool start = false;
+	bool player1creature = false;
+
+	//Gamestatus GS();
+	while (in >> commend) {
+		if (commend == "Test") {
+			start = true;
+			cout << "Attention: Test start " << endl;
+		}
 		if (commend == "battle") {
-			string play1, play2;
-			in >> play1;
-			in >> play2;
+			cout << "battle" << endl;
 
 		}
+		if (commend == "Bag") {
 
+		}
 	}
 }

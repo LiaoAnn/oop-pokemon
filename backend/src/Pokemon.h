@@ -12,16 +12,19 @@ private:
 	int typeNum; // number of types
 	set <int> type; // type of pokemon
 	int hp; // health points
-	int attack; // attack points
-	int defence; // defence points
-	int spAttack; // special attack points
-	int spDefence; // special defence points
-	int speed; // speed points
+	float attack; // attack points
+	float defence; // defence points
+	float spAttack; // special attack points
+	float spDefence; // special defence points
+	float speed; // speed points
 	vector <int> currentStat; // current stats
+	vector<float>atkList, defList;
 public:
+	Pokemon() { atkList.clear(); }
 	Pokemon(string name, set<int> typeList,
-		int HP, int atk, int def, int sPatk, int sPdef, int speed) :
+		int HP, float atk, float def, float sPatk, float sPdef, float speed) :
 		name(name), type(typeList), hp(HP), attack(atk),
 		defence(def), spAttack(sPatk), spDefence(sPdef), speed(speed) {};
-	void battle(string play1, string play2);
+	void battle(string power1, string power2);
+	float getATK();
 };

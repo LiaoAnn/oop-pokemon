@@ -27,5 +27,5 @@ public:
 	void setfile();
 	void PokemonLibfile();
 	void Movesfile();
-	void test();
+	void opentest();
 };
