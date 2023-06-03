@@ -13,10 +13,10 @@ void fileLoad::openFile() {
 	ifstream in;
 	in.open(fileName);
 	in >> MonsterLibName;
-	cout << MonsterLibName;
+	//cout << MonsterLibName;
 	in >> MoveLibName;
 	in >> GameDataName;
-	
+	in.close();
 
 
 }
@@ -75,4 +75,24 @@ void fileLoad::Movesfile() {
 		MoveLib.push_back(Move(movename, movetype, propertys, power1, power2, power3, effect));
 	}
 	Moves.close();
+}
+void fileLoad::test() {
+	ifstream in;
+	in.open(fileName);
+	in >> MonsterLibName;
+	//cout << MonsterLibName;
+	in >> MoveLibName;
+	in >> GameDataName;
+	string commend;
+	in >> commend;
+	if (commend == "test") {
+		in >> commend;
+		if (commend == "battle") {
+			string play1, play2;
+			in >> play1;
+			in >> play2;
+
+		}
+
+	}
 }

@@ -23,4 +23,5 @@ public:
 		int HP, int atk, int def, int sPatk, int sPdef, int speed) :
 		name(name), type(typeList), hp(HP), attack(atk),
 		defence(def), spAttack(sPatk), spDefence(sPdef), speed(speed) {};
+	void battle(string play1, string play2);
 };
