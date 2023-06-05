@@ -17,7 +17,7 @@ file(GLOB_RECURSE CPP_SOURCES "src/*.cpp")
 file(GLOB_RECURSE HEADER_FILES "include/*.h")
 
 # 添加所有的 .cpp 和 .h 文件到可執行文件中
-target_sources(myapp PRIVATE ${CPP_SOURCES} ${HEADER_FILES} "src/Pokemon.cpp" "src/Gamestatus.h")
+target_sources(myapp PRIVATE ${CPP_SOURCES} ${HEADER_FILES} "src/Pokemon.cpp" "src/Gamestatus.h" "src/Gamestatus.cpp" "src/Move.cpp")
 
 # 鏈接 Boost 庫
 target_link_libraries(myapp PRIVATE ${Boost_LIBRARIES})

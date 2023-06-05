@@ -7,4 +7,5 @@ private:
 public:
 	Gamestatus(vector<Pokemon> player1, vector<Pokemon> player2) :
 		play1(player1), play2(player2) {};
+	void Gamestart();
 };

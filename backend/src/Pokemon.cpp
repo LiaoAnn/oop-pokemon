@@ -9,3 +9,9 @@ Pokemon::Pokemon(string name, set<int> typeList,
 void Pokemon::battle(string play1, string play2) {
 
 }
+string Pokemon::getName() {
+	return name;
+}
+void Pokemon::skillMove(Move skill) {
+
+}

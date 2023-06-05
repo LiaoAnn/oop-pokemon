@@ -13,4 +13,5 @@ int main()
 	filetest.openFile();
 	filetest.PokemonLibfile();
 	filetest.Movesfile();
+	filetest.Gamedata();
 }

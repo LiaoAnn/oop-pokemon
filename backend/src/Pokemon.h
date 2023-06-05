@@ -3,6 +3,7 @@
 #include <vector>
 #include <set>
 #include "Type.h"
+#include "Move.h"
 using namespace std;
 //enum stat { hp, attack, defence, spAttack, spDefence, speed };
 class Pokemon
@@ -27,4 +28,6 @@ public:
 		defence(def), spAttack(sPatk), spDefence(sPdef), speed(speed) {};
 	void battle(string power1, string power2);
 	float getATK();
+	string getName();
+	void skillMove(Move skill);
 };

@@ -14,14 +14,20 @@ void fileLoad::openFile() {
 	in.open(fileName);
 	in >> MonsterLibName;
 	//cout << MonsterLibName;
+	MonsterLibName += ".txt";
+	MonsterLibName = "../../../src/" + MonsterLibName;
 	in >> MoveLibName;
+	MoveLibName += ".txt";
+	MoveLibName = "../../../src/" + MoveLibName;
 	in >> GameDataName;
+	GameDataName += ".txt";
+	GameDataName = "../../../src/" + GameDataName;
 	in.close();
 
 
 }
 void fileLoad::PokemonLibfile() {
-	vector<Pokemon> Monster;
+	
 	ifstream PokemonLib;
 	PokemonLib.open(MonsterLibName);
 	string Pname;
@@ -44,7 +50,6 @@ void fileLoad::PokemonLibfile() {
 
 }
 void fileLoad::Movesfile() {
-	vector<Move> MoveLib;
 	ifstream Moves;
 	Moves.open(MoveLibName);
 	string describe;
@@ -75,6 +80,54 @@ void fileLoad::Movesfile() {
 		MoveLib.push_back(Move(movename, movetype, propertys, power1, power2, power3, effect));
 	}
 	Moves.close();
+
+}
+void fileLoad::Gamedata() {
+	ifstream Game;
+	Game.open(GameDataName);
+	int cnt, skill;
+	Game >> cnt;
+	for (int i = 0; i < cnt; i++) {
+		string PokemonName;
+		Game >> PokemonName >> skill;
+		for (int j = 0; j < Monster.size(); j++) {
+			if (Monster[j].getName() == PokemonName) {
+				player1.push_back(Monster[j]);
+				break;
+			}
+		}
+		vector<string>skillList(skill);
+		for (int j = 0; j < skill; j++) {
+			Game >> skillList[j];
+			for (int k = 0; k < MoveLib.size(); k++) {
+				if (MoveLib[k].getName() == skillList[j]) {
+					player1[i].skillMove(MoveLib[k]);//攻擊招式player1函式未寫
+					break;
+				}
+			}
+		}
+	}
+	Game >> cnt;
+	for (int i = 0; i < cnt; i++) {
+		string PokemonName;
+		Game >> PokemonName >> skill;
+		for (int j = 0; j < Monster.size(); j++) {
+			if (Monster[j].getName() == PokemonName) {
+				player2.push_back(Monster[j]);
+				break;
+			}
+		}
+		vector<string>skillList(skill);
+		for (int j = 0; j < skill; j++) {
+			Game >> skillList[j];
+			for (int k = 0; k < MoveLib.size(); k++) {
+				if (MoveLib[k].getName() == skillList[j]) {
+					player2[i].skillMove(MoveLib[k]);//攻擊招式player2函式未寫
+					break;
+				}
+			}
+		}
+	}
 }
 void fileLoad::opentest() {
 	ifstream in;
@@ -94,11 +147,11 @@ void fileLoad::opentest() {
 			cout << "Attention: Test start " << endl;
 		}
 		if (commend == "battle") {
-			cout << "battle" << endl;
+			cout << "Two Pokemon battle" << endl;
 
 		}
 		if (commend == "Bag") {
-
+			cout << "use medicial" << endl;
 		}
 	}
 }
