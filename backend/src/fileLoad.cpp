@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include "Type.h"
+#include "Gamestatus.h"
 
 fileLoad::fileLoad(string name) {
 	fileName = name;
@@ -139,19 +140,23 @@ void fileLoad::opentest() {
 	string commend;
 	bool start = false;
 	bool player1creature = false;
-
-	//Gamestatus GS();
+	bool medical = false;
+	Gamestatus GS(player1,player2);
 	while (in >> commend) {
 		if (commend == "Test") {
 			start = true;
 			cout << "Attention: Test start " << endl;
 		}
-		if (commend == "battle") {
+		if (commend == "battle"&&start == true) {
 			cout << "Two Pokemon battle" << endl;
-
+			
 		}
 		if (commend == "Bag") {
 			cout << "use medicial" << endl;
+			medical = true;
+		}
+		if (commend == "Potion" && medical == true) {
+			GS.Healtime();
 		}
 	}
 }
