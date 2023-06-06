@@ -1,15 +1,15 @@
 ﻿#include "main.h"
 //#include "Type.h"
-#include "fileLoad.h"
+#include "FileLoad.h"
 int main()
 {
-	string filename;
+	/*string filename;
 	filename = "../../../src/case.txt";
-	fileLoad filetest(filename);
+	FileLoad filetest(filename);
 	filetest.openFile();
 	filetest.PokemonLibfile();
 	filetest.Movesfile();
-	filetest.Gamedata();
+	filetest.Gamedata();*/
 
 	/*webServer = new WebServer(WEBROOT, WEBPORT);
 	webSocketServer = new WebSocketServer();
