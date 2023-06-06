@@ -1,7 +1,7 @@
 #include"GameStatus.h"
-void GameStatus::Gamestart() {
+void GameStatus::GameStart() {
 	
 }
-void GameStatus::Healtime() {
+void GameStatus::HealTime() {
 
 }
