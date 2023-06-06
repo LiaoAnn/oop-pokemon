@@ -10,6 +10,14 @@
 #include "Player.h"
 
 /**
+ * Intent: Default constructor
+ * Pre: None
+ * Post: A Player object
+ */
+Player::Player() : name(""), currentPokemon(pokemonList[0])
+{}
+
+/**
  * Intent: Constructor
  * Pre: name is a string
  * Post: A Player object
@@ -36,11 +44,34 @@ Player::Player(
 }
 
 /**
+ * Intent: Copy constructor
+ * Pre: player is a Player object
+ * Post: A Player object
+ */
+Player::Player(const Player& player)
+    :
+name(player.name), pokemonList(player.pokemonList), currentPokemon(player.currentPokemon) 
+{}
+
+/**
  * Intent: Destructor
  * Pre: None
  * Post: None
  */
 Player::~Player() {}
+
+/**
+ * Intent: Assignment operator
+ * Pre: player is a Player object
+ * Post: A Player object
+ */
+Player& Player::operator=(const Player& player)
+{
+	name = player.name;
+	pokemonList = player.pokemonList;
+	currentPokemon = player.currentPokemon;
+	return *this;
+}
 
 /**
  * Intent: Get player's name

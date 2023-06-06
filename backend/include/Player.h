@@ -16,6 +16,7 @@ using namespace std;
 class Player {
 public:
     // constructor
+    Player();
     Player(string name);
     Player(
         string name,
@@ -24,6 +25,12 @@ public:
         Pokemon pokemon3, 
         Pokemon pokemon4
     );
+
+    // copy constructor
+    Player(const Player& player);
+
+    // oprator = overloading
+    Player& operator=(const Player& player);
 
     // destructor
     ~Player();
