@@ -16,7 +16,7 @@
  */
 SkillEffect::SkillEffect()
 	:
-	name(""),
+	name("none"),
 	type(0),
 	leftRound(0)
 {}
@@ -26,7 +26,7 @@ SkillEffect::SkillEffect()
  * Pre: skillEffectAttack is an integer, skillEffectName
  * Post: A SkillEffect object
  */
-SkillEffect::SkillEffect(int type, string name,int leftRound)
+SkillEffect::SkillEffect(int type, string name, int leftRound)
 	:
 	name(name),
 	type(type),

@@ -1,6 +1,7 @@
 ﻿#include "main.h"
 //#include "Type.h"
 #include "FileLoad.h"
+#include "Skill.h"
 int main()
 {
 	/*string filename;
@@ -13,6 +14,7 @@ int main()
 
 	FileLoad filetest;
 	//filetest.loadMonsterLibraryFile("../../../testData/PokemonLib.txt");
+	filetest.loadMoveLibraryFile("../../../testData/MoveLib.txt");
 
 
 	/*webServer = new WebServer(WEBROOT, WEBPORT);

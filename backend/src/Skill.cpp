@@ -11,6 +11,8 @@
 
 using namespace std;
 
+vector<Skill> skillList;
+
 /**
  * Intent: Default Constructor
  * Pre: None
@@ -23,7 +25,23 @@ Skill::Skill()
 	power(0),
 	accuracy(0),
 	pp(0),
-	effect(0)
+	effect()
+{}
+
+/**
+ * Intent: Constructor
+ * Pre: name is a string, type is an integer, power is an integer, accuracy is an integer, pp is an integer
+ * Post: Skill object
+ */
+Skill::Skill(string name, int type, int category, int power, int accuracy, int pp)
+	:
+	name(name),
+	type(type),
+	category(category),
+	power(power),
+	accuracy(accuracy),
+	pp(pp),
+	effect()
 {}
 
 /**
@@ -31,7 +49,7 @@ Skill::Skill()
  * Pre: name is a string, type is an integer, power is an integer, accuracy is an integer, pp is an integer, effect is an integer
  * Post: Skill object
  */
-Skill::Skill(string name, int type, int category, int power, int accuracy, int pp, SkillEffect* effect)
+Skill::Skill(string name, int type, int category, int power, int accuracy, int pp, SkillEffect effect)
 	:
 	name(name),
 	type(type),
@@ -117,7 +135,7 @@ int Skill::getPP() const
  * Pre: None
  * Post: Return the effect of the skill
  */
-SkillEffect* Skill::getEffect() const
+SkillEffect& Skill::getEffect()
 {
 	return effect;
 }
@@ -130,4 +148,14 @@ SkillEffect* Skill::getEffect() const
 void Skill::reducePP()
 {
 	pp--;
+}
+
+/**
+ * Intent: Set the effect of the skill
+ * Pre: effect is a SkillEffect object
+ * Post: None
+ */
+void Skill::setEffect(SkillEffect effect)
+{
+	this->effect = effect;
 }

@@ -7,6 +7,9 @@
 #include <algorithm>
 #include "Type.h"
 #include "Game.h"
+#include "Skill.h"
+#include "SkillEffectList.h"
+#include "SkillCategory.h"
 
 using namespace std;
 
@@ -84,6 +87,51 @@ void FileLoad::loadMonsterLibraryFile(string name)
 		ss >> HP >> ATK >> DEF >> SPATK >> SPDEF >> SPD;
 		Pokemon pokemon(name, typeCount, typeSet, HP, ATK, DEF, SPATK, SPDEF, SPD);
 		pokemonList.push_back(pokemon);
+	}
+}
+
+/**
+ * Intent: Load the move library
+ * Pre: data is the content of the file
+ * Post:
+ */
+void FileLoad::loadMoveLibraryFile(string name)
+{
+	//cout << data << endl;
+	/* e.g.
+	*	Tackle Normal Physical 40 100 35
+	*	Vine Whip Grass Physical 45 100 25
+	*	...
+	*/
+
+	ifstream in;
+	in.open(name);
+	string describe;
+	while (getline(in, describe)) {
+		stringstream ss(describe);
+		string name, type, category, con;
+		int typeIndex, categoryIndex, power, accuracy, pp, effectIndex;
+		SkillEffect effect;
+
+		ss >> name >> type >> category >> power >> accuracy >> pp;
+
+		transform(type.begin(), type.end(), type.begin(), ::tolower);
+		typeIndex = typeMap.at(type);
+
+		transform(category.begin(), category.end(), category.begin(), ::tolower);
+		categoryIndex = skillCategoryMap.at(category);
+
+		Skill skill(name, typeIndex, categoryIndex, power, accuracy, pp);
+
+		ss >> con;
+		transform(con.begin(), con.end(), con.begin(), ::tolower);
+		if (con != "")
+		{
+			effectIndex = skillEffectTypeMap.at(con);
+			effect = skillEffectList[effectIndex];
+			skill.setEffect(effect);
+		}
+		skillList.push_back(skill);
 	}
 }
 

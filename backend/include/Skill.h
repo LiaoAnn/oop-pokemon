@@ -8,6 +8,7 @@
 ************************************************************************/
 #pragma once
 #include <string>
+#include <vector>
 #include "SkillEffect.h"
 
 using namespace std;
@@ -20,12 +21,13 @@ private:
 	int power;  // Power of the skill
 	int accuracy;  // Accuracy of the skill
 	int pp;  // PP value of the skill, indicating the number of times it can be used
-	SkillEffect* effect;  // Special effects of the skill, e.g. paralysis, Burn, Poison
+	SkillEffect effect;  // Special effects of the skill, e.g. paralysis, Burn, Poison
 public:
 	// Default constructor
 	Skill();
 	// Constructor with parameters
-	Skill(string name, int type, int category, int power, int accuracy, int pp, SkillEffect* effect);
+	Skill(string name, int type, int category, int power, int accuracy, int pp);
+	Skill(string name, int type, int category, int power, int accuracy, int pp, SkillEffect effect);
 	// Destructor
 	~Skill();
 
@@ -42,8 +44,13 @@ public:
 	// Get Skill PP
 	int getPP() const;
 	// Get Skill effect
-	SkillEffect* Skill::getEffect() const;
+	SkillEffect& Skill::getEffect();
+
+	// Set Skill Effect
+	void setEffect(SkillEffect effect);
 
 	// Reduce PP by 1
 	void reducePP();
 };
+
+extern vector<Skill> skillList;  // List of all skills

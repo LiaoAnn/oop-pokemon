@@ -9,21 +9,25 @@
 #pragma once
 
 #include "SkillEffect.h"
+#include <map>
 
- // All effect
-extern SkillEffect* SkillEffectList[3];
-
-// All type of skill effect
-enum SkillEffectType
-{
-	DOT,
-	DEBUFF,
-};
+using namespace std;
 
 // All category of skill effect
-enum SkillEffectCategory
+enum SKILL_EFFECT_CATEGORY
 {
 	PARALYSIS,
 	POISON,
 	BURN,
+};
+extern map<string, int> skillEffectTypeMap;
+
+// All effect
+extern SkillEffect skillEffectList[3];
+
+// All type of skill effect
+enum SKILL_EFFECT_TYPE
+{
+	DOT,
+	DEBUFF,
 };

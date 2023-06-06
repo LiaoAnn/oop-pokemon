@@ -10,9 +10,17 @@
 #include "SkillEffectList.h"
 
  // All effect
-SkillEffect* SkillEffectList[3] =
+SkillEffect skillEffectList[3] =
 {
-	new Paralysis(),
-	new Poison(),
-	new Burn(),
+	Paralysis(),
+	Poison(),
+	Burn(),
+};
+
+// All effect name
+map<string, int> skillEffectTypeMap =
+{
+	{ "par", PARALYSIS },
+	{ "psn", POISON },
+	{ "brn", BURN },
 };

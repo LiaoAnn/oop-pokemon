@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <map>
 using namespace std;
 enum type {
@@ -44,7 +44,7 @@ const map <string, int >typeMap =
 	{"fairy", fairy}
 };
 
-static const double typeEffectiveness[18][18] =
+static double typeEffectiveness[18][18] =
 {
 	{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.5, 0.0, 1.0, 1.0, 0.5, 1.0},
 	{1.0, 0.5, 0.5, 1.0, 2.0, 2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 0.5, 1.0, 0.5, 1.0, 2.0, 1.0},
