@@ -1,4 +1,4 @@
-#include "fileLoad.h"
+#include "FileLoad.h"
 #include "Pokemon.h"
 #include "Move.h"
 #include <vector>
@@ -7,29 +7,40 @@
 #include "Type.h"
 #include "Game.h"
 
-fileLoad::fileLoad(string name) {
+using namespace std;
+
+/**
+ * Intent: 
+ * Pre: 
+ * Post: 
+ */
+
+FileLoad::FileLoad(string name) 
+{
 	fileName = name;
 }
-void fileLoad::openFile() {
+void FileLoad::openFile() 
+{
 	ifstream in;
 	in.open(fileName);
 	in >> MonsterLibName;
 	//cout << MonsterLibName;
 	MonsterLibName += ".txt";
-	MonsterLibName = "../../../src/" + MonsterLibName;
+	//MonsterLibName = "../../../src/" + MonsterLibName;
+	
 	in >> MoveLibName;
 	MoveLibName += ".txt";
-	MoveLibName = "../../../src/" + MoveLibName;
+	//MoveLibName = "../../../src/" + MoveLibName;
+
 	in >> GameDataName;
 	GameDataName += ".txt";
-	GameDataName = "../../../src/" + GameDataName;
+	//GameDataName = "../../../src/" + GameDataName;
+
 	in.close();
-
-
 }
-void fileLoad::PokemonLibfile() {
-	
-	/*ifstream PokemonLib;
+void FileLoad::PokemonLibfile() 
+{
+	ifstream PokemonLib;
 	PokemonLib.open(MonsterLibName);
 	string Pname;
 	while (PokemonLib >> Pname) {
@@ -47,9 +58,9 @@ void fileLoad::PokemonLibfile() {
 		PokemonLib >> hp >> attack >> defence >> spAttack >> spDefence >> speed;
 		Monster.push_back(Pokemon(Pname, typelist, hp, attack, defence, spAttack, spDefence, speed));
 	}
-	PokemonLib.close();*/
+	PokemonLib.close();
 }
-void fileLoad::Movesfile() {
+void FileLoad::Movesfile() {
 	/*ifstream Moves;
 	Moves.open(MoveLibName);
 	string describe;
@@ -82,7 +93,7 @@ void fileLoad::Movesfile() {
 	Moves.close();*/
 
 }
-void fileLoad::Gamedata() {
+void FileLoad::Gamedata() {
 	//ifstream Game;
 	//Game.open(GameDataName);
 	//int cnt, skill;
@@ -129,7 +140,7 @@ void fileLoad::Gamedata() {
 	//	}
 	//}
 }
-void fileLoad::opentest() {
+void FileLoad::opentest() {
 	/*ifstream in;
 	in.open(fileName);
 	in >> MonsterLibName;

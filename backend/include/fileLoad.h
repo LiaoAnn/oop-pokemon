@@ -10,7 +10,7 @@
 #include "Pokemon.h"
 using namespace std;
 
-class fileLoad {
+class FileLoad {
 private:
 	string fileName;
 	string MonsterLibName, MoveLibName, GameDataName;
@@ -28,7 +28,9 @@ private:
 	//vector<Move> MoveLib;
 
 public:
-	fileLoad(string file);
+	// default constructor
+	FileLoad();
+	FileLoad(string file);
 	void openFile();
 	void setfile();
 	void PokemonLibfile();

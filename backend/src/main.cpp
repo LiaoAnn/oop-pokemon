@@ -3,22 +3,22 @@
 #include "fileLoad.h"
 int main()
 {
-	/*string filename;
+	string filename;
 	filename = "../../../src/case.txt";
 	fileLoad filetest(filename);
 	filetest.openFile();
 	filetest.PokemonLibfile();
 	filetest.Movesfile();
-	filetest.Gamedata();*/
+	filetest.Gamedata();
 
-	webServer = new WebServer(WEBROOT, WEBPORT);
+	/*webServer = new WebServer(WEBROOT, WEBPORT);
 	webSocketServer = new WebSocketServer();
 	thread web(webServerThread);
 	thread ws(webSocketServerThread);
 	thread game(gameThread);
 	web.join();
 	ws.join();
-	game.join();
+	game.join();*/
 	return 0;
 }
 
