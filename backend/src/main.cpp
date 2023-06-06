@@ -1,5 +1,6 @@
-﻿#include "main.h"
+#include "main.h"
 //#include "Type.h"
+#include "fileLoad.h"
 int main()
 {
 	webServer = new WebServer(WEBROOT, WEBPORT);
@@ -16,6 +17,13 @@ int main()
 void webServerThread()
 {
 	webServer->run();
+	string filename;
+	filename = "../../../src/case.txt";
+	fileLoad filetest(filename);
+	filetest.openFile();
+	filetest.PokemonLibfile();
+	filetest.Movesfile();
+	filetest.Gamedata();
 }
 void webSocketServerThread()
 {
