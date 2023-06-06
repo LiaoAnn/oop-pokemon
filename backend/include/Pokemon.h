@@ -26,3 +26,5 @@ private:
 	int speed; // speed points
 	vector <int> currentStat; // current stats
 };
+
+extern vector <Pokemon> pokemonList; // list of all pokemon
