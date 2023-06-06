@@ -29,7 +29,7 @@ void fileLoad::openFile() {
 }
 void fileLoad::PokemonLibfile() {
 	
-	ifstream PokemonLib;
+	/*ifstream PokemonLib;
 	PokemonLib.open(MonsterLibName);
 	string Pname;
 	while (PokemonLib >> Pname) {
@@ -47,11 +47,10 @@ void fileLoad::PokemonLibfile() {
 		PokemonLib >> hp >> attack >> defence >> spAttack >> spDefence >> speed;
 		Monster.push_back(Pokemon(Pname, typelist, hp, attack, defence, spAttack, spDefence, speed));
 	}
-	PokemonLib.close();
-
+	PokemonLib.close();*/
 }
 void fileLoad::Movesfile() {
-	ifstream Moves;
+	/*ifstream Moves;
 	Moves.open(MoveLibName);
 	string describe;
 	AdditionalEffect effect;
@@ -80,55 +79,55 @@ void fileLoad::Movesfile() {
 		}
 		MoveLib.push_back(Move(movename, movetype, propertys, power1, power2, power3, effect));
 	}
-	Moves.close();
+	Moves.close();*/
 
 }
 void fileLoad::Gamedata() {
-	ifstream Game;
-	Game.open(GameDataName);
-	int cnt, skill;
-	Game >> cnt;
-	for (int i = 0; i < cnt; i++) {
-		string PokemonName;
-		Game >> PokemonName >> skill;
-		for (int j = 0; j < Monster.size(); j++) {
-			if (Monster[j].getName() == PokemonName) {
-				player1.push_back(Monster[j]);
-				break;
-			}
-		}
-		vector<string>skillList(skill);
-		for (int j = 0; j < skill; j++) {
-			Game >> skillList[j];
-			for (int k = 0; k < MoveLib.size(); k++) {
-				if (MoveLib[k].getName() == skillList[j]) {
-					player1[i].skillMove(MoveLib[k]);//攻擊招式player1函式未寫
-					break;
-				}
-			}
-		}
-	}
-	Game >> cnt;
-	for (int i = 0; i < cnt; i++) {
-		string PokemonName;
-		Game >> PokemonName >> skill;
-		for (int j = 0; j < Monster.size(); j++) {
-			if (Monster[j].getName() == PokemonName) {
-				player2.push_back(Monster[j]);
-				break;
-			}
-		}
-		vector<string>skillList(skill);
-		for (int j = 0; j < skill; j++) {
-			Game >> skillList[j];
-			for (int k = 0; k < MoveLib.size(); k++) {
-				if (MoveLib[k].getName() == skillList[j]) {
-					player2[i].skillMove(MoveLib[k]);//攻擊招式player2函式未寫
-					break;
-				}
-			}
-		}
-	}
+	//ifstream Game;
+	//Game.open(GameDataName);
+	//int cnt, skill;
+	//Game >> cnt;
+	//for (int i = 0; i < cnt; i++) {
+	//	string PokemonName;
+	//	Game >> PokemonName >> skill;
+	//	for (int j = 0; j < Monster.size(); j++) {
+	//		if (Monster[j].getName() == PokemonName) {
+	//			player1.push_back(Monster[j]);
+	//			break;
+	//		}
+	//	}
+	//	vector<string>skillList(skill);
+	//	for (int j = 0; j < skill; j++) {
+	//		Game >> skillList[j];
+	//		for (int k = 0; k < MoveLib.size(); k++) {
+	//			if (MoveLib[k].getName() == skillList[j]) {
+	//				player1[i].skillMove(MoveLib[k]);//攻擊招式player1函式未寫
+	//				break;
+	//			}
+	//		}
+	//	}
+	//}
+	//Game >> cnt;
+	//for (int i = 0; i < cnt; i++) {
+	//	string PokemonName;
+	//	Game >> PokemonName >> skill;
+	//	for (int j = 0; j < Monster.size(); j++) {
+	//		if (Monster[j].getName() == PokemonName) {
+	//			player2.push_back(Monster[j]);
+	//			break;
+	//		}
+	//	}
+	//	vector<string>skillList(skill);
+	//	for (int j = 0; j < skill; j++) {
+	//		Game >> skillList[j];
+	//		for (int k = 0; k < MoveLib.size(); k++) {
+	//			if (MoveLib[k].getName() == skillList[j]) {
+	//				player2[i].skillMove(MoveLib[k]);//攻擊招式player2函式未寫
+	//				break;
+	//			}
+	//		}
+	//	}
+	//}
 }
 void fileLoad::opentest() {
 	ifstream in;

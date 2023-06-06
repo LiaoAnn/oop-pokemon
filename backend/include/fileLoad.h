@@ -25,7 +25,7 @@ private:
 	set<int> typelist;
 	vector<Pokemon> Monster;
 	vector<Pokemon>player1, player2;
-	vector<Move> MoveLib;
+	//vector<Move> MoveLib;
 
 public:
 	fileLoad(string file);
