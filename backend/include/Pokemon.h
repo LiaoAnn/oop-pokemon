@@ -11,7 +11,7 @@
 #include <vector>
 #include <set>
 using namespace std;
-enum stat { hp, attack, defence, spAttack, spDefence, speed };
+enum pokemonStat { hp, attack, defence, spAttack, spDefence, speed };
 class Pokemon
 {
 private:
