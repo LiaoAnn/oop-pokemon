@@ -140,7 +140,7 @@ void fileLoad::opentest() {
 	bool start = false;
 	bool player1creature = false;
 	bool medical = false;
-	Gamestatus GS(player1,player2);
+	GameStatus GS(player1,player2);
 	while (in >> commend) {
 		if (commend == "Test") {
 			start = true;
