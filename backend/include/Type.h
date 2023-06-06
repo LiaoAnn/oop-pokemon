@@ -2,7 +2,7 @@
 #include <map>
 using namespace std;
 enum type {
-	normal, 
+	normal,
 	fire,
 	water,
 	electric,
@@ -21,7 +21,8 @@ enum type {
 	steel,
 	fairy
 };
-const map <string , int >typeMap =
+
+const map <string, int >typeMap =
 {
 	{"normal", normal},
 	{"fire", fire},
@@ -42,7 +43,8 @@ const map <string , int >typeMap =
 	{"steel", steel},
 	{"fairy", fairy}
 };
-static double typeEffectiveness[18][18] =
+
+static const double typeEffectiveness[18][18] =
 {
 	{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.5, 0.0, 1.0, 1.0, 0.5, 1.0},
 	{1.0, 0.5, 0.5, 1.0, 2.0, 2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 0.5, 1.0, 0.5, 1.0, 2.0, 1.0},

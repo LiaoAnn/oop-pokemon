@@ -1,8 +1,8 @@
-/***********************************************************************
+﻿/***********************************************************************
  * File: Pokemon.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-06-06
- * Editor: BING-JIA TAN (B11115001), Alan 
+ * Editor: BING-JIA TAN (B11115001), Alan
  * Update Date: 2023-06-06
  * Description: Implementation for Pokemon class
 ************************************************************************/
@@ -24,31 +24,50 @@
 //
 //}
 
+vector<Pokemon> pokemonList;
+
+/**
+ * Intent: Default Constructor
+ * Pre: None
+ * Post: A Pokemon object
+ */
+Pokemon::Pokemon()
+	:
+	name(""),
+	type(set <int>()),
+	hp(0),
+	attack(0),
+	defence(0),
+	spAttack(0),
+	spDefence(0),
+	speed(0)
+{}
 
 /**
  * Intent: Constructor
- * Pre: name is a string, 
-		typeNum is an integer, 
-		type is a set of integers, 
+ * Pre: name is a string,
+		typeNum is an integer,
+		type is a set of integers,
 		hp, attack, defence, spAttack, spDefence, speed are integers
  * Post: A Pokemon object
  */
 Pokemon::Pokemon(
-	string name, 
-	int typeNum, 
-	set <int> type, 
-	int hp, 
-	int attack, 
-	int defence, 
-	int spAttack, 
-	int spDefence, 
+	string name,
+	int typeNum,
+	set <int> type,
+	int hp,
+	int attack,
+	int defence,
+	int spAttack,
+	int spDefence,
 	int speed)
-	: 
-	name(name), 
-	type(type), 
-	hp(hp), 
-	attack(attack), defence(defence), 
-	spAttack(spAttack), spDefence(spDefence), 
+	:
+	name(name),
+	typeNum(typeNum),
+	type(type),
+	hp(hp),
+	attack(attack), defence(defence),
+	spAttack(spAttack), spDefence(spDefence),
 	speed(speed)
 {}
 
@@ -235,4 +254,14 @@ void Pokemon::setSpDefence(int spDefence)
 void Pokemon::setSpeed(int speed)
 {
 	this->speed = speed;
+}
+
+/**
+ * Intent: Add a type to the Pokemon
+ * Pre: type is an integer
+ * Post: None
+*/
+void Pokemon::addType(int type)
+{
+	this->type.insert(type);
 }

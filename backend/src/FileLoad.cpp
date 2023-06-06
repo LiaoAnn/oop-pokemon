@@ -1,33 +1,101 @@
-#include "FileLoad.h"
+ï»¿#include "FileLoad.h"
 #include "Pokemon.h"
 #include "Move.h"
 #include <vector>
 #include <string>
 #include <sstream>
+#include <algorithm>
 #include "Type.h"
 #include "Game.h"
 
 using namespace std;
 
 /**
- * Intent: 
- * Pre: 
- * Post: 
+ * Intent: Default constructor
+ * Pre: None
+ * Post: FileLoad object is created
  */
-
-FileLoad::FileLoad(string name) 
+FileLoad::FileLoad()
 {
-	fileName = name;
+	caseFilename = "";
+	MonsterLibName = "";
+	MoveLibName = "";
+	GameDataName = "";
 }
-void FileLoad::openFile() 
+
+/**
+ * Intent:
+ * Pre:
+ * Post:
+ */
+FileLoad::FileLoad(string name)
+{
+	caseFilename = name;
+}
+
+/**
+ * Intent: Is the required files loaded?
+ * Pre: None
+ * Post: Return true if the file is loaded, false otherwise
+ */
+bool FileLoad::canBeBattle()
+{
+	return this->isLoadGameData && this->isLoadMonsterLib && this->isLoadMoveLib;
+}
+
+/**
+ * Intent: Load the monster library
+ * Pre: data is the content of the file
+ * Post:
+ */
+void FileLoad::loadMonsterLibraryFile(string name)
+{
+	//cout << data << endl;
+	/* e.g.
+	*	Venusaur
+	*	2 Grass Poison
+	*	187 147 148 167 167 145
+	*/
+
+	ifstream in;
+	in.open(name);
+	string describe;
+	while (getline(in, describe)) {
+		stringstream ss(describe);
+		string name, type;
+		int typeCount, typeIndex, HP, ATK, DEF, SPATK, SPDEF, SPD;
+		set<int> typeSet;
+
+		ss >> name;
+		getline(in, describe);
+		ss = stringstream(describe);
+
+		ss >> typeCount;
+		for (size_t i = 0; i < typeCount; i++)
+		{
+			ss >> type;
+			transform(type.begin(), type.end(), type.begin(), ::tolower);
+			typeIndex = typeMap.at(type);
+			typeSet.insert(typeIndex);
+		}
+
+		getline(in, describe);
+		ss = stringstream(describe);
+		ss >> HP >> ATK >> DEF >> SPATK >> SPDEF >> SPD;
+		Pokemon pokemon(name, typeCount, typeSet, HP, ATK, DEF, SPATK, SPDEF, SPD);
+		pokemonList.push_back(pokemon);
+	}
+}
+
+void FileLoad::openFile()
 {
 	ifstream in;
-	in.open(fileName);
+	in.open(caseFilename);
 	in >> MonsterLibName;
 	//cout << MonsterLibName;
 	MonsterLibName += ".txt";
 	//MonsterLibName = "../../../src/" + MonsterLibName;
-	
+
 	in >> MoveLibName;
 	MoveLibName += ".txt";
 	//MoveLibName = "../../../src/" + MoveLibName;
@@ -37,28 +105,6 @@ void FileLoad::openFile()
 	//GameDataName = "../../../src/" + GameDataName;
 
 	in.close();
-}
-void FileLoad::PokemonLibfile() 
-{
-	ifstream PokemonLib;
-	PokemonLib.open(MonsterLibName);
-	string Pname;
-	while (PokemonLib >> Pname) {
-		typelist.clear();
-		int typeNum;
-		PokemonLib >> typeNum;
-		int cnt = 0;
-		while (cnt < typeNum) {
-			cnt++;
-			string typeName;
-			PokemonLib >> typeName;
-			
-			typelist.insert(TypeMap[typeName]);
-		}
-		PokemonLib >> hp >> attack >> defence >> spAttack >> spDefence >> speed;
-		Monster.push_back(Pokemon(Pname, typelist, hp, attack, defence, spAttack, spDefence, speed));
-	}
-	PokemonLib.close();
 }
 void FileLoad::Movesfile() {
 	/*ifstream Moves;
@@ -112,7 +158,7 @@ void FileLoad::Gamedata() {
 	//		Game >> skillList[j];
 	//		for (int k = 0; k < MoveLib.size(); k++) {
 	//			if (MoveLib[k].getName() == skillList[j]) {
-	//				player1[i].skillMove(MoveLib[k]);//§ðÀ»©Û¦¡player1¨ç¦¡¥¼¼g
+	//				player1[i].skillMove(MoveLib[k]);//æ”»æ“Šæ‹›å¼player1å‡½å¼æœªå¯«
 	//				break;
 	//			}
 	//		}
@@ -133,7 +179,7 @@ void FileLoad::Gamedata() {
 	//		Game >> skillList[j];
 	//		for (int k = 0; k < MoveLib.size(); k++) {
 	//			if (MoveLib[k].getName() == skillList[j]) {
-	//				player2[i].skillMove(MoveLib[k]);//§ðÀ»©Û¦¡player2¨ç¦¡¥¼¼g
+	//				player2[i].skillMove(MoveLib[k]);//æ”»æ“Šæ‹›å¼player2å‡½å¼æœªå¯«
 	//				break;
 	//			}
 	//		}
@@ -159,7 +205,7 @@ void FileLoad::opentest() {
 		}
 		if (commend == "battle"&&start == true) {
 			cout << "Two Pokemon battle" << endl;
-			
+
 		}
 		if (commend == "Bag") {
 			cout << "use medicial" << endl;

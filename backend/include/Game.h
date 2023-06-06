@@ -8,7 +8,7 @@ private:
 	Player player, AI;
 	int turn;
 	int mode;
-	fileLoad file;
+	FileLoad file;
 public:
 	// default constructor
 	Game();

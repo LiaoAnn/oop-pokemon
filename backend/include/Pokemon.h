@@ -26,6 +26,9 @@ private:
 	int speed; // speed points
 	vector <int> currentStat; // current stats
 public:
+	// Default Constructor
+	Pokemon();
+
 	// Constructor
 	Pokemon(string name, int typeNum, set <int> type, int hp, int attack, int defence, int spAttack, int spDefence, int speed);
 
@@ -58,6 +61,8 @@ public:
 	void setSpDefence(int spDefence);
 	void setSpeed(int speed);
 	void setCurrentStat(vector <int> currentStat);
+
+	void addType(int type);
 };
 
 extern vector <Pokemon> pokemonList; // list of all pokemon

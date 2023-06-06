@@ -11,6 +11,10 @@ int main()
 	filetest.Movesfile();
 	filetest.Gamedata();*/
 
+	FileLoad filetest;
+	//filetest.loadMonsterLibraryFile("../../../testData/PokemonLib.txt");
+
+
 	/*webServer = new WebServer(WEBROOT, WEBPORT);
 	webSocketServer = new WebSocketServer();
 	thread web(webServerThread);
@@ -25,7 +29,7 @@ int main()
 void webServerThread()
 {
 	webServer->run();
-	
+
 }
 void webSocketServerThread()
 {
