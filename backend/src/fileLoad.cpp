@@ -155,7 +155,7 @@ void fileLoad::opentest() {
 			medical = true;
 		}
 		if (commend == "Potion" && medical == true) {
-			GS.Healtime();
+			GS.HealTime();
 		}
 	}
 }
