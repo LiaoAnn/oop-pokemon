@@ -5,7 +5,7 @@
 #include <string>
 #include <sstream>
 #include "Type.h"
-#include "Gamestatus.h"
+#include "Game.h"
 
 fileLoad::fileLoad(string name) {
 	fileName = name;
@@ -130,7 +130,7 @@ void fileLoad::Gamedata() {
 	//}
 }
 void fileLoad::opentest() {
-	ifstream in;
+	/*ifstream in;
 	in.open(fileName);
 	in >> MonsterLibName;
 	cout << MonsterLibName;
@@ -140,7 +140,7 @@ void fileLoad::opentest() {
 	bool start = false;
 	bool player1creature = false;
 	bool medical = false;
-	GameStatus GS(player1,player2);
+	Game GS(player1,player2);
 	while (in >> commend) {
 		if (commend == "Test") {
 			start = true;
@@ -157,5 +157,5 @@ void fileLoad::opentest() {
 		if (commend == "Potion" && medical == true) {
 			GS.HealTime();
 		}
-	}
+	}*/
 }
