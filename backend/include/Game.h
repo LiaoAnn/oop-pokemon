@@ -6,8 +6,6 @@ class Game {
 private:
 	Player player, AI;
 	int turn;
-	int status;
-	int result;
 	int mode;
 public:
 	// default constructor

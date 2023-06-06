@@ -13,7 +13,7 @@
  * Pre: None
  * Post: A new Game object is created
  */
-Game::Game() : player(), AI(), turn(0), status(0), result(0)
+Game::Game() : player(), AI(), turn(0)
 {}
 
 /**
@@ -26,10 +26,7 @@ Game::Game(Player player1, Player player2)
 	this->player = player1;
 	this->AI = player2;
 	this->turn = 0;
-	this->status = 0;
-	this->result = 0;
 }
-
 
 void Game::GameStart() 
 {}
