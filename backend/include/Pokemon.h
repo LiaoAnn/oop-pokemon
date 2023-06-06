@@ -25,6 +25,39 @@ private:
 	int spDefence; // special defence points
 	int speed; // speed points
 	vector <int> currentStat; // current stats
+public:
+	// Constructor
+	Pokemon(string name, int typeNum, set <int> type, int hp, int attack, int defence, int spAttack, int spDefence, int speed);
+
+	// Copy Constructor
+	Pokemon(const Pokemon& pokemon);
+
+	// Destructor
+	~Pokemon();
+
+	// Getters
+	string getName() const;
+	int getTypeNum()  const;
+	set <int> getType() const;
+	int getHp() const;
+	int getAttack() const;
+	int getDefence() const;
+	int getSpAttack() const;
+	int getSpDefence() const;
+	int getSpeed() const;
+	vector <int> getCurrentStat() const;
+
+	// Setters
+	void setName(string name);
+	void setTypeNum(int typeNum);
+	void setType(set <int> type);
+	void setHp(int hp);
+	void setAttack(int attack);
+	void setDefence(int defence);
+	void setSpAttack(int spAttack);
+	void setSpDefence(int spDefence);
+	void setSpeed(int speed);
+	void setCurrentStat(vector <int> currentStat);
 };
 
 extern vector <Pokemon> pokemonList; // list of all pokemon
