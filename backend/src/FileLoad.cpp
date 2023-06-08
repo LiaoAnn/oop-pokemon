@@ -89,6 +89,7 @@ bool FileLoad::loadMonsterLibraryFile(string name)
 		pokemonList.push_back(pokemon);
 	}
 
+	this->MonsterLibName = name;
 	this->isLoadMonsterLib = true;
 	return this->canBeBattle();
 }
@@ -136,8 +137,9 @@ bool FileLoad::loadMoveLibraryFile(string name)
 		}
 		skillList.push_back(skill);
 	}
-	this->isLoadMoveLib = true;
 
+	this->MoveLibName = name;
+	this->isLoadMoveLib = true;
 	return this->canBeBattle();
 }
 
@@ -215,6 +217,7 @@ bool FileLoad::loadGameDataFile(string name)
 		}
 	}
 
+	this->GameDataName = name;
 	this->isLoadGameData = true;
 	return this->canBeBattle();
 }
