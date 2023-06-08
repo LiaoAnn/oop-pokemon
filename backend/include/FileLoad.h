@@ -33,7 +33,6 @@ public:
 	// default constructor
 	FileLoad();
 	FileLoad(string file);
-	void openFile();
 
 	// Load the monster library
 	bool loadMonsterLibraryFile(string name);
