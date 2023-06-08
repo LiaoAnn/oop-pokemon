@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 #include "SkillEffect.h"
+#include "Pokemon.h"
 
 using namespace std;
 
@@ -54,6 +55,9 @@ public:
 
 	// Find Skill index in skillList by name
 	friend int findSkillByName(string name);
+
+	// Use skill
+	void useSkill(Pokemon& user, Pokemon& target);
 };
 
 extern vector<Skill> skillList;  // List of all skills

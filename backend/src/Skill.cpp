@@ -176,3 +176,13 @@ int findSkillByName(string name)
 	}
 	return -1;
 }
+
+/**
+ * Intent: Use the skill
+ * Pre: user is a Pokemon object, target is a Pokemon object
+ * Post: None
+ */
+void Skill::useSkill(Pokemon& user, Pokemon& target)
+{
+
+}
