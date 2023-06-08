@@ -10,6 +10,7 @@
 
 #include "Item.h"
 #include "Pokemon.h"
+#include <map>
 
 // Potions can affect the HP of the current Pokémon, but they cannot be used on a copied Pokémon.
 class Potion : public Item
@@ -57,3 +58,13 @@ public:
 
 	void usePotion(Pokemon& pokemon) override;
 };
+
+enum PotionType
+{
+	NormalPotionType,
+	SuperPotionType,
+	HyperPotionType,
+	MaxPotionType
+};
+
+extern map<string, Potion&> potionMap;

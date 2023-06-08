@@ -137,3 +137,10 @@ void MaxPotion::usePotion(Pokemon& pokemon)
 	int mapHp = pokemon.getMaxHp();
 	pokemon.healHp(mapHp);
 }
+
+map<string, Potion&> potionMap = {
+	{"Potion", NormalPotion()},
+	{"Super Potion", SuperPotion()},
+	{"Hyper Potion", HyperPotion()},
+	{"Max Potion", MaxPotion()}
+};
