@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #pragma once
 #include <iostream>
 #include <fstream>
@@ -42,13 +42,13 @@ public:
 	void setGameDataName(string name);
 
 	// Load the monster library
-	void loadMonsterLibraryFile(string name);
+	bool loadMonsterLibraryFile(string name);
 
 	// Load the move library
-	void loadMoveLibraryFile(string name);
+	bool loadMoveLibraryFile(string name);
 
 	// Load the game data
-	void loadGameDataFile(string name);
+	bool loadGameDataFile(string name);
 
 	// Load the case file
 	void loadCaseFile(string name);
