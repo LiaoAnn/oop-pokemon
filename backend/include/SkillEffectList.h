@@ -22,6 +22,8 @@ enum SKILL_EFFECT_CATEGORY
 };
 extern map<string, int> skillEffectTypeMap;
 
+string getSkillEffectCategoryName(int category);
+
 // All effect
 extern SkillEffect skillEffectList[3];
 

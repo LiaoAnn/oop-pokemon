@@ -22,7 +22,10 @@ int main()
 	{
 		game << e;
 	}
-
+	for (int i = 0; i < game.battleLog.size(); i++)
+	{
+		cout << game.battleLog[i] << endl;
+	}
 
 	/*webServer = new WebServer(WEBROOT, WEBPORT);
 	webSocketServer = new WebSocketServer();

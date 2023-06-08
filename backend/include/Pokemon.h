@@ -44,14 +44,15 @@ public:
 	// Getters
 	string getName() const;
 	int getTypeNum()  const;
-	set <int> getType() const;
+	set<int> getType() const;
 	int getHp() const;
 	int getAttack() const;
 	int getDefence() const;
 	int getSpAttack() const;
 	int getSpDefence() const;
 	int getSpeed() const;
-	vector <int> getCurrentStat() const;
+	int getMaxHp() const;
+	vector<int> getCurrentStat() const;
 
 	// Setters
 	void setName(string name);
@@ -65,6 +66,11 @@ public:
 	void setSpeed(int speed);
 	void setCurrentStat(vector <int> currentStat);
 
+	// Add a stat to the current stat list
+	void addCurrentStat(int stat);
+	// Scan the current stat list and remove the stat if it turns to 0
+	void removeCurrentStat();
+
 	void addType(int type);
 
 	// Add a skill to the skill list
@@ -75,6 +81,9 @@ public:
 	// Overload operator []
 	Skill& operator[](int index);
 	Skill& operator[](string name);
+
+	// Heal the pokemon
+	void heal(int points);
 
 	friend int findPokemonByName(string name);
 };

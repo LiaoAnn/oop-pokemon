@@ -232,7 +232,7 @@ void FileLoad::loadCaseFile(string name)
 {
 	ifstream in;
 	in.open(name);
-	string describe;
+	string describe, logs;
 	stringstream ss;
 	int gameMode;
 
@@ -264,29 +264,82 @@ void FileLoad::loadCaseFile(string name)
 	/* Game Start */
 	while (getline(in, describe))
 	{
+		logs = "";
 		if (describe == "Battle")
 		{
 			// Both player and AI use a skill
+			string playerSkill, AISkill;
+			getline(in, playerSkill);
+			getline(in, AISkill);
+
+			logs = "Battle";
 		}
 		else if (describe == "Bag")
 		{
 			// Player use a item and AI use a skill
+			string playerItem, playerPokemon, AISkill;
+			getline(in, playerItem);
+			getline(in, playerPokemon);
+			getline(in, AISkill);
+
+			logs = "Bag";
 		}
 		else if (describe == "Pokemon")
 		{
 			// Player change Pokemon and AI use a skill
+			string playerPokemon, AISkill;
+			getline(in, playerPokemon);
+			getline(in, AISkill);
+
+			logs = "Pokemon";
 		}
 		else if (describe == "Status")
 		{
 			// Player check the status of the Pokemon
+			Pokemon& pokemon = game.player.getCurrentPokemon();
+
+			logs += pokemon.getName() + " ";
+			logs += to_string(pokemon.getHp()) + " ";
+			vector<int> stat = pokemon.getCurrentStat();
+			for (int i = 0; i < stat.size(); i++)
+			{
+				logs += getSkillEffectCategoryName(stat[i]);
+
+				if (i != stat.size() - 1)
+				{
+					logs += " ";
+				}
+			}
+
+			game << logs;
+		}
+		else if (describe == "Check")
+		{
+			// Player check the moves of the Pokemon
+			Pokemon& pokemon = game.player.getCurrentPokemon();
+			vector<Skill> skills = pokemon.getSkillList();
+
+			for (int i = 0; i < skills.size(); i++)
+			{
+				logs += skills[i].getName() + " ";
+				logs += to_string(skills[i].getPP());
+
+				if (i != skills.size() - 1)
+				{
+					logs += " ";
+				}
+			}
 		}
 		else if (describe == "Run")
 		{
+			game << "Run";
 			break;
 		}
 		else
 		{
 			throw string("Invalid command");
 		}
+
+		game << logs;
 	}
 }

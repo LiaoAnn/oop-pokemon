@@ -24,3 +24,20 @@ map<string, int> skillEffectTypeMap =
 	{ "psn", POISON },
 	{ "brn", BURN },
 };
+
+/**
+ * Intent: Get skill effect category name
+ * Pre: category
+ * Post: return skill effect category name by skillEffectTypeMap
+ */
+string getSkillEffectCategoryName(int category)
+{
+	for (auto it = skillEffectTypeMap.begin(); it != skillEffectTypeMap.end(); it++)
+	{
+		if (it->second == category)
+		{
+			return it->first;
+		}
+	}
+	return "";
+}

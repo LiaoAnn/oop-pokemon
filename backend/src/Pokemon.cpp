@@ -336,3 +336,12 @@ Skill& Pokemon::operator[](string name)
 	}
 }
 
+/**
+ * Intent: Get current stat of the Pokemon
+ * Pre: None
+ * Post: Return the current stat of the Pokemon
+ */
+vector<int> Pokemon::getCurrentStat() const
+{
+	return currentStat;
+}

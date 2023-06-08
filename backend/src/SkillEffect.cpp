@@ -110,7 +110,7 @@ string SkillEffect::printAffactMessage(string pokemonName) const
  */
 Poison::Poison()
 	:
-	SkillEffect(DOT, "Poison")
+	SkillEffect(DOT, "psn")
 {}
 
 /**
@@ -120,7 +120,7 @@ Poison::Poison()
  */
 Poison::Poison(int leftRound)
 	:
-	SkillEffect(DOT, "Poison", leftRound)
+	SkillEffect(DOT, "psn", leftRound)
 {}
 
 /**
@@ -159,7 +159,7 @@ string Poison::printAffactMessage(string pokemonName) const
  */
 Burn::Burn()
 	:
-	SkillEffect(DOT, "Burn")
+	SkillEffect(DOT, "brn")
 {}
 
 /**
@@ -169,7 +169,7 @@ Burn::Burn()
  */
 Burn::Burn(int leftRound)
 	:
-	SkillEffect(DOT, "Burn", leftRound)
+	SkillEffect(DOT, "brn", leftRound)
 {}
 
 /**
@@ -208,7 +208,7 @@ string Burn::printAffactMessage(string pokemonName) const
  */
 Paralysis::Paralysis()
 	:
-	SkillEffect(DEBUFF, "Paralysis")
+	SkillEffect(DEBUFF, "par")
 {}
 
 /**
@@ -218,7 +218,7 @@ Paralysis::Paralysis()
  */
 Paralysis::Paralysis(int leftRound)
 	:
-	SkillEffect(DEBUFF, "Paralysis", leftRound)
+	SkillEffect(DEBUFF, "par", leftRound)
 {}
 
 /**
