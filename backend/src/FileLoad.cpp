@@ -10,6 +10,7 @@
 #include "Skill.h"
 #include "SkillEffectList.h"
 #include "SkillCategory.h"
+#include "GameMode.h"
 
 using namespace std;
 
@@ -49,7 +50,7 @@ bool FileLoad::canBeBattle()
 /**
  * Intent: Load the monster library
  * Pre: data is the content of the file
- * Post: None
+ * Post: bool of whether the battle can be started
  */
 bool FileLoad::loadMonsterLibraryFile(string name)
 {
@@ -97,7 +98,7 @@ bool FileLoad::loadMonsterLibraryFile(string name)
 /**
  * Intent: Load the move library
  * Pre: data is the content of the file
- * Post: None
+ * Post: bool of whether the battle can be started
  */
 bool FileLoad::loadMoveLibraryFile(string name)
 {
@@ -145,8 +146,8 @@ bool FileLoad::loadMoveLibraryFile(string name)
 
 /**
  * Intent: Load the game data
- * * Pre: data is the content of the file
- * * Post: None
+ * Pre: data is the content of the file
+ * Post: bool of whether the battle can be started
  */
 bool FileLoad::loadGameDataFile(string name)
 {
@@ -220,4 +221,72 @@ bool FileLoad::loadGameDataFile(string name)
 	this->GameDataName = name;
 	this->isLoadGameData = true;
 	return this->canBeBattle();
+}
+
+/**
+ * Intent: Load the case file
+ * Pre: name is the name of the file
+ * Post: None
+ */
+void FileLoad::loadCaseFile(string name)
+{
+	ifstream in;
+	in.open(name);
+	string describe;
+	stringstream ss;
+	int gameMode;
+
+	/* Load the type library */
+	try
+	{
+		getline(in, describe);
+		this->loadMonsterLibraryFile(describe);
+
+		getline(in, describe);
+		this->loadMoveLibraryFile(describe);
+
+		getline(in, describe);
+		this->loadGameDataFile(describe);
+	}
+	catch (string& e)
+	{
+		game << e;
+	}
+
+	/* Set the game mode */
+	getline(in, describe);
+	if (describe == "Test")
+		gameMode = TEST;
+	else
+		gameMode = NORMAL;
+	game.setGameMode(gameMode);
+
+	/* Game Start */
+	while (getline(in, describe))
+	{
+		if (describe == "Battle")
+		{
+			// Both player and AI use a skill
+		}
+		else if (describe == "Bag")
+		{
+			// Player use a item and AI use a skill
+		}
+		else if (describe == "Pokemon")
+		{
+			// Player change Pokemon and AI use a skill
+		}
+		else if (describe == "Status")
+		{
+			// Player check the status of the Pokemon
+		}
+		else if (describe == "Run")
+		{
+			break;
+		}
+		else
+		{
+			throw string("Invalid command");
+		}
+	}
 }

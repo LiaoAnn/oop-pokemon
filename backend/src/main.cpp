@@ -13,20 +13,14 @@ int main()
 	filetest.Movesfile();
 	filetest.Gamedata();*/
 
-	FileLoad filetest;
-	filetest.loadMonsterLibraryFile("../../../testData/PokemonLib.txt");
-	filetest.loadMoveLibraryFile("../../../testData/MoveLib.txt");
+	FileLoad file;
 	try
 	{
-		filetest.loadGameDataFile("../../../testData/GameData.txt");
+		file.loadCaseFile("case.txt");
 	}
 	catch (string& e)
 	{
 		game << e;
-	}
-	for (int i = 0; i < game.battleLog.size(); i++)
-	{
-		cout << game.battleLog[i] << endl;
 	}
 
 

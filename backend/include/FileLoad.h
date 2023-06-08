@@ -1,4 +1,12 @@
-﻿#pragma once
+﻿/***********************************************************************
+ * File: FileLoad.h
+ * Author: Alan
+ * Create Date: 2023-05-23
+ * Editor: Alan, BING-JIA TAN (B11115001)
+ * Update Date: 2023-06-08
+ * Description: Header file for FileLoad
+************************************************************************/
+#pragma once
 #pragma once
 #include <iostream>
 #include <fstream>

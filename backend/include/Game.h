@@ -15,12 +15,15 @@ public:
 	// constructor
 	Game(Player player1, Player player2);
 
-	// start the game
-	void StartGame();
-	// initialize the game
-	void InitGame();
+	// set game mode
+	void setGameMode(int mode);
 
-	void HealTime();
+	// start the game
+	void startGame();
+	// initialize the game
+	void initGame();
+
+	void healTime();
 
 	void operator<<(string str);
 };

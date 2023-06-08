@@ -35,7 +35,7 @@ Game::Game(Player player1, Player player2)
  * Pre:
  * Post:
  */
-void Game::StartGame()
+void Game::startGame()
 {}
 
 /**
@@ -43,7 +43,7 @@ void Game::StartGame()
  * Pre:
  * Post:
  */
-void Game::InitGame()
+void Game::initGame()
 {
 	this->player.clearPokemonList();
 	this->AI.clearPokemonList();
@@ -51,7 +51,7 @@ void Game::InitGame()
 	this->battleLog.clear();
 }
 
-void Game::HealTime()
+void Game::healTime()
 {}
 
 /**
@@ -63,6 +63,16 @@ void Game::operator<<(string str)
 {
 	string temp = "[Turn " + to_string(this->turn) + "] " + str;
 	this->battleLog.push_back(temp);
+}
+
+/**
+ * Intent: Set game mode
+ * Pre: mode is the game mode
+ * Post: None
+ */
+void Game::setGameMode(int mode)
+{
+	this->mode = mode;
 }
 
 Game game = Game();
