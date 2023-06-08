@@ -26,7 +26,7 @@ private:
 	int spAttack; // special attack points
 	int spDefence; // special defence points
 	int speed; // speed points
-	vector <int> currentStat; // current stats
+	vector <SkillEffect> currentStat; // current stats
 	vector<Skill> skillList; // list of skills
 public:
 	// Default Constructor
@@ -52,11 +52,10 @@ public:
 	int getSpDefence() const;
 	int getSpeed() const;
 	int getMaxHp() const;
-	vector<int> getCurrentStat() const;
+	vector<SkillEffect> getCurrentStats() const;
 
 	// Setters
 	void setName(string name);
-	void setTypeNum(int typeNum);
 	void setType(set <int> type);
 	void setHp(int hp);
 	void setAttack(int attack);
@@ -64,10 +63,9 @@ public:
 	void setSpAttack(int spAttack);
 	void setSpDefence(int spDefence);
 	void setSpeed(int speed);
-	void setCurrentStat(vector <int> currentStat);
 
 	// Add a stat to the current stat list
-	void addCurrentStat(int stat);
+	void addCurrentStat(SkillEffect stat);
 	// Scan the current stat list and remove the stat if it turns to 0
 	void removeCurrentStat();
 

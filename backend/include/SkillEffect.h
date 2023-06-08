@@ -28,7 +28,7 @@ public:
 	// Get type of skill effect
 	int getSkillEffectType() const;
 	// Get name of skill effect
-	string getSkillEffectName() const;
+	string getName() const;
 	// Get left round of skill effect
 	int getLeftRound() const;
 

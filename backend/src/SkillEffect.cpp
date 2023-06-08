@@ -47,7 +47,7 @@ SkillEffect::~SkillEffect()
  * Pre: None
  * Post: A string
  */
-string SkillEffect::getSkillEffectName() const
+string SkillEffect::getName() const
 {
 	return name;
 }

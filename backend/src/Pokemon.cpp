@@ -341,7 +341,37 @@ Skill& Pokemon::operator[](string name)
  * Pre: None
  * Post: Return the current stat of the Pokemon
  */
-vector<int> Pokemon::getCurrentStat() const
+vector<SkillEffect> Pokemon::getCurrentStats() const
 {
 	return currentStat;
 }
+
+/**
+ * Intent: Add a stat to the current stat of the Pokemon
+ * Pre: stat is a SkillEffect object
+ * Post: None
+ */
+void Pokemon::addCurrentStat(SkillEffect stat)
+{
+	currentStat.push_back(stat);
+}
+
+/**
+ * Intent: Remove a stat from the current stat of the Pokemon
+ * Pre: stat is a SkillEffect object
+ * Post: None
+ */
+void Pokemon::removeCurrentStat()
+{
+	for (int i = 0; i < currentStat.size(); i++)
+	{
+		if (currentStat[i].getLeftRound() == 0)
+		{
+			currentStat.erase(currentStat.begin() + i);
+			i--;
+		}
+		else
+			currentStat[i].reduceLeftRound();
+	}
+}
+

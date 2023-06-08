@@ -300,10 +300,15 @@ void FileLoad::loadCaseFile(string name)
 
 			logs += pokemon.getName() + " ";
 			logs += to_string(pokemon.getHp()) + " ";
-			vector<int> stat = pokemon.getCurrentStat();
+			vector<SkillEffect> stat = pokemon.getCurrentStats();
 			for (int i = 0; i < stat.size(); i++)
 			{
-				logs += getSkillEffectCategoryName(stat[i]);
+				string skillEffectName = stat[i].getName();
+				transform(
+					skillEffectName.begin(),
+					skillEffectName.end(), skillEffectName.begin(),
+					::toupper);
+				logs += skillEffectName;
 
 				if (i != stat.size() - 1)
 				{
