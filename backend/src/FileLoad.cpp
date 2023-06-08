@@ -71,9 +71,9 @@ bool FileLoad::loadMonsterLibraryFile(string name)
 		set<int> typeSet;
 
 		ss >> name;
+
 		getline(in, describe);
 		ss = stringstream(describe);
-
 		ss >> typeCount;
 		for (size_t i = 0; i < typeCount; i++)
 		{
@@ -118,16 +118,20 @@ bool FileLoad::loadMoveLibraryFile(string name)
 		int typeIndex, categoryIndex, power, accuracy, pp, effectIndex;
 		SkillEffect effect;
 
+		// Read the data to the skill
 		ss >> name >> type >> category >> power >> accuracy >> pp;
 
+		// Set the type
 		transform(type.begin(), type.end(), type.begin(), ::tolower);
 		typeIndex = typeMap.at(type);
 
+		// Set the category
 		transform(category.begin(), category.end(), category.begin(), ::tolower);
 		categoryIndex = skillCategoryMap.at(category);
 
 		Skill skill(name, typeIndex, categoryIndex, power, accuracy, pp);
 
+		// Set the effect
 		ss >> con;
 		transform(con.begin(), con.end(), con.begin(), ::tolower);
 		if (con != "")
@@ -157,6 +161,7 @@ bool FileLoad::loadGameDataFile(string name)
 	int pokemonCount;
 	in.open(name);
 	string describe;
+
 	while (in >> pokemonCount)
 	{
 		Player player;
@@ -168,6 +173,8 @@ bool FileLoad::loadGameDataFile(string name)
 			Pokemon pokemon;
 			string pokemonName, skillName;
 			int pokemonIndex, skillCount, skillIndex;
+
+			// Read Pokemon
 			getline(in, describe);
 			ss = stringstream(describe);
 			ss >> pokemonName >> skillCount;
