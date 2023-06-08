@@ -49,9 +49,4 @@ public:
 
 	// Return true if the file is loaded
 	bool canBeBattle();
-
-	void Movesfile();
-	void Gamedata();
-	void opentest();
-	void setfile();
 };
