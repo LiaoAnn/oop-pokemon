@@ -40,7 +40,10 @@ Pokemon::Pokemon()
 	defence(0),
 	spAttack(0),
 	spDefence(0),
-	speed(0)
+	speed(0),
+	maxHp(0),
+	typeNum(0),
+	skillList(vector <Skill>())
 {}
 
 /**
@@ -66,9 +69,11 @@ Pokemon::Pokemon(
 	typeNum(typeNum),
 	type(type),
 	hp(hp),
+	maxHp(hp),
 	attack(attack), defence(defence),
 	spAttack(spAttack), spDefence(spDefence),
-	speed(speed)
+	speed(speed),
+	skillList(vector <Skill>())
 {}
 
 /**
@@ -81,12 +86,18 @@ Pokemon::Pokemon(const Pokemon& pokemon)
 	name(pokemon.name),
 	type(pokemon.type),
 	hp(pokemon.hp),
+	maxHp(pokemon.maxHp),
 	attack(pokemon.attack),
 	defence(pokemon.defence),
 	spAttack(pokemon.spAttack),
 	spDefence(pokemon.spDefence),
 	speed(pokemon.speed)
-{}
+{
+	for (int i = 0; i < pokemon.skillList.size(); i++)
+	{
+		skillList.push_back(pokemon.skillList[i]);
+	}
+}
 
 /**
  * Intent: Destructor
@@ -265,3 +276,63 @@ void Pokemon::addType(int type)
 {
 	this->type.insert(type);
 }
+
+/**
+ * Intent: Find the Pokemon by name
+ * Pre: name is a string
+ * Post: Return the index of the Pokemon in the vector if found, otherwise return -1
+ */
+int findPokemonByName(string name)
+{
+	for (int i = 0; i < pokemonList.size(); i++)
+	{
+		if (pokemonList[i].name == name)
+			return i;
+	}
+	return -1;
+}
+
+/**
+ * Intent: Add Skill to the Pokemon
+ * Pre: skill is a Skill object
+ * Post: None
+ */
+void Pokemon::addSkill(Skill skill)
+{
+	skillList.push_back(skill);
+}
+
+/**
+ * Intent: Get the skill list of the Pokemon
+ * Pre: None
+ * Post: Return the skill list of the Pokemon
+ */
+vector<Skill> Pokemon::getSkillList() const
+{
+	return skillList;
+}
+
+/**
+ * Intent: Operator overloading []
+ * Pre: index is an integer
+ * Post: Return the skill of the Pokemon by index
+ */
+Skill& Pokemon::operator[](int index)
+{
+	return skillList[index];
+}
+
+/**
+ * Intent: Operator overloading []
+ * Pre: name is a string
+ * Post: Return the skill of the Pokemon by name
+ */
+Skill& Pokemon::operator[](string name)
+{
+	for (int i = 0; i < skillList.size(); i++)
+	{
+		if (skillList[i].getName() == name)
+			return skillList[i];
+	}
+}
+

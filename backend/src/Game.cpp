@@ -1,4 +1,4 @@
-/***********************************************************************
+﻿/***********************************************************************
  * File: GameStatus.cpp
  * Author: Alan
  * Create Date: 2023-06-06
@@ -13,7 +13,7 @@
  * Pre: None
  * Post: A new Game object is created
  */
-Game::Game() : player(), AI(), turn(0), file("")
+Game::Game() : player(), AI(), turn(1), mode(0), battleLog()
 {}
 
 /**
@@ -21,16 +21,49 @@ Game::Game() : player(), AI(), turn(0), file("")
  * Pre: None
  * Post: A new Game object is created
  */
-Game::Game(Player player1, Player player2) 
+Game::Game(Player player1, Player player2)
 {
 	this->player = player1;
 	this->AI = player2;
-	this->turn = 0;
-	this->file = FileLoad("");
+	this->turn = 1;
+	this->mode = 0;
+	this->battleLog.clear();
 }
 
-void Game::GameStart() 
+/**
+ * Intent: Start the game
+ * Pre:
+ * Post:
+ */
+void Game::StartGame()
 {}
 
-void Game::HealTime() 
+/**
+ * Intent: Initialize the game
+ * Pre:
+ * Post:
+ */
+void Game::InitGame()
+{
+	this->player.clearPokemonList();
+	this->AI.clearPokemonList();
+	this->turn = 1;
+	this->battleLog.clear();
+}
+
+void Game::HealTime()
 {}
+
+/**
+ * Intent: Operator overload <<
+ * Pre: a string
+ * Post: push the string into battleLog
+ */
+void Game::operator<<(string str)
+{
+	string temp = "[Turn " + to_string(this->turn) + "] " + str;
+	this->battleLog.push_back(temp);
+}
+
+Game game = Game();
+

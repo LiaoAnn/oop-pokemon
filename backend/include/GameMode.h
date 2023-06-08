@@ -10,8 +10,8 @@
 
 enum GameMode
 {
-	// Normal mode
+	// 0: Normal mode
+	// 1: Test mode
 	NORMAL,
-	// Test mode
 	TEST
 };

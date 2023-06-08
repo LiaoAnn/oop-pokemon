@@ -49,9 +49,9 @@ bool FileLoad::canBeBattle()
 /**
  * Intent: Load the monster library
  * Pre: data is the content of the file
- * Post:
+ * Post: None
  */
-void FileLoad::loadMonsterLibraryFile(string name)
+bool FileLoad::loadMonsterLibraryFile(string name)
 {
 	//cout << data << endl;
 	/* e.g.
@@ -88,14 +88,17 @@ void FileLoad::loadMonsterLibraryFile(string name)
 		Pokemon pokemon(name, typeCount, typeSet, HP, ATK, DEF, SPATK, SPDEF, SPD);
 		pokemonList.push_back(pokemon);
 	}
+
+	this->isLoadMonsterLib = true;
+	return this->canBeBattle();
 }
 
 /**
  * Intent: Load the move library
  * Pre: data is the content of the file
- * Post:
+ * Post: None
  */
-void FileLoad::loadMoveLibraryFile(string name)
+bool FileLoad::loadMoveLibraryFile(string name)
 {
 	//cout << data << endl;
 	/* e.g.
@@ -133,6 +136,87 @@ void FileLoad::loadMoveLibraryFile(string name)
 		}
 		skillList.push_back(skill);
 	}
+	this->isLoadMoveLib = true;
+
+	return this->canBeBattle();
+}
+
+/**
+ * Intent: Load the game data
+ * * Pre: data is the content of the file
+ * * Post: None
+ */
+bool FileLoad::loadGameDataFile(string name)
+{
+	bool firstPlayer = true;
+	ifstream in;
+	stringstream ss;
+	int pokemonCount;
+	in.open(name);
+	string describe;
+	while (in >> pokemonCount)
+	{
+		Player player;
+		getline(in, describe);
+
+		// Find Pokemon
+		for (int i = 0; i < pokemonCount; i++)
+		{
+			Pokemon pokemon;
+			string pokemonName, skillName;
+			int pokemonIndex, skillCount, skillIndex;
+			getline(in, describe);
+			ss = stringstream(describe);
+			ss >> pokemonName >> skillCount;
+
+			pokemonIndex = findPokemonByName(pokemonName);
+			if (pokemonIndex != -1)
+			{
+				// To next line
+				getline(in, describe);
+				ss = stringstream(describe);
+
+				// Copy Pokemon
+				pokemon = pokemonList[pokemonIndex];
+				for (int j = 0; j < skillCount; j++)
+				{
+					// Find Skill
+					ss >> skillName;
+					skillIndex = findSkillByName(skillName);
+
+					if (skillIndex == -1)
+					{
+						throw string("Skill not found");
+					}
+
+					// Copy Skill
+					Skill skill = skillList[skillIndex];
+					pokemon.addSkill(skill);
+				}
+				player.addPokemon(pokemon);
+			}
+			else
+			{
+				throw string("Pokemon not found");
+			}
+
+			player.addPokemon(pokemon);
+		}
+
+		// Set the game.player if it is the first player
+		if (firstPlayer)
+		{
+			game.player = player;
+			firstPlayer = false;
+		}
+		else
+		{
+			game.AI = player;
+		}
+	}
+
+	this->isLoadGameData = true;
+	return this->canBeBattle();
 }
 
 void FileLoad::openFile()

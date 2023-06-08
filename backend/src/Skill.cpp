@@ -159,3 +159,20 @@ void Skill::setEffect(SkillEffect effect)
 {
 	this->effect = effect;
 }
+
+/**
+ * Intent: Find the skill by name
+ * Pre: name is a string
+ * Post: Return the index of the skill
+ */
+int findSkillByName(string name)
+{
+	for (int i = 0; i < skillList.size(); i++)
+	{
+		if (skillList[i].name == name)
+		{
+			return i;
+		}
+	}
+	return -1;
+}

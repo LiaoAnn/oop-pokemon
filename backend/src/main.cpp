@@ -1,5 +1,6 @@
 ﻿#include "main.h"
 //#include "Type.h"
+#include "Game.h"
 #include "FileLoad.h"
 #include "Skill.h"
 int main()
@@ -13,8 +14,20 @@ int main()
 	filetest.Gamedata();*/
 
 	FileLoad filetest;
-	//filetest.loadMonsterLibraryFile("../../../testData/PokemonLib.txt");
+	filetest.loadMonsterLibraryFile("../../../testData/PokemonLib.txt");
 	filetest.loadMoveLibraryFile("../../../testData/MoveLib.txt");
+	try
+	{
+		filetest.loadGameDataFile("../../../testData/GameData.txt");
+	}
+	catch (string& e)
+	{
+		game << e;
+	}
+	for (int i = 0; i < game.battleLog.size(); i++)
+	{
+		cout << game.battleLog[i] << endl;
+	}
 
 
 	/*webServer = new WebServer(WEBROOT, WEBPORT);

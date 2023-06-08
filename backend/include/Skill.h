@@ -51,6 +51,9 @@ public:
 
 	// Reduce PP by 1
 	void reducePP();
+
+	// Find Skill index in skillList by name
+	friend int findSkillByName(string name);
 };
 
 extern vector<Skill> skillList;  // List of all skills

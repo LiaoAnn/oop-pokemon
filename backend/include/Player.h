@@ -1,4 +1,4 @@
-/***********************************************************************
+﻿/***********************************************************************
  * File: Player.h
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-06-06
@@ -15,40 +15,41 @@
 using namespace std;
 class Player {
 public:
-    // constructor
-    Player();
-    Player(string name);
-    Player(
-        string name,
-        Pokemon pokemon1, 
-        Pokemon pokemon2, 
-        Pokemon pokemon3, 
-        Pokemon pokemon4
-    );
+	// constructor
+	Player();
+	Player(string name);
+	Player(
+		string name,
+		Pokemon pokemon1,
+		Pokemon pokemon2,
+		Pokemon pokemon3,
+		Pokemon pokemon4
+	);
 
-    // copy constructor
-    Player(const Player& player);
+	// copy constructor
+	Player(const Player& player);
 
-    // oprator = overloading
-    Player& operator=(const Player& player);
+	// oprator = overloading
+	Player& operator=(const Player& player);
 
-    // destructor
-    ~Player();
+	// destructor
+	~Player();
 
-    // Get player's name
-    string getName() const;
-    // Get player's Pokemon list
-    vector<Pokemon> getPokemonList() const;
-    // Get player's current Pokemon
-    Pokemon getCurrentPokemon() const;
+	// Get player's name
+	string getName() const;
+	// Get player's Pokemon list
+	vector<Pokemon> getPokemonList() const;
+	// Get player's current Pokemon
+	Pokemon& getCurrentPokemon();
 
-    // Add a Pokemon to the player's Pokemon list
-    void addPokemon(Pokemon pokemon);
-    // Set the player's current Pokemon by index
-    void setCurrentPokemon(int index);
-
+	// Add a Pokemon to the player's Pokemon list
+	void addPokemon(Pokemon pokemon);
+	// Set the player's current Pokemon by index
+	void setCurrentPokemon(int index);
+	// Clear the player's Pokemon list
+	void clearPokemonList();
 private:
-    string name;  // Name of the player
-    vector<Pokemon> pokemonList;  // List of Pokemon owned by the player
-    Pokemon& currentPokemon;  // Current Pokemon of the player
+	string name;  // Name of the player
+	vector<Pokemon> pokemonList;  // List of Pokemon owned by the player
+	int currentPokemon;  // Current Pokemon of the player
 };
