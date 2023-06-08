@@ -35,12 +35,6 @@ public:
 	FileLoad(string file);
 	void openFile();
 
-	// Set the file name
-	void setCaseFileName(string name);
-	void setMonsterLibName(string name);
-	void setMoveLibName(string name);
-	void setGameDataName(string name);
-
 	// Load the monster library
 	bool loadMonsterLibraryFile(string name);
 
