@@ -375,3 +375,14 @@ void Pokemon::removeCurrentStat()
 	}
 }
 
+/**
+ * Intent: Heal the Pokemon
+ * Pre: points is an integer
+ * Post: None
+ */
+void Pokemon::healHp(int points)
+{
+	hp += points;
+	if (hp > maxHp)
+		hp = maxHp;
+}
