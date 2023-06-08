@@ -81,7 +81,7 @@ public:
 	Skill& operator[](string name);
 
 	// Heal the pokemon
-	void heal(int points);
+	void healHp(int points);
 
 	friend int findPokemonByName(string name);
 };
