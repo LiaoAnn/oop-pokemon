@@ -1,4 +1,4 @@
-﻿/***********************************************************************
+/***********************************************************************
  * File: Pokemon.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-06-06
@@ -407,4 +407,19 @@ int Pokemon::getMaxHp() const
 int Pokemon::getLevel() const
 {
 	return level;
+}
+
+/**
+ * Intent: Check if the Pokemon has status effect
+ * Pre: S
+ * Post:
+ */
+bool Pokemon::checkSkillEffect(SkillEffect skillEffect) const
+{
+	for (int i = 0; i < currentStat.size(); i++)
+	{
+		if (currentStat[i] == skillEffect)
+			return true;
+	}
+	return false;
 }
