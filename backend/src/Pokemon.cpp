@@ -441,3 +441,13 @@ bool Pokemon::isAlive() const
 {
 	return hp > 0;
 }
+
+/**
+ * Intent: Add a stat to the current stat of the Pokemon
+ * Pre: stat is a SkillEffect object
+ * Post: None
+ */
+void Pokemon::addCurrentStat(SkillEffect& stat)
+{
+	currentStat.push_back(stat);
+}
