@@ -87,7 +87,7 @@ public:
 	// Scan the current stat list and remove the stat if it turns to 0
 	void removeCurrentStat();
 	// Check if pokemon has skill effect
-	bool checkSkillEffect(SkillEffect skillEffect) const;
+	bool checkSkillEffect(const SkillEffect& skillEffect) const;
 
 	// Overload operator [] to get skill by index or name
 	Skill& operator[](int index);

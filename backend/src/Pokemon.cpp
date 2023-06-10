@@ -422,7 +422,7 @@ int Pokemon::getLevel() const
  * Pre: S
  * Post:
  */
-bool Pokemon::checkSkillEffect(SkillEffect skillEffect) const
+bool Pokemon::checkSkillEffect(const SkillEffect& skillEffect) const
 {
 	for (int i = 0; i < currentStat.size(); i++)
 	{
