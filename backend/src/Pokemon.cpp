@@ -1,4 +1,4 @@
-﻿/***********************************************************************
+/***********************************************************************
  * File: Pokemon.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-06-06
@@ -54,7 +54,8 @@ Pokemon::Pokemon()
 		hp, attack, defence, spAttack, spDefence, speed are integers
  * Post: A Pokemon object
  */
-Pokemon::Pokemon(
+Pokemon::Pokemon
+(
 	string name,
 	int typeNum,
 	set <int> type,
@@ -63,7 +64,8 @@ Pokemon::Pokemon(
 	int defence,
 	int spAttack,
 	int spDefence,
-	int speed)
+	int speed
+)
 	:
 	name(name),
 	typeNum(typeNum),
