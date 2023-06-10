@@ -1,4 +1,4 @@
-/***********************************************************************
+﻿/***********************************************************************
  * File: Pokemon.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-06-06
@@ -7,6 +7,7 @@
  * Description: Implementation for Pokemon class
 ************************************************************************/
 #include "Pokemon.h"
+#include "SkillEffectList.h"
 //Pokemon::Pokemon(string name, set<int> typeList,
 //	int HP, float atk, float def, float sPatk, float sPdef, float speed) {
 //	atkList.push_back(atk);
@@ -180,13 +181,20 @@ int Pokemon::getSpDefence() const
 }
 
 /**
- * Intent: Get the speed of the Pokemon
+ * Intent: Get the speed of the Pokemon. If the Pokemon is paralyzed, the speed will be halved.
  * Pre: None
  * Post: Return the speed of the Pokemon
  */
 int Pokemon::getSpeed() const
 {
-	return speed;
+	if (checkSkillEffect(skillEffectList[PARALYSIS]))
+	{
+		return speed / 2;
+	}
+	else
+	{
+		return speed;
+	}
 }
 
 /**
