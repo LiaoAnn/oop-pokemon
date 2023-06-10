@@ -34,7 +34,7 @@ private:
 	int spDefence; // special defence points
 	int speed; // speed points
 	int level = LEVEL; // level of pokemon
-	vector<SkillEffect> currentStat; // current stats
+	vector<SkillEffect*> currentStat; // current stats
 	vector<Skill> skillList; // list of skills
 public:
 	// Default Constructor
@@ -60,7 +60,7 @@ public:
 	int getSpDefence() const;
 	int getSpeed() const;
 	int getMaxHp() const;
-	vector<SkillEffect> getCurrentStats() const;
+	vector<SkillEffect*> getCurrentStats() const;
 	int getLevel() const;
 	vector<Skill> getSkillList() const;
 

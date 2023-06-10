@@ -351,19 +351,9 @@ Skill& Pokemon::operator[](string name)
  * Pre: None
  * Post: Return the current stat of the Pokemon
  */
-vector<SkillEffect> Pokemon::getCurrentStats() const
+vector<SkillEffect*> Pokemon::getCurrentStats() const
 {
 	return currentStat;
-}
-
-/**
- * Intent: Add a stat to the current stat of the Pokemon
- * Pre: stat is a SkillEffect object
- * Post: None
- */
-void Pokemon::addCurrentStat(SkillEffect stat)
-{
-	currentStat.push_back(stat);
 }
 
 /**
@@ -375,13 +365,13 @@ void Pokemon::removeCurrentStat()
 {
 	for (int i = 0; i < currentStat.size(); i++)
 	{
-		if (currentStat[i].getLeftRound() == 0)
+		if (currentStat[i]->getLeftRound() == 0)
 		{
 			currentStat.erase(currentStat.begin() + i);
 			i--;
 		}
 		else
-			currentStat[i].reduceLeftRound();
+			currentStat[i]->reduceLeftRound();
 	}
 }
 
@@ -426,7 +416,7 @@ bool Pokemon::checkSkillEffect(const SkillEffect& skillEffect) const
 {
 	for (int i = 0; i < currentStat.size(); i++)
 	{
-		if (currentStat[i] == skillEffect)
+		if (currentStat[i] == &skillEffect)
 			return true;
 	}
 	return false;
@@ -449,5 +439,5 @@ bool Pokemon::isAlive() const
  */
 void Pokemon::addCurrentStat(SkillEffect& stat)
 {
-	currentStat.push_back(stat);
+	currentStat.push_back(&stat);
 }
