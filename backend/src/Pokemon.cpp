@@ -398,3 +398,13 @@ int Pokemon::getMaxHp() const
 {
 	return maxHp;
 }
+
+/**
+ * Intent: Get the level of the Pokemon
+ * Pre: None
+ * Post: Return the level of the Pokemon
+ */
+int Pokemon::getLevel() const
+{
+	return level;
+}

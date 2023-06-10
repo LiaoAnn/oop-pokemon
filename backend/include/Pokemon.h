@@ -18,6 +18,8 @@ enum pokemonStat { hp, attack, defence, spAttack, spDefence, speed };
 class Skill;
 class SkillEffect;
 
+const int LEVEL = 50;
+
 class Pokemon
 {
 private:
@@ -31,7 +33,7 @@ private:
 	int spAttack; // special attack points
 	int spDefence; // special defence points
 	int speed; // speed points
-
+	int level = LEVEL; // level of pokemon
 	vector<SkillEffect> currentStat; // current stats
 	vector<Skill> skillList; // list of skills
 public:
@@ -59,6 +61,7 @@ public:
 	int getSpeed() const;
 	int getMaxHp() const;
 	vector<SkillEffect> getCurrentStats() const;
+	int getLevel() const;
 
 	// Setters
 	void setName(string name);
