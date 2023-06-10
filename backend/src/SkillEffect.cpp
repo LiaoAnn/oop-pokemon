@@ -82,6 +82,16 @@ void SkillEffect::reduceLeftRound()
 	leftRound--;
 }
 
+/**
+ * Intent: Check if pokemon has skill effect
+ * Pre: None
+ * Post: A boolean
+ */
+bool SkillEffect::operator==(const SkillEffect& skillEffect) const
+{
+	return name == skillEffect.name;
+}
+
 
 /**
  * Intent: Print message when get skill effect
