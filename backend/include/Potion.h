@@ -20,7 +20,7 @@ public:
 	Potion(string name, int points);
 	~Potion();
 
-	virtual void usePotion() = 0;
+	virtual void usePotion(Pokemon& pokemon) = 0;
 };
 
 class NormalPotion : public Potion
