@@ -62,6 +62,7 @@ public:
 	int getMaxHp() const;
 	vector<SkillEffect> getCurrentStats() const;
 	int getLevel() const;
+	vector<Skill> getSkillList() const;
 
 	// Setters
 	void setName(string name);
@@ -73,30 +74,26 @@ public:
 	void setSpDefence(int spDefence);
 	void setSpeed(int speed);
 
+	// Add a type to the type list
+	void addType(int type);
+
+	// Check if pokemon is alive
+	bool isAlive() const;
+	// Heal the pokemon
+	void healHp(int points);
+
 	// Add a stat to the current stat list
 	void addCurrentStat(SkillEffect stat);
 	// Scan the current stat list and remove the stat if it turns to 0
 	void removeCurrentStat();
-
-	void addType(int type);
-
-	// Add a skill to the skill list
-	void addSkill(Skill skill);
-	// Get the skill list
-	vector<Skill> getSkillList() const;
-
-	// Overload operator []
-	Skill& operator[](int index);
-	Skill& operator[](string name);
-
-	// Heal the pokemon
-	void healHp(int points);
-
-	// Check if pokemon is alive
-	bool isAlive() const;
-
 	// Check if pokemon has skill effect
 	bool checkSkillEffect(SkillEffect skillEffect) const;
+
+	// Overload operator [] to get skill by index or name
+	Skill& operator[](int index);
+	Skill& operator[](string name);
+	// Add a skill to the skill list
+	void addSkill(Skill skill);
 
 	friend int findPokemonByName(string name);
 };
