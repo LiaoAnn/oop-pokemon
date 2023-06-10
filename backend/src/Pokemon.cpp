@@ -1,4 +1,4 @@
-/***********************************************************************
+﻿/***********************************************************************
  * File: Pokemon.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-06-06
@@ -387,4 +387,14 @@ void Pokemon::healHp(int points)
 	hp += points;
 	if (hp > maxHp)
 		hp = maxHp;
+}
+
+/**
+ * Intent: Get the max HP of the Pokemon
+ * Pre: None
+ * Post: Return the max HP of the Pokemon
+ */
+int Pokemon::getMaxHp() const
+{
+	return maxHp;
 }
