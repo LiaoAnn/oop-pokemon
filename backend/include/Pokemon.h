@@ -11,8 +11,13 @@
 #include <vector>
 #include <set>
 #include "Skill.h"
+#include "SkillEffect.h"
+
 using namespace std;
 enum pokemonStat { hp, attack, defence, spAttack, spDefence, speed };
+class Skill;
+class SkillEffect;
+
 class Pokemon
 {
 private:
@@ -26,7 +31,8 @@ private:
 	int spAttack; // special attack points
 	int spDefence; // special defence points
 	int speed; // speed points
-	vector <SkillEffect> currentStat; // current stats
+
+	vector<SkillEffect> currentStat; // current stats
 	vector<Skill> skillList; // list of skills
 public:
 	// Default Constructor
@@ -74,7 +80,7 @@ public:
 	// Add a skill to the skill list
 	void addSkill(Skill skill);
 	// Get the skill list
-	vector <Skill> getSkillList() const;
+	vector<Skill> getSkillList() const;
 
 	// Overload operator []
 	Skill& operator[](int index);

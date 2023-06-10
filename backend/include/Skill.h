@@ -14,6 +14,8 @@
 
 using namespace std;
 
+class Pokemon;
+
 class Skill {
 private:
 	string name;  // Name of the skill
