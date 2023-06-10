@@ -1,4 +1,4 @@
-/***********************************************************************
+﻿/***********************************************************************
  * File: Pokemon.h
  * Author: 劉耀恩
  * Create Date: 2023/05/30
@@ -91,6 +91,9 @@ public:
 
 	// Heal the pokemon
 	void healHp(int points);
+
+	// Check if pokemon is alive
+	bool isAlive() const;
 
 	// Check if pokemon has skill effect
 	bool checkSkillEffect(SkillEffect skillEffect) const;

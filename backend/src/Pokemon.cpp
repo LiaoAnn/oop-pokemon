@@ -423,3 +423,13 @@ bool Pokemon::checkSkillEffect(SkillEffect skillEffect) const
 	}
 	return false;
 }
+
+/**
+ * Intent: Check if the Pokemon is alive
+ * Pre: None
+ * Post: Return true if the Pokemon is alive, otherwise return false
+ */
+bool Pokemon::isAlive() const
+{
+	return hp > 0;
+}
