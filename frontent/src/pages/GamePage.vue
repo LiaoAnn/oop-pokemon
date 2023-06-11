@@ -19,8 +19,24 @@ import { NLayoutContent } from 'naive-ui';
 import { ref } from 'vue';
 
 import BattleBackground from '@/assets/battle-background.png';
+import type { ReceiveMsg } from '@/common/useWebSocket';
+import { useWebSocket } from '@/common/useWebSocket';
 
 const gameDivRef = ref<HTMLElement | null>(null);
+
+//#region WebSocket
+const onMsg = (e: MessageEvent) => {
+  const { data } = e;
+  const msg = JSON.parse(data) as ReceiveMsg;
+
+  switch (msg.type) {
+    default:
+      break;
+  }
+};
+
+const { openWs, sendMsg } = useWebSocket(onMsg);
+//#endregion
 </script>
 
 <style scoped>
