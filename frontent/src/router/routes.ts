@@ -9,8 +9,18 @@ const routes: RouteRecordRaw[] = [
         path: '',
         name: 'Home',
         component: () => import('@/pages/HomePage.vue')
+      },
+      {
+        path: 'game',
+        name: 'Game',
+        component: () => import('@/pages/GamePage.vue')
       }
     ]
+  },
+  {
+    path: '/:catchAll(.*)*',
+    name: 'NotFound',
+    component: () => import('@/pages/NotFoundPage.vue')
   }
 ];
 

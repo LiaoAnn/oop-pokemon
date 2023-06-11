@@ -1,10 +1,10 @@
 <template>
   <n-layout-header>
-    <div :class="`p:.5em|0 bg:${darkPrimaryColor}`">
+    <div :class="`p:.5em|0 bg:${darkSecondaryColor}`">
       <div
         class="w:80% flex align-items:center justify-content:space-between margin:0|auto height:3em"
       >
-        <div class="flex align-items:center">
+        <div class="flex align-items:center gap:48px">
           <router-link to="/">
             <n-icon :class="`height:${logoHeight}px width:${logoWidth}px`">
               <PokemonLogo :height="logoHeight" :width="logoWidth" />
@@ -39,7 +39,7 @@ const currMenuValue = computed(() => {
   const { name } = route;
   return name?.toString() || 'home';
 });
-const { darkPrimaryColor } = useTheme();
+const { darkSecondaryColor } = useTheme();
 const logoHeight = 32;
 const logoWidth = 100;
 const menuOptions: MenuOption[] = [
@@ -55,6 +55,19 @@ const menuOptions: MenuOption[] = [
       ),
     name: 'Home',
     key: 'Home'
+  },
+  {
+    label: () =>
+      h(
+        RouterLink,
+        {
+          to: '/game',
+          class: classStr
+        },
+        'Game'
+      ),
+    name: 'Game',
+    key: 'Game'
   }
 ];
 </script>
