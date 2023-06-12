@@ -22,6 +22,10 @@ public:
 	void startGame();
 	// initialize the game
 	void initGame();
+	// Lose check
+	bool isLose();
+	// Win check
+	bool isWin();
 
 	void healTime();
 

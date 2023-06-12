@@ -75,5 +75,38 @@ void Game::setGameMode(int mode)
 	this->mode = mode;
 }
 
+/**
+ * Intent: Check if the game is over
+ * Pre: None
+ * Post: Return true if the game is over, false otherwise
+ */
+bool Game::isLose()
+{
+	vector<Pokemon> temp = this->player.getPokemonList();
+	for (int i = 0; i < temp.size(); i++)
+	{
+		if (temp[i].getHp() > 0)
+			return false;
+	}
+	return true;
+}
+
+/**
+ * Intent: Check if the game is Win
+ * Pre: None
+ * Post: Return true if the game is Win, false otherwise
+ */
+bool Game::isWin()
+{
+	vector<Pokemon> temp = this->AI.getPokemonList();
+	for (int i = 0; i < temp.size(); i++)
+	{
+		if (temp[i].getHp() > 0)
+			return false;
+	}
+
+	return true;
+}
+
 Game game = Game();
 
