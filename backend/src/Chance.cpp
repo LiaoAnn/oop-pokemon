@@ -11,6 +11,8 @@
 #include <random>
 #include <iostream>
 
+using namespace std;
+
 // random number generator
 // for invoiding keep generating the same random number
 random_device rd;
