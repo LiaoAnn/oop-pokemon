@@ -8,6 +8,7 @@
 ************************************************************************/
 
 #include "Item.h"
+#include "Potion.h"
 
 /**
  * Intent: Constructor
@@ -48,4 +49,9 @@ int Item::getPoints()
 	return points;
 }
 
-
+map<string, Item*> itemMap = {
+	{"Potion", new NormalPotion()},
+	{"Super Potion", new SuperPotion()},
+	{"Hyper Potion", new HyperPotion()},
+	{"Max Potion", new MaxPotion()}
+};

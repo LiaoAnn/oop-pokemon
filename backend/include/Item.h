@@ -10,6 +10,8 @@
 #pragma once
 
 #include <string>
+#include <map>
+#include "Pokemon.h"
 
 using namespace std;
 
@@ -23,4 +25,8 @@ public:
 	~Item();
 	string getName();
 	int getPoints();
+
+	virtual void useItem(Pokemon& pokemon) = 0;
 };
+
+extern map<string, Item*> itemMap;
