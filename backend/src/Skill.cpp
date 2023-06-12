@@ -184,5 +184,13 @@ int findSkillByName(string name)
  */
 void Skill::useSkill(Pokemon& user, Pokemon& target)
 {
-
+	srand(time(NULL));
+	float crrtical = 1.5;
+	int level = 50;
+	int useratk = user.getAttack();
+	int userspatk = user.getSpAttack();
+	int targetdef = target.getDefence();
+	int damage;
+	int type = user.getType();
+	//damage = ((2 * level + 10) / 250 * useratk * (userspatk / targetdef) + 2) * critical * stab * type;
 }
