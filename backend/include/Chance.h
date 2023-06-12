@@ -8,4 +8,7 @@
 ************************************************************************/
 #pragma once
 
+const double PARALYSIS_CHANCE = 0.5;
+const double CRITICAL_CHANCE = 0.2;
+
 bool checkChance(double probability);
