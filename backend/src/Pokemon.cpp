@@ -1,4 +1,4 @@
-﻿/***********************************************************************
+/***********************************************************************
  * File: Pokemon.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-06-06
@@ -357,7 +357,7 @@ vector<SkillEffect*> Pokemon::getCurrentStats() const
 }
 
 /**
- * Intent: Remove a stat from the current stat of the Pokemon
+ * Intent: Remove a stat from the current stat of the Pokemon and reduce the left round of the stat by 1
  * Pre: stat is a SkillEffect object
  * Post: None
  */
