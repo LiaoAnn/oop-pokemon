@@ -465,9 +465,10 @@ bool Pokemon::isCanNotMove(bool isOpposing)
 				if (isOpposing)
 					log += OPPOSING_PREFIX;
 
-				log += this->name + " is paralysed!\nIt can't move!";
+				log += this->name + " is paralysed!";
 
 				game << log;
+				game << "It can't move!";
 				return true;
 			}
 		}
@@ -496,7 +497,7 @@ bool Pokemon::isHurtByDot(bool isOpposing)
 
 			if (isOpposing)
 				log += OPPOSING_PREFIX;
-			log += this->name + " is hurt by its burn!\n";
+			log += this->name + " is hurt by its burn!";
 		}
 
 		// Poison
@@ -507,7 +508,7 @@ bool Pokemon::isHurtByDot(bool isOpposing)
 
 			if (isOpposing)
 				log += OPPOSING_PREFIX;
-			log += this->name + " is hurt by its poisoning!\n";
+			log += this->name + " is hurt by its poisoning!";
 		}
 
 		if (isHurt) {

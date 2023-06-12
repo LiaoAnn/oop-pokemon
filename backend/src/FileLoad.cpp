@@ -1,4 +1,4 @@
-﻿#include "FileLoad.h"
+#include "FileLoad.h"
 #include "Pokemon.h"
 #include "Move.h"
 #include <vector>
@@ -314,16 +314,29 @@ void FileLoad::loadCaseFile(string name)
 			// DOT check
 			playerPokemon.isHurtByDot(false);
 			AIPokemon.isHurtByDot(true);
+			game.turn++;
 		}
 		else if (describe == "Bag")
 		{
 			// Player use a item and AI use a skill
-			string playerItem, playerPokemon, AISkill;
+			string playerItem, playerPokemonName, AISkill;
 			getline(in, playerItem);
-			getline(in, playerPokemon);
+			getline(in, playerPokemonName);
 			getline(in, AISkill);
 
-			logs = "Bag";
+			Pokemon& playerPokemon = game.player.getCurrentPokemon();
+			Pokemon& AIPokemon = game.AI.getCurrentPokemon();
+
+			// Opposing Pokemon use a skill
+			if (!AIPokemon.isCanNotMove(true))
+			{
+				AIPokemon[AISkill].useSkill(AIPokemon, playerPokemon);
+			}
+
+			// DOT check
+			playerPokemon.isHurtByDot(false);
+			AIPokemon.isHurtByDot(true);
+			game.turn++;
 		}
 		else if (describe == "Pokemon")
 		{
@@ -332,7 +345,8 @@ void FileLoad::loadCaseFile(string name)
 			getline(in, playerPokemon);
 			getline(in, AISkill);
 
-			logs = "Pokemon";
+			game << "Switch Pokemon";
+			game.turn++;
 		}
 		else if (describe == "Status")
 		{
@@ -385,7 +399,5 @@ void FileLoad::loadCaseFile(string name)
 		{
 			throw string("Invalid command");
 		}
-
-		game << logs;
 	}
 }
