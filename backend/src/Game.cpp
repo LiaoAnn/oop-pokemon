@@ -13,7 +13,7 @@
  * Pre: None
  * Post: A new Game object is created
  */
-Game::Game() : player(), AI(), turn(1), mode(0), battleLog()
+Game::Game() : player(false), AI(true), turn(1), mode(0), battleLog()
 {}
 
 /**

@@ -20,6 +20,7 @@ public:
 	// constructor
 	Player();
 	Player(string name);
+	Player(bool isOpposing);
 	Player(
 		string name,
 		Pokemon pokemon1,
@@ -55,8 +56,15 @@ public:
 	void clearPokemonList();
 	// Get the Pokemon by name
 	Pokemon& getPokemonByName(string name);
+
+	// Pokemon fainted
+	void pokemonFainted(bool isOpposing);
+
+	// Is the player opposing
+	bool getIsOpposing() const;
 private:
 	string name;  // Name of the player
 	vector<Pokemon> pokemonList;  // List of Pokemon owned by the player
 	int currentPokemon;  // Current Pokemon of the player
+	bool isOpposing;  // Is the player opposing
 };

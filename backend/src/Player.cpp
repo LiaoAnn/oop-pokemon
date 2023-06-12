@@ -1,4 +1,4 @@
-﻿/***********************************************************************
+/***********************************************************************
  * File: Player.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-06-06
@@ -8,13 +8,22 @@
 ************************************************************************/
 
 #include "Player.h"
+#include "Game.h"
 
 /**
  * Intent: Default constructor
  * Pre: None
  * Post: A Player object
  */
-Player::Player() : name(""), currentPokemon(0), pokemonList()
+Player::Player() : name(""), currentPokemon(0), pokemonList(), isOpposing(false)
+{}
+
+/**
+ * Intent: Constructor
+ * Pre: isOpposing is a boolean
+ * Post: A Player object
+ */
+Player::Player(bool isOpposing) : name(""), currentPokemon(0), pokemonList(), isOpposing(isOpposing)
 {}
 
 /**
@@ -22,7 +31,7 @@ Player::Player() : name(""), currentPokemon(0), pokemonList()
  * Pre: name is a string
  * Post: A Player object
  */
-Player::Player(string name) : name(name), currentPokemon(0), pokemonList()
+Player::Player(string name) : name(name), currentPokemon(0), pokemonList(), isOpposing(false)
 {}
 
 /**
@@ -41,6 +50,7 @@ Player::Player(
 	pokemonList.push_back(pokemon2);
 	pokemonList.push_back(pokemon3);
 	pokemonList.push_back(pokemon4);
+	isOpposing = false;
 }
 
 /**
@@ -50,7 +60,7 @@ Player::Player(
  */
 Player::Player(const Player& player)
 	:
-	name(player.name), pokemonList(player.pokemonList), currentPokemon(player.currentPokemon)
+	name(player.name), pokemonList(player.pokemonList), currentPokemon(player.currentPokemon), isOpposing(player.isOpposing)
 {}
 
 /**
