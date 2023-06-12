@@ -48,6 +48,9 @@ public:
 	void addPokemon(Pokemon pokemon);
 	// Set the player's current Pokemon by index
 	void setCurrentPokemon(int index);
+	// Set the player's current Pokemon by name
+	void setCurrentPokemon(string name);
+
 	// Clear the player's Pokemon list
 	void clearPokemonList();
 	// Get the Pokemon by name

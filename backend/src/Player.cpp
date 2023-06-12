@@ -149,3 +149,20 @@ Pokemon& Player::getPokemonByName(string name)
 		}
 	}
 }
+
+/**
+ * Intent: Set the player's current Pokemon by name
+ * Pre: name is a string
+ * Post: None
+ */
+void Player::setCurrentPokemon(string name)
+{
+	for (int i = 0; i < pokemonList.size(); i++)
+	{
+		if (pokemonList[i].getName() == name)
+		{
+			currentPokemon = i;
+			break;
+		}
+	}
+}

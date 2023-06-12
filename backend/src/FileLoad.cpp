@@ -1,4 +1,4 @@
-#include "FileLoad.h"
+﻿#include "FileLoad.h"
 #include "Pokemon.h"
 #include "Move.h"
 #include <vector>
@@ -12,6 +12,7 @@
 #include "SkillCategory.h"
 #include "GameMode.h"
 #include "Chance.h"
+#include "Item.h"
 
 using namespace std;
 
@@ -269,6 +270,9 @@ void FileLoad::loadCaseFile(string name)
 		gameMode = NORMAL;
 	game.setGameMode(gameMode);
 
+	Pokemon& p = game.player.getCurrentPokemon();
+	p.addCurrentStat(skillEffectList[POISON]);
+
 	/* Game Start */
 	while (getline(in, describe))
 	{
@@ -349,11 +353,27 @@ void FileLoad::loadCaseFile(string name)
 		else if (describe == "Pokemon")
 		{
 			// Player change Pokemon and AI use a skill
-			string playerPokemon, AISkill;
-			getline(in, playerPokemon);
+			string playerPokemonName, AISkill;
+			getline(in, playerPokemonName);
 			getline(in, AISkill);
 
-			game << "Switch Pokemon";
+			// Return the current Pokemon
+			Pokemon& playerPokemon = game.player.getCurrentPokemon();
+			game << playerPokemon.getName() + ", switch out!";
+			game << "Come back! ";
+
+			// Change Pokemon
+			game.player.setCurrentPokemon(playerPokemonName);
+			playerPokemon = game.player.getCurrentPokemon();
+			game << "Go! " + playerPokemon.getName() + "!";
+
+			// Opposing Pokemon use a skill
+			Pokemon& AIPokemon = game.AI.getCurrentPokemon();
+			if (!AIPokemon.isCanNotMove(true))
+			{
+				AIPokemon[AISkill].useSkill(AIPokemon, playerPokemon);
+			}
+
 			game.turn++;
 		}
 		else if (describe == "Status")
@@ -407,5 +427,7 @@ void FileLoad::loadCaseFile(string name)
 		{
 			throw string("Invalid command");
 		}
+
+
 	}
 }
