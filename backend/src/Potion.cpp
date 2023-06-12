@@ -1,4 +1,4 @@
-/***********************************************************************
+﻿/***********************************************************************
  * File: Potion.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-06-08
@@ -50,13 +50,14 @@ NormalPotion::~NormalPotion()
 {}
 
 /**
- * Intent: Use the potion on the pokemon
+ * Intent: Use the potion on the pokemon only if the pokemon is not fainted
  * Pre: None
  * Post: The pokemon's HP is increased by 20
  */
-void NormalPotion::usePotion(Pokemon& pokemon)
+void NormalPotion::useItem(Pokemon& pokemon)
 {
-	pokemon.healHp(20);
+	if (pokemon.getHp() > 0)
+		pokemon.healHp(20);
 }
 
 /**
@@ -76,13 +77,14 @@ SuperPotion::~SuperPotion()
 {}
 
 /**
- * Intent: Use the potion on the pokemon
+ * Intent: Use the potion on the pokemon only if the pokemon is not fainted
  * Pre: None
  * Post: The pokemon's HP is increased by 50
  */
-void SuperPotion::usePotion(Pokemon& pokemon)
+void SuperPotion::useItem(Pokemon& pokemon)
 {
-	pokemon.healHp(50);
+	if (pokemon.getHp() > 0)
+		pokemon.healHp(50);
 }
 
 /**
@@ -102,13 +104,14 @@ HyperPotion::~HyperPotion()
 {}
 
 /**
- * Intent: Use the potion on the pokemon
+ * Intent: Use the potion on the pokemon only if the pokemon is not fainted
  * Pre: None
  * Post: The pokemon's HP is increased by 200
  */
-void HyperPotion::usePotion(Pokemon& pokemon)
+void HyperPotion::useItem(Pokemon& pokemon)
 {
-	pokemon.healHp(200);
+	if (pokemon.getHp() > 0)
+		pokemon.healHp(200);
 }
 
 /**
@@ -128,12 +131,12 @@ MaxPotion::~MaxPotion()
 {}
 
 /**
- * Intent: Use the potion on the pokemon
+ * Intent: Use the potion on the pokemon only if the pokemon is not fainted
  * Pre: None
  * Post: The pokemon's HP is increased to its maximum
  */
-void MaxPotion::usePotion(Pokemon& pokemon)
+void MaxPotion::useItem(Pokemon& pokemon)
 {
-	int mapHp = pokemon.getMaxHp();
-	pokemon.healHp(mapHp);
+	if (pokemon.getHp() > 0)
+		pokemon.healHp(pokemon.getMaxHp());
 }
