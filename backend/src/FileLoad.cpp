@@ -1,4 +1,4 @@
-#include "FileLoad.h"
+﻿#include "FileLoad.h"
 #include "Pokemon.h"
 #include "Move.h"
 #include <vector>
@@ -11,6 +11,7 @@
 #include "SkillEffectList.h"
 #include "SkillCategory.h"
 #include "GameMode.h"
+#include "Chance.h"
 
 using namespace std;
 
@@ -116,7 +117,7 @@ bool FileLoad::loadMoveLibraryFile(string name)
 		stringstream ss(describe);
 		string name, type, category, con;
 		int typeIndex, categoryIndex, power, accuracy, pp, effectIndex;
-		SkillEffect effect;
+		SkillEffect* effect;
 
 		// Read the data to the skill
 		ss >> name >> type >> category >> power >> accuracy >> pp;
@@ -278,8 +279,41 @@ void FileLoad::loadCaseFile(string name)
 			string playerSkill, AISkill;
 			getline(in, playerSkill);
 			getline(in, AISkill);
+			int playerSpeed = game.player.getCurrentPokemon().getSpeed();
+			int AISpeed = game.AI.getCurrentPokemon().getSpeed();
 
-			logs = "Battle";
+			Pokemon& playerPokemon = game.player.getCurrentPokemon();
+			Pokemon& AIPokemon = game.AI.getCurrentPokemon();
+
+			// Player use a skill and AI use a skill
+			if (playerSpeed > AISpeed)
+			{
+				if (!playerPokemon.isCanNotMove(false))
+				{
+					playerPokemon[playerSkill].useSkill(playerPokemon, AIPokemon);
+				}
+
+				if (!AIPokemon.isCanNotMove(true))
+				{
+					AIPokemon[AISkill].useSkill(AIPokemon, playerPokemon);
+				}
+			}
+			else
+			{
+				if (!AIPokemon.isCanNotMove(true))
+				{
+					AIPokemon[AISkill].useSkill(AIPokemon, playerPokemon);
+				}
+
+				if (!playerPokemon.isCanNotMove(false))
+				{
+					playerPokemon[playerSkill].useSkill(playerPokemon, AIPokemon);
+				}
+			}
+
+			// DOT check
+			playerPokemon.isHurtByDot(false);
+			AIPokemon.isHurtByDot(true);
 		}
 		else if (describe == "Bag")
 		{

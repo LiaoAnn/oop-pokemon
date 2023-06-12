@@ -1,4 +1,4 @@
-/***********************************************************************
+﻿/***********************************************************************
  * File: Pokemon.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-06-06
@@ -8,6 +8,9 @@
 ************************************************************************/
 #include "Pokemon.h"
 #include "SkillEffectList.h"
+#include "Game.h"
+#include "Chance.h"
+#include "GameMode.h"
 //Pokemon::Pokemon(string name, set<int> typeList,
 //	int HP, float atk, float def, float sPatk, float sPdef, float speed) {
 //	atkList.push_back(atk);
@@ -412,11 +415,11 @@ int Pokemon::getLevel() const
  * Pre: statusEffect is a StatusEffect object
  * Post: Return true if the Pokemon has status effect, otherwise return false
  */
-bool Pokemon::checkSkillEffect(const SkillEffect& skillEffect) const
+bool Pokemon::checkSkillEffect(const SkillEffect* skillEffect) const
 {
 	for (int i = 0; i < currentStat.size(); i++)
 	{
-		if (currentStat[i] == &skillEffect)
+		if (currentStat[i] == skillEffect)
 			return true;
 	}
 	return false;
@@ -440,4 +443,78 @@ bool Pokemon::isAlive() const
 void Pokemon::addCurrentStat(SkillEffect& stat)
 {
 	currentStat.push_back(&stat);
+}
+
+/**
+ * Intent: Check if the Pokemon is can't move
+ * Pre: isOpposing is a boolean
+ * Post: Return true if the Pokemon is can't move, otherwise return false
+ */
+bool Pokemon::isCanNotMove(bool isOpposing)
+{
+	double paralysed = (game.mode == TEST) ? 1 : PARALYSIS_CHANCE;
+
+	for (int i = 0; i < this->currentStat.size(); i++)
+	{
+		string log;
+		// Paralysis
+		if (this->currentStat[i] == skillEffectList[PARALYSIS])
+		{
+			if (checkChance(paralysed))
+			{
+				if (isOpposing)
+					log += OPPOSING_PREFIX;
+
+				log += this->name + " is paralysed!\nIt can't move!";
+
+				game << log;
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+/**
+ * Intent: Check if the Pokemon is hurt by dot
+ * Pre: isOpposing is a boolean
+ * Post: Return true if the Pokemon is hurt by dot, otherwise return false
+ */
+bool Pokemon::isHurtByDot(bool isOpposing)
+{
+	bool hasHurt = false;
+	for (int i = 0; i < this->currentStat.size(); i++)
+	{
+		string log;
+		bool isHurt = false;
+		// Paralysis
+		if (this->currentStat[i] == skillEffectList[BURN])
+		{
+			isHurt = true;
+			this->hp -= this->maxHp * SKILL_EFFECT_DAMAGE_POWER[BURN];
+
+			if (isOpposing)
+				log += OPPOSING_PREFIX;
+			log += this->name + " is hurt by its burn!\n";
+		}
+
+		// Poison
+		if (this->currentStat[i] == skillEffectList[POISON])
+		{
+			isHurt = true;
+			this->hp -= this->maxHp * SKILL_EFFECT_DAMAGE_POWER[POISON];
+
+			if (isOpposing)
+				log += OPPOSING_PREFIX;
+			log += this->name + " is hurt by its poisoning!\n";
+		}
+
+		if (isHurt) {
+			hasHurt = true;
+			game << log;
+		}
+	}
+
+	return hasHurt;
 }

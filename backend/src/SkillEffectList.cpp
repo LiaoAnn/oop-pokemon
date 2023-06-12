@@ -10,11 +10,11 @@
 #include "SkillEffectList.h"
 
  // All effect
-SkillEffect skillEffectList[3] =
+SkillEffect* skillEffectList[3] =
 {
-	Paralysis(),
-	Poison(),
-	Burn(),
+	new Paralysis(),
+	new Poison(),
+	new Burn(),
 };
 
 // All effect name
@@ -23,6 +23,14 @@ map<string, int> skillEffectTypeMap =
 	{ "par", PARALYSIS },
 	{ "psn", POISON },
 	{ "brn", BURN },
+};
+
+// skill effect damage
+const double SKILL_EFFECT_DAMAGE_POWER[3] = 
+{
+	0,
+	0.0625,
+	0.0625
 };
 
 /**

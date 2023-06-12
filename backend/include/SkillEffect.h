@@ -42,6 +42,7 @@ public:
 
 	// Check if pokemon has skill effect
 	bool operator==(const SkillEffect& skillEffect) const;
+	friend bool operator==(const SkillEffect& effect1, const SkillEffect& effect2);
 };
 
 // Posion skill effect

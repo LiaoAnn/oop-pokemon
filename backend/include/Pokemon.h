@@ -87,7 +87,9 @@ public:
 	// Scan the current stat list and remove the stat if it turns to 0
 	void removeCurrentStat();
 	// Check if pokemon has skill effect
-	bool checkSkillEffect(const SkillEffect& skillEffect) const;
+	bool checkSkillEffect(const SkillEffect* skillEffect) const;
+	bool isCanNotMove(bool isOpposing);
+	bool isHurtByDot(bool isOpposing);
 
 	// Overload operator [] to get skill by index or name
 	Skill& operator[](int index);
@@ -96,6 +98,9 @@ public:
 	void addSkill(Skill skill);
 
 	friend int findPokemonByName(string name);
+
+	// Pokemon actions
+	void action(Pokemon& opposing, string skill);
 };
 
 extern vector <Pokemon> pokemonList; // list of all pokemon

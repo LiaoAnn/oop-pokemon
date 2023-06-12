@@ -114,6 +114,16 @@ string SkillEffect::printAffactMessage(string pokemonName) const
 }
 
 /**
+ * Intent: operator overload
+ * Pre: effect1 and effect2 are SkillEffect objects
+ * Post: A boolean
+ */
+bool operator==(const SkillEffect& effect1, const SkillEffect effect2)
+{
+	return effect1.getName() == effect2.getName();
+}
+
+/**
  * Intent: Default constructor
  * Pre: None
  * Post: A Poison object
