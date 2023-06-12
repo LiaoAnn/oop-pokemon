@@ -26,10 +26,11 @@ SkillEffect::SkillEffect()
  * Pre: skillEffectAttack is an integer, skillEffectName
  * Post: A SkillEffect object
  */
-SkillEffect::SkillEffect(int type, string name, int leftRound)
+SkillEffect::SkillEffect(int type, string name, double power, int leftRound)
 	:
 	name(name),
 	type(type),
+	power(power),
 	leftRound(leftRound)
 {}
 
@@ -92,6 +93,16 @@ bool SkillEffect::operator==(const SkillEffect& skillEffect) const
 	return name == skillEffect.name;
 }
 
+/**
+ * Intent: Get the power of the skill effect
+ * Pre: None
+ * Post: A double
+ */
+double SkillEffect::getPower() const
+{
+	return power;
+}
+
 
 /**
  * Intent: Print message when get skill effect
@@ -130,7 +141,7 @@ bool operator==(const SkillEffect& effect1, const SkillEffect effect2)
  */
 Poison::Poison()
 	:
-	SkillEffect(DOT, "psn")
+	SkillEffect(DOT, "psn", SKILL_EFFECT_DAMAGE_POWER[POISON])
 {}
 
 /**
@@ -140,7 +151,7 @@ Poison::Poison()
  */
 Poison::Poison(int leftRound)
 	:
-	SkillEffect(DOT, "psn", leftRound)
+	SkillEffect(DOT, "psn", SKILL_EFFECT_DAMAGE_POWER[POISON], leftRound)
 {}
 
 /**
@@ -179,7 +190,7 @@ string Poison::printAffactMessage(string pokemonName) const
  */
 Burn::Burn()
 	:
-	SkillEffect(DOT, "brn")
+	SkillEffect(DOT, "brn", SKILL_EFFECT_DAMAGE_POWER[BURN])
 {}
 
 /**
@@ -189,7 +200,7 @@ Burn::Burn()
  */
 Burn::Burn(int leftRound)
 	:
-	SkillEffect(DOT, "brn", leftRound)
+	SkillEffect(DOT, "brn", SKILL_EFFECT_DAMAGE_POWER[BURN], leftRound)
 {}
 
 /**
@@ -228,7 +239,7 @@ string Burn::printAffactMessage(string pokemonName) const
  */
 Paralysis::Paralysis()
 	:
-	SkillEffect(DEBUFF, "par")
+	SkillEffect(DEBUFF, "par", SKILL_EFFECT_DAMAGE_POWER[PARALYSIS])
 {}
 
 /**
@@ -238,7 +249,7 @@ Paralysis::Paralysis()
  */
 Paralysis::Paralysis(int leftRound)
 	:
-	SkillEffect(DEBUFF, "par", leftRound)
+	SkillEffect(DEBUFF, "par", SKILL_EFFECT_DAMAGE_POWER[PARALYSIS], leftRound)
 {}
 
 /**

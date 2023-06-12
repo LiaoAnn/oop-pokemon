@@ -17,11 +17,12 @@ private:
 	int type;
 	string name;
 	int leftRound;
+	double power;
 public:
 	// Default Constructor
 	SkillEffect();
 	// Constructor
-	SkillEffect(int type, string name, int leftRound = 5);
+	SkillEffect(int type, string name, double power, int leftRound = 5);
 	// Destructor
 	~SkillEffect();
 
@@ -31,6 +32,9 @@ public:
 	string getName() const;
 	// Get left round of skill effect
 	int getLeftRound() const;
+
+	// Get Power of skill effect
+	double getPower() const;
 
 	// Reduce left round of skill effect
 	void reduceLeftRound();
