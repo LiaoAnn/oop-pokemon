@@ -357,8 +357,7 @@ void FileLoad::loadCaseFile(string name)
 			}
 
 			// DOT check
-			playerPokemon.isHurtByDot(false);
-			AIPokemon.isHurtByDot(true);
+			game.playerDotCheck();
 			game.turn++;
 		}
 		else if (describe == "Pokemon")
@@ -385,6 +384,8 @@ void FileLoad::loadCaseFile(string name)
 				AIPokemon[AISkill].useSkill(AIPokemon, playerPokemon);
 			}
 
+			// DOT check
+			game.playerDotCheck();
 			game.turn++;
 		}
 		else if (describe == "Status")
