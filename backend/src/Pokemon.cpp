@@ -409,8 +409,8 @@ int Pokemon::getLevel() const
 
 /**
  * Intent: Check if the Pokemon has status effect
- * Pre: S
- * Post:
+ * Pre: statusEffect is a StatusEffect object
+ * Post: Return true if the Pokemon has status effect, otherwise return false
  */
 bool Pokemon::checkSkillEffect(const SkillEffect& skillEffect) const
 {
