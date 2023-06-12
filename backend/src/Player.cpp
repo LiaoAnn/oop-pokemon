@@ -133,3 +133,19 @@ void Player::clearPokemonList()
 {
 	pokemonList.clear();
 }
+
+/**
+ * Intent: Get the Pokemon by name
+ * Pre: name is a string
+ * Post: Return the Pokemon Reference
+ */
+Pokemon& Player::getPokemonByName(string name)
+{
+	for (int i = 0; i < pokemonList.size(); i++)
+	{
+		if (pokemonList[i].getName() == name)
+		{
+			return pokemonList[i];
+		}
+	}
+}

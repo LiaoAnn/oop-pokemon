@@ -50,6 +50,8 @@ public:
 	void setCurrentPokemon(int index);
 	// Clear the player's Pokemon list
 	void clearPokemonList();
+	// Get the Pokemon by name
+	Pokemon& getPokemonByName(string name);
 private:
 	string name;  // Name of the player
 	vector<Pokemon> pokemonList;  // List of Pokemon owned by the player
