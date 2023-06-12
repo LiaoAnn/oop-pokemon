@@ -324,8 +324,16 @@ void FileLoad::loadCaseFile(string name)
 			getline(in, playerPokemonName);
 			getline(in, AISkill);
 
+			// Get the Pokemon
+			Pokemon& assignedPokemon = game.player.getPokemonByName(playerPokemonName);
 			Pokemon& playerPokemon = game.player.getCurrentPokemon();
 			Pokemon& AIPokemon = game.AI.getCurrentPokemon();
+
+			// Get the item
+			Item* item = itemMap[playerItem];
+
+			// Player use a item
+			item->useItem(assignedPokemon);
 
 			// Opposing Pokemon use a skill
 			if (!AIPokemon.isCanNotMove(true))
