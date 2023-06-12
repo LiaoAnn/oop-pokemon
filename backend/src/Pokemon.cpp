@@ -440,9 +440,9 @@ bool Pokemon::isAlive() const
  * Pre: stat is a SkillEffect object
  * Post: None
  */
-void Pokemon::addCurrentStat(SkillEffect& stat)
+void Pokemon::addCurrentStat(SkillEffect* stat)
 {
-	currentStat.push_back(&stat);
+	currentStat.push_back(stat);
 }
 
 /**
@@ -492,7 +492,7 @@ bool Pokemon::isHurtByDot(bool isOpposing)
 		if (this->currentStat[i] == skillEffectList[BURN])
 		{
 			isHurt = true;
-			this->hp -= this->maxHp * SKILL_EFFECT_DAMAGE_POWER[BURN];
+			this->hp -= this->maxHp * this->currentStat[i]->getPower();
 
 			if (isOpposing)
 				log += OPPOSING_PREFIX;
@@ -503,7 +503,7 @@ bool Pokemon::isHurtByDot(bool isOpposing)
 		if (this->currentStat[i] == skillEffectList[POISON])
 		{
 			isHurt = true;
-			this->hp -= this->maxHp * SKILL_EFFECT_DAMAGE_POWER[POISON];
+			this->hp -= this->maxHp * this->currentStat[i]->getPower();
 
 			if (isOpposing)
 				log += OPPOSING_PREFIX;

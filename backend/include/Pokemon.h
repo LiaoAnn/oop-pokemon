@@ -83,7 +83,7 @@ public:
 	void healHp(int points);
 
 	// Add a stat to the current stat list
-	void addCurrentStat(SkillEffect& stat);
+	void addCurrentStat(SkillEffect* stat);
 	// Scan the current stat list and remove the stat if it turns to 0
 	void removeCurrentStat();
 	// Check if pokemon has skill effect
