@@ -1,4 +1,4 @@
-﻿/***********************************************************************
+/***********************************************************************
  * File: Potion.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-06-08
@@ -137,10 +137,3 @@ void MaxPotion::usePotion(Pokemon& pokemon)
 	int mapHp = pokemon.getMaxHp();
 	pokemon.healHp(mapHp);
 }
-
-map<string, Potion&> potionMap = {
-	{"Potion", NormalPotion()},
-	{"Super Potion", SuperPotion()},
-	{"Hyper Potion", HyperPotion()},
-	{"Max Potion", MaxPotion()}
-};
