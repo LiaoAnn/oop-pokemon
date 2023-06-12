@@ -12,6 +12,8 @@
 #include <vector>
 #include "Pokemon.h"
 
+const string OPPOSING_PREFIX = "The opposing ";
+
 using namespace std;
 class Player {
 public:
