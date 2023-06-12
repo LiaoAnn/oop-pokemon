@@ -493,7 +493,9 @@ bool Pokemon::isHurtByDot(bool isOpposing)
 		if (this->currentStat[i] == skillEffectList[BURN])
 		{
 			isHurt = true;
-			this->hp -= this->maxHp * this->currentStat[i]->getPower();
+			double power = this->maxHp * this->currentStat[i]->getPower();
+			if (power > hp)
+				hp = 0;
 
 			if (isOpposing)
 				log += OPPOSING_PREFIX;
@@ -504,7 +506,9 @@ bool Pokemon::isHurtByDot(bool isOpposing)
 		if (this->currentStat[i] == skillEffectList[POISON])
 		{
 			isHurt = true;
-			this->hp -= this->maxHp * this->currentStat[i]->getPower();
+			double power = this->maxHp * this->currentStat[i]->getPower();
+			if (power > hp)
+				hp = 0;
 
 			if (isOpposing)
 				log += OPPOSING_PREFIX;
