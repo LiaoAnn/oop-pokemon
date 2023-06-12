@@ -26,6 +26,8 @@ public:
 	bool isLose();
 	// Win check
 	bool isWin();
+	// Dot check
+	void playerDotCheck();
 
 	void healTime();
 

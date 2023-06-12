@@ -108,5 +108,31 @@ bool Game::isWin()
 	return true;
 }
 
+/**
+ * Intent: Check both player's pokemon's skill effect dot
+ * Pre: None
+ * Post: None
+ */
+void Game::playerDotCheck()
+{
+	Player& firstPlayer = game.player;
+	Pokemon& firstPokemon = firstPlayer.getCurrentPokemon();
+
+	Player& secondPlayer = game.AI;
+	Pokemon& secondPokemon = secondPlayer.getCurrentPokemon();
+
+	firstPokemon.isHurtByDot(false);
+	if (!firstPokemon.isAlive())
+	{
+		firstPlayer.pokemonFainted(false);
+	}
+
+	secondPokemon.isHurtByDot(true);
+	if (!secondPokemon.isAlive())
+	{
+		secondPlayer.pokemonFainted(true);
+	}
+}
+
 Game game = Game();
 

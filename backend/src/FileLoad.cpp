@@ -286,38 +286,49 @@ void FileLoad::loadCaseFile(string name)
 			int playerSpeed = game.player.getCurrentPokemon().getSpeed();
 			int AISpeed = game.AI.getCurrentPokemon().getSpeed();
 
-			Pokemon& playerPokemon = game.player.getCurrentPokemon();
-			Pokemon& AIPokemon = game.AI.getCurrentPokemon();
-
-			// Player use a skill and AI use a skill
-			if (playerSpeed > AISpeed)
+			Player& firstPlayer = game.player;
+			Player& secondPlayer = game.AI;
+			if (playerSpeed < AISpeed)
 			{
-				if (!playerPokemon.isCanNotMove(false))
-				{
-					playerPokemon[playerSkill].useSkill(playerPokemon, AIPokemon);
-				}
-
-				if (!AIPokemon.isCanNotMove(true))
-				{
-					AIPokemon[AISkill].useSkill(AIPokemon, playerPokemon);
-				}
+				firstPlayer = game.AI;
+				secondPlayer = game.player;
 			}
-			else
-			{
-				if (!AIPokemon.isCanNotMove(true))
-				{
-					AIPokemon[AISkill].useSkill(AIPokemon, playerPokemon);
-				}
+			bool isFristPlayerOpposing = firstPlayer.getIsOpposing();
+			bool isSecondPlayerOpposing = secondPlayer.getIsOpposing();
 
-				if (!playerPokemon.isCanNotMove(false))
-				{
-					playerPokemon[playerSkill].useSkill(playerPokemon, AIPokemon);
-				}
+			Pokemon& firstPokemon = firstPlayer.getCurrentPokemon();
+			Pokemon& secondPokemon = secondPlayer.getCurrentPokemon();
+
+			if (!firstPokemon.isCanNotMove(isFristPlayerOpposing))
+			{
+				firstPokemon[playerSkill].useSkill(firstPokemon, secondPokemon);
 			}
 
-			// DOT check
-			playerPokemon.isHurtByDot(false);
-			AIPokemon.isHurtByDot(true);
+			// Check if the Second Player pokemon is alive
+			if (!secondPokemon.isAlive())
+			{
+				secondPlayer.pokemonFainted(isSecondPlayerOpposing);
+				game.playerDotCheck();
+				game.turn++;
+				continue;
+			}
+
+			if (!secondPokemon.isCanNotMove(isSecondPlayerOpposing))
+			{
+				secondPokemon[AISkill].useSkill(secondPokemon, firstPokemon);
+			}
+
+			// Check if the First Player pokemon is alive
+			if (!firstPokemon.isAlive())
+			{
+				firstPlayer.pokemonFainted(isFristPlayerOpposing);
+				game.playerDotCheck();
+				game.turn++;
+				continue;
+			}
+
+			// DOT check -- Player first AI second
+			game.playerDotCheck();
 			game.turn++;
 		}
 		else if (describe == "Bag")
@@ -428,6 +439,16 @@ void FileLoad::loadCaseFile(string name)
 			throw string("Invalid command");
 		}
 
-
+		// Check Win
+		if (game.isWin())
+		{
+			game << "You win";
+			break;
+		}
+		else if (game.isLose())
+		{
+			game << "You lose";
+			break;
+		}
 	}
 }
