@@ -1,4 +1,4 @@
-/***********************************************************************
+﻿/***********************************************************************
  * File: Player.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-06-06
@@ -175,4 +175,35 @@ void Player::setCurrentPokemon(string name)
 			break;
 		}
 	}
+}
+
+/**
+ * Intent: Player's Pokemon fainted and switch to the next Pokemon
+ * Pre: isOpposing is a boolean
+ * Post: None
+ */
+void Player::pokemonFainted(bool isOpposing)
+{
+	string log;
+	Pokemon& pokemon = getCurrentPokemon();
+
+	if (isOpposing)
+		log += OPPOSING_PREFIX;
+	log += pokemon.getName() + " fainted!";
+	game << log;
+
+	// Find the next Pokemon starting from the current Pokemon
+	int nextPokemon = currentPokemon;
+	int count = 0;
+	do
+	{
+		nextPokemon = (nextPokemon + 1) % pokemonList.size();
+		count++;
+	} while (pokemonList[nextPokemon].getHp() <= 0 && nextPokemon != currentPokemon && count < pokemonList.size());
+	currentPokemon = nextPokemon;
+}
+
+bool Player::getIsOpposing() const
+{
+	return isOpposing;
 }
