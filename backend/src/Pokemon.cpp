@@ -7,6 +7,7 @@
  * Description: Implementation for Pokemon class
 ************************************************************************/
 #include "Pokemon.h"
+#include "SkillEffectList.h"
 //Pokemon::Pokemon(string name, set<int> typeList,
 //	int HP, float atk, float def, float sPatk, float sPdef, float speed) {
 //	atkList.push_back(atk);
@@ -54,7 +55,8 @@ Pokemon::Pokemon()
 		hp, attack, defence, spAttack, spDefence, speed are integers
  * Post: A Pokemon object
  */
-Pokemon::Pokemon(
+Pokemon::Pokemon
+(
 	string name,
 	int typeNum,
 	set <int> type,
@@ -63,7 +65,8 @@ Pokemon::Pokemon(
 	int defence,
 	int spAttack,
 	int spDefence,
-	int speed)
+	int speed
+)
 	:
 	name(name),
 	typeNum(typeNum),
@@ -178,13 +181,20 @@ int Pokemon::getSpDefence() const
 }
 
 /**
- * Intent: Get the speed of the Pokemon
+ * Intent: Get the speed of the Pokemon. If the Pokemon is paralyzed, the speed will be halved.
  * Pre: None
  * Post: Return the speed of the Pokemon
  */
 int Pokemon::getSpeed() const
 {
-	return speed;
+	if (checkSkillEffect(skillEffectList[PARALYSIS]))
+	{
+		return speed / 2;
+	}
+	else
+	{
+		return speed;
+	}
 }
 
 /**
@@ -341,19 +351,9 @@ Skill& Pokemon::operator[](string name)
  * Pre: None
  * Post: Return the current stat of the Pokemon
  */
-vector<SkillEffect> Pokemon::getCurrentStats() const
+vector<SkillEffect*> Pokemon::getCurrentStats() const
 {
 	return currentStat;
-}
-
-/**
- * Intent: Add a stat to the current stat of the Pokemon
- * Pre: stat is a SkillEffect object
- * Post: None
- */
-void Pokemon::addCurrentStat(SkillEffect stat)
-{
-	currentStat.push_back(stat);
 }
 
 /**
@@ -365,13 +365,13 @@ void Pokemon::removeCurrentStat()
 {
 	for (int i = 0; i < currentStat.size(); i++)
 	{
-		if (currentStat[i].getLeftRound() == 0)
+		if (currentStat[i]->getLeftRound() == 0)
 		{
 			currentStat.erase(currentStat.begin() + i);
 			i--;
 		}
 		else
-			currentStat[i].reduceLeftRound();
+			currentStat[i]->reduceLeftRound();
 	}
 }
 
@@ -385,4 +385,59 @@ void Pokemon::healHp(int points)
 	hp += points;
 	if (hp > maxHp)
 		hp = maxHp;
+}
+
+/**
+ * Intent: Get the max HP of the Pokemon
+ * Pre: None
+ * Post: Return the max HP of the Pokemon
+ */
+int Pokemon::getMaxHp() const
+{
+	return maxHp;
+}
+
+/**
+ * Intent: Get the level of the Pokemon
+ * Pre: None
+ * Post: Return the level of the Pokemon
+ */
+int Pokemon::getLevel() const
+{
+	return level;
+}
+
+/**
+ * Intent: Check if the Pokemon has status effect
+ * Pre: S
+ * Post:
+ */
+bool Pokemon::checkSkillEffect(const SkillEffect& skillEffect) const
+{
+	for (int i = 0; i < currentStat.size(); i++)
+	{
+		if (currentStat[i] == &skillEffect)
+			return true;
+	}
+	return false;
+}
+
+/**
+ * Intent: Check if the Pokemon is alive
+ * Pre: None
+ * Post: Return true if the Pokemon is alive, otherwise return false
+ */
+bool Pokemon::isAlive() const
+{
+	return hp > 0;
+}
+
+/**
+ * Intent: Add a stat to the current stat of the Pokemon
+ * Pre: stat is a SkillEffect object
+ * Post: None
+ */
+void Pokemon::addCurrentStat(SkillEffect& stat)
+{
+	currentStat.push_back(&stat);
 }

@@ -11,8 +11,15 @@
 #include <vector>
 #include <set>
 #include "Skill.h"
+#include "SkillEffect.h"
+
 using namespace std;
 enum pokemonStat { hp, attack, defence, spAttack, spDefence, speed };
+class Skill;
+class SkillEffect;
+
+const int LEVEL = 50;
+
 class Pokemon
 {
 private:
@@ -26,7 +33,8 @@ private:
 	int spAttack; // special attack points
 	int spDefence; // special defence points
 	int speed; // speed points
-	vector <SkillEffect> currentStat; // current stats
+	int level = LEVEL; // level of pokemon
+	vector<SkillEffect*> currentStat; // current stats
 	vector<Skill> skillList; // list of skills
 public:
 	// Default Constructor
@@ -52,7 +60,9 @@ public:
 	int getSpDefence() const;
 	int getSpeed() const;
 	int getMaxHp() const;
-	vector<SkillEffect> getCurrentStats() const;
+	vector<SkillEffect*> getCurrentStats() const;
+	int getLevel() const;
+	vector<Skill> getSkillList() const;
 
 	// Setters
 	void setName(string name);
@@ -64,24 +74,26 @@ public:
 	void setSpDefence(int spDefence);
 	void setSpeed(int speed);
 
-	// Add a stat to the current stat list
-	void addCurrentStat(SkillEffect stat);
-	// Scan the current stat list and remove the stat if it turns to 0
-	void removeCurrentStat();
-
+	// Add a type to the type list
 	void addType(int type);
 
-	// Add a skill to the skill list
-	void addSkill(Skill skill);
-	// Get the skill list
-	vector <Skill> getSkillList() const;
-
-	// Overload operator []
-	Skill& operator[](int index);
-	Skill& operator[](string name);
-
+	// Check if pokemon is alive
+	bool isAlive() const;
 	// Heal the pokemon
 	void healHp(int points);
+
+	// Add a stat to the current stat list
+	void addCurrentStat(SkillEffect& stat);
+	// Scan the current stat list and remove the stat if it turns to 0
+	void removeCurrentStat();
+	// Check if pokemon has skill effect
+	bool checkSkillEffect(const SkillEffect& skillEffect) const;
+
+	// Overload operator [] to get skill by index or name
+	Skill& operator[](int index);
+	Skill& operator[](string name);
+	// Add a skill to the skill list
+	void addSkill(Skill skill);
 
 	friend int findPokemonByName(string name);
 };

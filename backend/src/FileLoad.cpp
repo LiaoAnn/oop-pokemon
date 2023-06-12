@@ -1,4 +1,4 @@
-﻿#include "FileLoad.h"
+#include "FileLoad.h"
 #include "Pokemon.h"
 #include "Move.h"
 #include <vector>
@@ -307,10 +307,10 @@ void FileLoad::loadCaseFile(string name)
 
 			logs += pokemon.getName() + " ";
 			logs += to_string(pokemon.getHp()) + " ";
-			vector<SkillEffect> stat = pokemon.getCurrentStats();
+			vector<SkillEffect*> stat = pokemon.getCurrentStats();
 			for (int i = 0; i < stat.size(); i++)
 			{
-				string skillEffectName = stat[i].getName();
+				string skillEffectName = stat[i]->getName();
 				transform(
 					skillEffectName.begin(),
 					skillEffectName.end(), skillEffectName.begin(),

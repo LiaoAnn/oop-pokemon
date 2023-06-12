@@ -39,6 +39,9 @@ public:
 	virtual string printGotMessage(string pokemonName) const;
 	// Print message when skill effect affect
 	virtual string printAffactMessage(string pokemonName) const;
+
+	// Check if pokemon has skill effect
+	bool operator==(const SkillEffect& skillEffect) const;
 };
 
 // Posion skill effect
