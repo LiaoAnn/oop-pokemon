@@ -25,9 +25,6 @@ public:
 
 	void healTime();
 
-	// check if the status infliction is successful or not
-	bool checkChance(double probability);
-
 	void operator<<(string str);
 };
 
