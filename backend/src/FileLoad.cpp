@@ -1,4 +1,4 @@
-/***********************************************************************
+﻿/***********************************************************************
  * File: Chance.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-05-30
@@ -224,7 +224,6 @@ bool FileLoad::loadGameDataFile(string name)
 					Skill skill = skillList[skillIndex];
 					pokemon.addSkill(skill);
 				}
-				player.addPokemon(pokemon);// player added pokemon 
 			}
 			else
 			{
