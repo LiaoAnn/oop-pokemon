@@ -46,3 +46,10 @@ static double typeEffectiveness[18][18] =
 	{1.0, 0.5, 0.5, 0.5, 1.0, 2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 1.0, 0.5, 2.0},
 	{1.0, 0.5, 1.0, 1.0, 1.0, 1.0, 2.0, 0.5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 0.5, 1.0}
 };
+
+enum TYPE_EFFECT_CATEGORY {
+	NOT_VERY_EFFECTIVE,
+	NORMALLY_EFFECTIVE,
+	SUPER_EFFECTIVE,
+};
+extern map<double,int> typeEffectMap;
