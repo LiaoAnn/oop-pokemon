@@ -21,9 +21,4 @@ enum SkillCategory
 	STATUS
 };
 
-extern map<string, int> skillCategoryMap
-{
-	{"physical",PHYSICAL},
-	{"special",SPECIAL},
-	{"status",STATUS}
-};
+extern map<string, int> skillCategoryMap;
