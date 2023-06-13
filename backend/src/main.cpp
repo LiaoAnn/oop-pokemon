@@ -240,5 +240,88 @@ void gameThread()
 				result["otherMonster"].push_back(opposingPokemonList[i].toJson());
 			}
 		}
+
+		if (type == "attack")
+		{
+			int firstAttack = 0, secondAttack = 0;
+			// Both player and AI use a skill
+			string playerSkillName, opposingSkillName;
+			playerSkillName = recive["move"];
+
+			Skill opposingRandomSkill = game.AI.getCurrentPokemon().randomSkill();
+
+			opposingSkillName = opposingRandomSkill.getName();
+
+			int playerSpeed = game.player.getCurrentPokemon().getSpeed();
+			int opposingSpeed = game.AI.getCurrentPokemon().getSpeed();
+
+			Player* playerArray[2] = { &game.player, &game.AI };
+			int firstPlayerIndex = 0;
+			int secondPlayerIndex = 1;
+
+			Skill* skillArray[2] =
+			{
+				&game.player.getCurrentPokemon()[playerSkillName],
+				&game.AI.getCurrentPokemon()[opposingSkillName]
+			};
+
+			if (playerSpeed < opposingSpeed)
+			{
+				firstPlayerIndex = 1;
+				secondPlayerIndex = 0;
+			}
+			Player& firstPlayer = *playerArray[firstPlayerIndex];
+			Player& secondPlayer = *playerArray[secondPlayerIndex];
+
+			Skill& firstSkill = *skillArray[firstPlayerIndex];
+			Skill& secondSkill = *skillArray[secondPlayerIndex];
+
+			Pokemon& firstPokemon = firstPlayer.getCurrentPokemon();
+			Pokemon& secondPokemon = secondPlayer.getCurrentPokemon();
+
+			bool isFristPlayerOpposing = firstPlayer.getIsOpposing();
+			bool isSecondPlayerOpposing = secondPlayer.getIsOpposing();
+
+			firstSkill.reducePP();
+			if (!firstPokemon.isCanNotMove(isFristPlayerOpposing))
+			{
+				firstAttack = firstSkill.useSkill
+				(
+					firstPokemon, secondPokemon, isFristPlayerOpposing
+				);
+			}
+
+			// Check if the Second Player pokemon is alive
+			if (!secondPokemon.isAlive())
+			{
+				secondPlayer.pokemonFainted(isSecondPlayerOpposing);
+				game.playerDotCheck();
+				game.turn++;
+				continue;
+			}
+
+			secondSkill.reducePP();
+			//judge the pokemon which can move
+			if (!secondPokemon.isCanNotMove(isSecondPlayerOpposing))
+			{
+				secondAttack = secondSkill.useSkill
+				(
+					secondPokemon, firstPokemon, isSecondPlayerOpposing
+				);
+			}
+
+			// Check if the First Player pokemon is alive
+			if (!firstPokemon.isAlive())
+			{
+				firstPlayer.pokemonFainted(isFristPlayerOpposing);
+				game.playerDotCheck();
+				game.turn++;
+				continue;
+			}
+
+			// DOT check -- Player first AI second
+			game.playerDotCheck();
+			game.turn++;
+		}
 	}
 }
