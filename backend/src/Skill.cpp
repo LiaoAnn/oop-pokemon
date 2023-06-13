@@ -41,6 +41,7 @@ Skill::Skill(string name, int type, int category, int power, int accuracy, int p
 	power(power),
 	accuracy(accuracy),
 	pp(pp),
+	maxPP(pp),
 	effect()
 {}
 
@@ -57,6 +58,7 @@ Skill::Skill(string name, int type, int category, int power, int accuracy, int p
 	power(power),
 	accuracy(accuracy),
 	pp(pp),
+	maxPP(pp),
 	effect(effect)
 {}
 
@@ -201,7 +203,7 @@ void Skill::useSkill(Pokemon& user, Pokemon& target)
 	}
 	set<int>usertype = user.getType();
 	set<int>targettype = target.getType();
-	
+
 
 	for (auto i : usertype) {
 		for (auto j : targettype) {
@@ -262,7 +264,6 @@ void Skill::useSkill(Pokemon& user, Pokemon& target)
  * Post: None
  */
 bool criticalchance(int criticalhit) {
-	
 	int criticalhit = rand() % 4;
 	if (criticalhit == 1) {
 		return true;
@@ -284,4 +285,14 @@ bool escapechance(int escape) {
 	else {
 		return false;
 	}
+}
+
+/**
+ * Intent: Get skill's max pp
+ * Pre: None
+ * Post: Return skill's max pp
+ */
+int Skill::getMaxPP() const
+{
+	return maxPP;
 }

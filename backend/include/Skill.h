@@ -24,6 +24,7 @@ private:
 	int power;  // Power of the skill
 	int accuracy;  // Accuracy of the skill
 	int pp;  // PP value of the skill, indicating the number of times it can be used
+	int maxPP;  // Max PP value of the skill
 	SkillEffect* effect;  // Special effects of the skill, e.g. paralysis, Burn, Poison
 public:
 	// Default constructor
@@ -48,6 +49,8 @@ public:
 	int getPP() const;
 	// Get Skill effect
 	SkillEffect* Skill::getEffect();
+	// Get Skill max PP
+	int getMaxPP() const;
 
 	// Set Skill Effect
 	void setEffect(SkillEffect* effect);
