@@ -211,6 +211,7 @@ void gameThread()
 
 			result["myMonster"] = game.player.getCurrentPokemon().toJson();
 			result["otherMonster"] = game.AI.getCurrentPokemon().toJson();
+			result["battle_log"] = game.battleLog;
 			webSocketServer->send(jsonToString(result));
 			continue;
 		}
