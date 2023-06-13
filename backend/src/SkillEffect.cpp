@@ -9,6 +9,7 @@
 #include "SkillEffect.h"
 #include "SkillEffectList.h"
 #include "json.h"
+#include "Player.h"
 
 /**
  * Intent: Default constructor
@@ -119,33 +120,12 @@ double SkillEffect::getPower() const
 	return power;
 }
 
-
-/**
- * Intent: Print message when get skill effect
- * Pre: None
- * Post: None
- */
-string SkillEffect::printGotMessage(string pokemonName) const
-{
-	return "";
-}
-
-/**
- * Intent: Print message when skill effect affect
- * Pre: None
- * Post: None
- */
-string SkillEffect::printAffactMessage(string pokemonName) const
-{
-	return "";
-}
-
 /**
  * Intent: operator overload
  * Pre: effect1 and effect2 are SkillEffect objects
  * Post: A boolean
  */
-bool operator==(const SkillEffect& effect1, const SkillEffect effect2)
+bool operator==(const SkillEffect& effect1, const SkillEffect& effect2)
 {
 	return effect1.getName() == effect2.getName();
 }
@@ -184,9 +164,13 @@ Poison::~Poison()
  * Pre: None
  * Post: None
  */
-string Poison::printGotMessage(string pokemonName) const
+string Poison::printGotMessage(string pokemonName, bool isOpposing) const
 {
-	return pokemonName + " was poisoned!";
+	string log = "";
+	if (isOpposing)
+		log += OPPOSING_PREFIX;
+
+	return log + pokemonName + " was poisoned!";
 }
 
 /**
@@ -194,9 +178,13 @@ string Poison::printGotMessage(string pokemonName) const
  * Pre: None
  * Post: None
  */
-string Poison::printAffactMessage(string pokemonName) const
+string Poison::printAffactMessage(string pokemonName, bool isOpposing) const
 {
-	return pokemonName + " is hurt by its poisoning!";
+	string log = "";
+	if (isOpposing)
+		log += OPPOSING_PREFIX;
+
+	return log + pokemonName + " is hurt by its poisoning!";
 }
 
 /**
@@ -233,9 +221,13 @@ Burn::~Burn()
  * Pre: None
  * Post: None
  */
-string Burn::printGotMessage(string pokemonName) const
+string Burn::printGotMessage(string pokemonName, bool isOpposing) const
 {
-	return pokemonName + " was burned!";
+	string log = "";
+	if (isOpposing)
+		log += OPPOSING_PREFIX;
+
+	return log + pokemonName + " was burned!";
 }
 
 /**
@@ -243,9 +235,13 @@ string Burn::printGotMessage(string pokemonName) const
  * Pre: None
  * Post: None
  */
-string Burn::printAffactMessage(string pokemonName) const
+string Burn::printAffactMessage(string pokemonName, bool isOpposing) const
 {
-	return pokemonName + " is hurt by its burn!";
+	string log = "";
+	if (isOpposing)
+		log += OPPOSING_PREFIX;
+
+	return log + pokemonName + " is hurt by its burn!";
 }
 
 /**
@@ -283,9 +279,13 @@ Paralysis::~Paralysis()
  * Pre: None
  * Post: None
  */
-string Paralysis::printGotMessage(string pokemonName) const
+string Paralysis::printGotMessage(string pokemonName, bool isOpposing) const
 {
-	return pokemonName + " is paralyzed, so it may be unable to move!";
+	string log = "";
+	if (isOpposing)
+		log += OPPOSING_PREFIX;
+
+	return log + pokemonName + " is paralyzed, so it may be unable to move!";
 }
 
 /**
@@ -293,7 +293,11 @@ string Paralysis::printGotMessage(string pokemonName) const
  * Pre: None
  * Post: None
  */
-string Paralysis::printAffactMessage(string pokemonName) const
+string Paralysis::printAffactMessage(string pokemonName, bool isOpposing) const
 {
-	return pokemonName + " is paralyzed!\r\nIt can't move!";
+	string log = "";
+	if (isOpposing)
+		log += OPPOSING_PREFIX;
+
+	return log + pokemonName + " is paralyzed!\r\nIt can't move!";
 }

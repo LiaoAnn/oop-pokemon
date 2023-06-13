@@ -40,17 +40,17 @@ public:
 
 	// Reduce left round of skill effect
 	void reduceLeftRound();
-
-	// Print message when get skill effect
-	virtual string printGotMessage(string pokemonName) const;
-	// Print message when skill effect affect
-	virtual string printAffactMessage(string pokemonName) const;
 	// To JSON
 	json toJson();
 
 	// Check if pokemon has skill effect
 	bool operator==(const SkillEffect& skillEffect) const;
 	friend bool operator==(const SkillEffect& effect1, const SkillEffect& effect2);
+
+	// Print message when get skill effect
+	virtual string printGotMessage(string pokemonName, bool isOpposing) const = 0;
+	// Print message when skill effect affect
+	virtual string printAffactMessage(string pokemonName, bool isOpposing) const = 0;
 };
 
 // Posion skill effect
@@ -65,9 +65,9 @@ public:
 	~Poison();
 
 	// Print message when get skill effect
-	string printGotMessage(string pokemonName) const override;
+	string printGotMessage(string pokemonName, bool isOpposing) const override;
 	// Print message when skill effect affect
-	string printAffactMessage(string pokemonName) const override;
+	string printAffactMessage(string pokemonName, bool isOpposing) const override;
 };
 
 // Burn skill effect
@@ -82,9 +82,9 @@ public:
 	~Burn();
 
 	// Print message when get skill effect
-	string printGotMessage(string pokemonName) const override;
+	string printGotMessage(string pokemonName, bool isOpposing) const override;
 	// Print message when skill effect affect
-	string printAffactMessage(string pokemonName) const override;
+	string printAffactMessage(string pokemonName, bool isOpposing) const override;
 };
 
 // Paralysis skill effect
@@ -99,9 +99,9 @@ public:
 	~Paralysis();
 
 	// Print message when get skill effect
-	string printGotMessage(string pokemonName) const override;
+	string printGotMessage(string pokemonName, bool isOpposing) const override;
 	// Print message when skill effect affect
-	string printAffactMessage(string pokemonName) const override;
+	string printAffactMessage(string pokemonName, bool isOpposing) const override;
 };
 
 
