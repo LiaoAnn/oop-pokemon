@@ -11,6 +11,7 @@
 #include <vector>
 #include "SkillEffect.h"
 #include "Pokemon.h"
+#include "json.h"
 
 using namespace std;
 

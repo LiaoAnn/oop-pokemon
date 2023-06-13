@@ -9,6 +9,8 @@
 #pragma once
 
 #include <string>
+#include <vector>
+#include "json.h"
 using namespace std;
 
 class SkillEffect
