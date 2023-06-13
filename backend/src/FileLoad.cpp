@@ -295,16 +295,23 @@ void FileLoad::loadCaseFile(string name)
 		if (describe == "Battle")
 		{
 			// Both player and AI use a skill
-			string playerSkill, AISkill;
-			getline(in, playerSkill);
-			getline(in, AISkill);
+			string playerSkillName, opposingSkillName;
+			getline(in, playerSkillName);
+			getline(in, opposingSkillName);
 			int playerSpeed = game.player.getCurrentPokemon().getSpeed();
-			int AISpeed = game.AI.getCurrentPokemon().getSpeed();
+			int opposingSpeed = game.AI.getCurrentPokemon().getSpeed();
+
 			Player* playerArray[2] = { &game.player, &game.AI };
 			int firstPlayerIndex = 0;
 			int secondPlayerIndex = 1;
 
-			if (playerSpeed < AISpeed)
+			Skill* skillArray[2] =
+			{
+				&game.player.getCurrentPokemon()[playerSkillName],
+				&game.AI.getCurrentPokemon()[opposingSkillName]
+			};
+
+			if (playerSpeed < opposingSpeed)
 			{
 				firstPlayerIndex = 1;
 				secondPlayerIndex = 0;
@@ -312,14 +319,15 @@ void FileLoad::loadCaseFile(string name)
 			Player& firstPlayer = *playerArray[firstPlayerIndex];
 			Player& secondPlayer = *playerArray[secondPlayerIndex];
 
-			bool isFristPlayerOpposing = firstPlayer.getIsOpposing();
-			bool isSecondPlayerOpposing = secondPlayer.getIsOpposing();
+			Skill& firstSkill = *skillArray[firstPlayerIndex];
+			Skill& secondSkill = *skillArray[secondPlayerIndex];
 
 			Pokemon& firstPokemon = firstPlayer.getCurrentPokemon();
 			Pokemon& secondPokemon = secondPlayer.getCurrentPokemon();
 
-			string firstSkillName = firstPlayer.getIsOpposing() ? AISkill : playerSkill;
-			Skill& firstSkill = firstPokemon[firstSkillName];
+			bool isFristPlayerOpposing = firstPlayer.getIsOpposing();
+			bool isSecondPlayerOpposing = secondPlayer.getIsOpposing();
+
 			firstSkill.reducePP();
 			if (!firstPokemon.isCanNotMove(isFristPlayerOpposing))
 			{
@@ -338,8 +346,6 @@ void FileLoad::loadCaseFile(string name)
 				continue;
 			}
 
-			string secondSkillName = secondPlayer.getIsOpposing() ? AISkill : playerSkill;
-			Skill& secondSkill = secondPokemon[secondSkillName];
 			secondSkill.reducePP();
 			//judge the pokemon which can move
 			if (!secondPokemon.isCanNotMove(isSecondPlayerOpposing))
