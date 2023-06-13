@@ -29,8 +29,6 @@ public:
 	// Dot check
 	void playerDotCheck();
 
-	void healTime();
-
 	void operator<<(string str);
 };
 

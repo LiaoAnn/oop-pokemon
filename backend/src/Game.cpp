@@ -51,9 +51,6 @@ void Game::initGame()
 	this->battleLog.clear();
 }
 
-void Game::healTime()
-{}
-
 /**
  * Intent: Operator overload <<
  * Pre: a string
