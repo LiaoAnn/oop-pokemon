@@ -12,6 +12,7 @@
 #include <set>
 #include "Skill.h"
 #include "SkillEffect.h"
+#include "json.h"
 
 using namespace std;
 enum pokemonStat { hp, attack, defence, spAttack, spDefence, speed };
@@ -101,6 +102,9 @@ public:
 
 	// Pokemon actions
 	void action(Pokemon& opposing, string skill);
+
+	// To JSON
+	json toJson();
 };
 
 extern vector <Pokemon> pokemonList; // list of all pokemon

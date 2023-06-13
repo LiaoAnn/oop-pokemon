@@ -523,3 +523,28 @@ bool Pokemon::isHurtByDot(bool isOpposing)
 
 	return hasHurt;
 }
+
+/**
+ * Intent: Turn the Pokemon into a JSON object
+ * Pre: None
+ * Post: Return the JSON object of the Pokemon
+ */
+json Pokemon::toJson()
+{
+	json j;
+	j["name"] = name;
+	j["health"] = hp;
+	j["maxHealth"] = maxHp;
+	j["attack"] = attack;
+	j["defense"] = defence;
+	j["s_attack"] = spAttack;
+	j["s_defense"] = spDefence;
+	j["speed"] = speed;
+
+	j["moves"] = json::array();
+	for (int i = 0; i < skillList.size(); i++)
+	{
+		j["moves"].push_back(skillList[i].toJson());
+	}
+	return j;
+}
