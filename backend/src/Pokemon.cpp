@@ -1,4 +1,4 @@
-/***********************************************************************
+﻿/***********************************************************************
  * File: Pokemon.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-06-06
@@ -498,6 +498,7 @@ bool Pokemon::isHurtByDot(bool isOpposing)
 			if (power > hp)
 				hp = 0;
 
+			hp -= (int)power;
 			if (isOpposing)
 				log += OPPOSING_PREFIX;
 			log += this->name + " is hurt by its burn!";
@@ -511,6 +512,7 @@ bool Pokemon::isHurtByDot(bool isOpposing)
 			if (power > hp)
 				hp = 0;
 
+			hp -= (int)power;
 			if (isOpposing)
 				log += OPPOSING_PREFIX;
 			log += this->name + " is hurt by its poisoning!";
