@@ -442,7 +442,8 @@ bool Pokemon::isAlive() const
  */
 void Pokemon::addCurrentStat(SkillEffect* stat)
 {
-	currentStat.push_back(stat);
+	if (!checkSkillEffect(stat))
+		currentStat.push_back(stat);
 }
 
 /**
