@@ -51,7 +51,7 @@ int Item::getPoints()
 
 map<string, Item*> itemMap = {
 	{"Potion", new NormalPotion()},
-	{"Super Potion", new SuperPotion()},
-	{"Hyper Potion", new HyperPotion()},
-	{"Max Potion", new MaxPotion()}
+	{"SuperPotion", new SuperPotion()},
+	{"HyperPotion", new HyperPotion()},
+	{"MaxPotion", new MaxPotion()}
 };
