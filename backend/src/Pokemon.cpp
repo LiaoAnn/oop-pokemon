@@ -332,6 +332,9 @@ vector<Skill> Pokemon::getSkillList() const
  */
 Skill& Pokemon::operator[](int index)
 {
+	if (index < 0 || index >= skillList.size())
+		return skillList[0];
+
 	return skillList[index];
 }
 
@@ -347,6 +350,7 @@ Skill& Pokemon::operator[](string name)
 		if (skillList[i].getName() == name)
 			return skillList[i];
 	}
+	return skillList[0];
 }
 
 /**

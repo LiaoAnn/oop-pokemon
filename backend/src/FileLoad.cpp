@@ -317,11 +317,10 @@ void FileLoad::loadCaseFile(string name)
 
 			if (!firstPokemon.isCanNotMove(isFristPlayerOpposing))
 			{
-				if (firstPokemon.hasSkill(playerSkill))
-					firstPokemon[playerSkill].useSkill
-					(
-						firstPokemon, secondPokemon, isFristPlayerOpposing
-					);
+				firstPokemon[playerSkill].useSkill
+				(
+					firstPokemon, secondPokemon, isFristPlayerOpposing
+				);
 			}
 
 			// Check if the Second Player pokemon is alive
@@ -336,11 +335,10 @@ void FileLoad::loadCaseFile(string name)
 			//judge the pokemon which can move
 			if (!secondPokemon.isCanNotMove(isSecondPlayerOpposing))
 			{
-				if (secondPokemon.hasSkill(AISkill))
-					secondPokemon[AISkill].useSkill
-					(
-						secondPokemon, firstPokemon, isSecondPlayerOpposing
-					);
+				secondPokemon[AISkill].useSkill
+				(
+					secondPokemon, firstPokemon, isSecondPlayerOpposing
+				);
 			}
 
 			// Check if the First Player pokemon is alive
@@ -378,8 +376,7 @@ void FileLoad::loadCaseFile(string name)
 			// Opposing Pokemon use a skill
 			if (!AIPokemon.isCanNotMove(true))
 			{
-				if (AIPokemon.hasSkill(AISkill))
-					AIPokemon[AISkill].useSkill(AIPokemon, playerPokemon, true);
+				AIPokemon[AISkill].useSkill(AIPokemon, playerPokemon, true);
 			}
 
 			// DOT check
@@ -407,8 +404,7 @@ void FileLoad::loadCaseFile(string name)
 			Pokemon& AIPokemon = game.AI.getCurrentPokemon();
 			if (!AIPokemon.isCanNotMove(true))
 			{
-				if (AIPokemon.hasSkill(AISkill))
-					AIPokemon[AISkill].useSkill(AIPokemon, playerPokemon, true);
+				AIPokemon[AISkill].useSkill(AIPokemon, playerPokemon, true);
 			}
 
 			// DOT check
