@@ -8,7 +8,7 @@
 ************************************************************************/
 
 #include "Command.h"
-
+#include "Game.h"
 
 /**
  * Intent: Return the result of attack command
@@ -47,6 +47,6 @@ json attactCommandResult
 	result["otherDamage"] = (firstPlayerIndex == 0) ? myDamage : otherDamage;
 	result["otherMove"] = otherMoveJson;
 	result["otherMonster"] = otherMonsterJson;
-
+	result["battle_log"] = game.battleLog;
 	return result;
 }
