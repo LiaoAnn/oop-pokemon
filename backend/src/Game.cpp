@@ -1,5 +1,5 @@
 ﻿/***********************************************************************
- * File: GameStatus.cpp
+ * File: Game.cpp
  * Author: Alan
  * Create Date: 2023-06-06
  * Editor: BING-JIA TAN (B11115001), Alan
