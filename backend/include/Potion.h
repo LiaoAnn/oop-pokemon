@@ -19,6 +19,8 @@ public:
 	Potion();
 	Potion(string name, int points);
 	~Potion();
+
+	void useItem(Pokemon& pokemon) override;
 };
 
 class NormalPotion : public Potion
@@ -26,8 +28,6 @@ class NormalPotion : public Potion
 public:
 	NormalPotion();
 	~NormalPotion();
-
-	void useItem(Pokemon& pokemon) override;
 };
 
 class SuperPotion : public Potion
@@ -35,8 +35,6 @@ class SuperPotion : public Potion
 public:
 	SuperPotion();
 	~SuperPotion();
-
-	void useItem(Pokemon& pokemon) override;
 };
 
 class HyperPotion : public Potion
@@ -44,8 +42,6 @@ class HyperPotion : public Potion
 public:
 	HyperPotion();
 	~HyperPotion();
-
-	void useItem(Pokemon& pokemon) override;
 };
 
 class MaxPotion : public Potion
@@ -53,8 +49,6 @@ class MaxPotion : public Potion
 public:
 	MaxPotion();
 	~MaxPotion();
-
-	void useItem(Pokemon& pokemon) override;
 };
 
 enum PotionType

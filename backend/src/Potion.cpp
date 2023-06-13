@@ -8,6 +8,7 @@
 ************************************************************************/
 
 #include "Potion.h"
+#include "Game.h"
 
 /**
  * Intent: Default constructor
@@ -34,6 +35,20 @@ Potion::~Potion()
 {}
 
 /**
+ * Intent: Use the potion on the pokemon
+ * * Pre: None
+ * * Post: The pokemon's HP is increased by the points of the potion
+ * */
+void Potion::useItem(Pokemon& pokemon)
+{
+	if (pokemon.getHp() > 0)
+		pokemon.healHp(this->points);
+
+	game << "You used a " + this->name + "!";
+	game << pokemon.getName() + " had its HP restored.";
+}
+
+/**
  * Intent: Normal potion constructor
  * Pre: None
  * Post: A NormalPotion object is created with name "Normal Potion" and points 20
@@ -48,17 +63,6 @@ NormalPotion::NormalPotion() : Potion("Potion", 20)
  */
 NormalPotion::~NormalPotion()
 {}
-
-/**
- * Intent: Use the potion on the pokemon only if the pokemon is not fainted
- * Pre: None
- * Post: The pokemon's HP is increased by 20
- */
-void NormalPotion::useItem(Pokemon& pokemon)
-{
-	if (pokemon.getHp() > 0)
-		pokemon.healHp(20);
-}
 
 /**
  * Intent: Hyper potion constructor
@@ -77,17 +81,6 @@ SuperPotion::~SuperPotion()
 {}
 
 /**
- * Intent: Use the potion on the pokemon only if the pokemon is not fainted
- * Pre: None
- * Post: The pokemon's HP is increased by 50
- */
-void SuperPotion::useItem(Pokemon& pokemon)
-{
-	if (pokemon.getHp() > 0)
-		pokemon.healHp(50);
-}
-
-/**
  * Intent: Hyper potion constructor
  * Pre: None
  * Post: A HyperPotion object is created with name "Hyper Potion" and points 200
@@ -104,17 +97,6 @@ HyperPotion::~HyperPotion()
 {}
 
 /**
- * Intent: Use the potion on the pokemon only if the pokemon is not fainted
- * Pre: None
- * Post: The pokemon's HP is increased by 200
- */
-void HyperPotion::useItem(Pokemon& pokemon)
-{
-	if (pokemon.getHp() > 0)
-		pokemon.healHp(200);
-}
-
-/**
  * Intent: Max potion constructor
  * Pre: None
  * Post: A MaxPotion object is created with name "Max Potion" and points 999
@@ -129,14 +111,3 @@ MaxPotion::MaxPotion() : Potion("Max Potion", 999)
  */
 MaxPotion::~MaxPotion()
 {}
-
-/**
- * Intent: Use the potion on the pokemon only if the pokemon is not fainted
- * Pre: None
- * Post: The pokemon's HP is increased to its maximum
- */
-void MaxPotion::useItem(Pokemon& pokemon)
-{
-	if (pokemon.getHp() > 0)
-		pokemon.healHp(pokemon.getMaxHp());
-}
