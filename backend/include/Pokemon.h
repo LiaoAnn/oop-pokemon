@@ -108,6 +108,9 @@ public:
 
 	// To JSON
 	json toJson();
+
+	// Check if pokemon has skill
+	bool hasSkill(string skillName);
 };
 
 extern vector <Pokemon> pokemonList; // list of all pokemon

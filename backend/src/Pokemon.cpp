@@ -563,3 +563,18 @@ void Pokemon::restore()
 		skillList[i].restore();
 	}
 }
+
+/**
+ * Intent: Check if the Pokemon has a skill
+ * Pre: skillName is a string
+ * Post: Return true if the Pokemon has the skill, otherwise return false
+ */
+bool Pokemon::hasSkill(string skillName)
+{
+	for (int i = 0; i < skillList.size(); i++)
+	{
+		if (skillList[i].getName() == skillName)
+			return true;
+	}
+	return false;
+}
