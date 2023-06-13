@@ -87,7 +87,7 @@ bool FileLoad::loadMonsterLibraryFile(string name)
 		set<int> typeSet;
 
 		ss >> name;
-		
+
 		getline(in, describe);//next line
 		ss = stringstream(describe);
 		ss >> typeCount;
@@ -105,7 +105,7 @@ bool FileLoad::loadMonsterLibraryFile(string name)
 		Pokemon pokemon(name, typeCount, typeSet, HP, ATK, DEF, SPATK, SPDEF, SPD);
 		pokemonList.push_back(pokemon);
 	}
-	
+
 	this->MonsterLibName = name;//set the monsterlib 
 	this->isLoadMonsterLib = true;
 	return this->canBeBattle();
@@ -124,7 +124,7 @@ bool FileLoad::loadMoveLibraryFile(string name)
 	*	Vine Whip Grass Physical 45 100 25
 	*	...
 	*/
-	
+
 	ifstream in;
 	in.open(name);
 	string describe;
@@ -161,7 +161,7 @@ bool FileLoad::loadMoveLibraryFile(string name)
 		}
 		skillList.push_back(skill);
 	}
-	
+
 	this->MoveLibName = name;//set MoveLib file
 	this->isLoadMoveLib = true;
 	return this->canBeBattle();
@@ -289,9 +289,6 @@ void FileLoad::loadCaseFile(string name)
 		gameMode = NORMAL;
 	game.setGameMode(gameMode);
 
-	Pokemon& p = game.player.getCurrentPokemon();
-	p.addCurrentStat(skillEffectList[POISON]);
-
 	/* Game Start */
 	while (getline(in, describe))
 	{
@@ -320,7 +317,11 @@ void FileLoad::loadCaseFile(string name)
 
 			if (!firstPokemon.isCanNotMove(isFristPlayerOpposing))
 			{
-				firstPokemon[playerSkill].useSkill(firstPokemon, secondPokemon);
+				if (firstPokemon.hasSkill(playerSkill))
+					firstPokemon[playerSkill].useSkill
+					(
+						firstPokemon, secondPokemon, isFristPlayerOpposing
+					);
 			}
 
 			// Check if the Second Player pokemon is alive
@@ -332,9 +333,14 @@ void FileLoad::loadCaseFile(string name)
 				continue;
 			}
 
-			if (!secondPokemon.isCanNotMove(isSecondPlayerOpposing))//judge the pokemon which can move
+			//judge the pokemon which can move
+			if (!secondPokemon.isCanNotMove(isSecondPlayerOpposing))
 			{
-				secondPokemon[AISkill].useSkill(secondPokemon, firstPokemon);
+				if (secondPokemon.hasSkill(AISkill))
+					secondPokemon[AISkill].useSkill
+					(
+						secondPokemon, firstPokemon, isSecondPlayerOpposing
+					);
 			}
 
 			// Check if the First Player pokemon is alive
@@ -372,7 +378,8 @@ void FileLoad::loadCaseFile(string name)
 			// Opposing Pokemon use a skill
 			if (!AIPokemon.isCanNotMove(true))
 			{
-				AIPokemon[AISkill].useSkill(AIPokemon, playerPokemon);
+				if (AIPokemon.hasSkill(AISkill))
+					AIPokemon[AISkill].useSkill(AIPokemon, playerPokemon, true);
 			}
 
 			// DOT check
@@ -400,7 +407,8 @@ void FileLoad::loadCaseFile(string name)
 			Pokemon& AIPokemon = game.AI.getCurrentPokemon();
 			if (!AIPokemon.isCanNotMove(true))
 			{
-				AIPokemon[AISkill].useSkill(AIPokemon, playerPokemon);
+				if (AIPokemon.hasSkill(AISkill))
+					AIPokemon[AISkill].useSkill(AIPokemon, playerPokemon, true);
 			}
 
 			// DOT check
@@ -410,11 +418,30 @@ void FileLoad::loadCaseFile(string name)
 		else if (describe == "Status")
 		{
 			// Player check the status of the Pokemon
-			Pokemon& pokemon = game.player.getCurrentPokemon();
+			Pokemon& userPokemon = game.player.getCurrentPokemon();
+			Pokemon& AIPokemon = game.AI.getCurrentPokemon();
 
-			logs += pokemon.getName() + " ";
-			logs += to_string(pokemon.getHp()) + " ";
-			vector<SkillEffect*> stat = pokemon.getCurrentStats();
+			logs += userPokemon.getName() + " ";
+			logs += to_string(userPokemon.getHp()) + " ";
+			vector<SkillEffect*> stat = userPokemon.getCurrentStats();
+			for (int i = 0; i < stat.size(); i++)
+			{
+				string skillEffectName = stat[i]->getName();
+				transform(
+					skillEffectName.begin(),
+					skillEffectName.end(), skillEffectName.begin(),
+					::toupper);
+				logs += skillEffectName;
+
+				if (i != stat.size() - 1)
+				{
+					logs += " ";
+				}
+			}
+
+			logs += AIPokemon.getName() + " ";
+			logs += to_string(AIPokemon.getHp()) + " ";
+			stat = AIPokemon.getCurrentStats();
 			for (int i = 0; i < stat.size(); i++)
 			{
 				string skillEffectName = stat[i]->getName();

@@ -63,7 +63,7 @@ public:
 	friend int findSkillByName(string name);
 
 	// Use skill
-	void useSkill(Pokemon& user, Pokemon& target);
+	void useSkill(Pokemon& userPokemon, Pokemon& targetPokemon, bool isOpposing);
 
 	// To JSON
 	json toJson();
