@@ -69,7 +69,7 @@ NormalPotion::~NormalPotion()
  * Pre: None
  * Post: A HyperPotion object is created with name "Hyper Potion" and points 200
  */
-SuperPotion::SuperPotion() : Potion("SuperPotion", 50)
+SuperPotion::SuperPotion() : Potion("Super Potion", 50)
 {}
 
 /**
@@ -85,7 +85,7 @@ SuperPotion::~SuperPotion()
  * Pre: None
  * Post: A HyperPotion object is created with name "Hyper Potion" and points 200
  */
-HyperPotion::HyperPotion() : Potion("HyperPotion", 200)
+HyperPotion::HyperPotion() : Potion("Hyper Potion", 200)
 {}
 
 /**
@@ -101,7 +101,7 @@ HyperPotion::~HyperPotion()
  * Pre: None
  * Post: A MaxPotion object is created with name "Max Potion" and points 999
  */
-MaxPotion::MaxPotion() : Potion("MaxPotion", 999)
+MaxPotion::MaxPotion() : Potion("Max Potion", 999)
 {}
 
 /**
