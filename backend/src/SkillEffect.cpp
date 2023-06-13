@@ -8,6 +8,7 @@
 ************************************************************************/
 #include "SkillEffect.h"
 #include "SkillEffectList.h"
+#include "json.h"
 
 /**
  * Intent: Default constructor
@@ -51,6 +52,21 @@ SkillEffect::~SkillEffect()
 string SkillEffect::getName() const
 {
 	return name;
+}
+
+/**
+ * Intent:
+ * Pre:
+ * Post:
+ */
+json SkillEffect::toJson()
+{
+	json j;
+	j["name"] = name;
+	j["type"] = (type == DOT) ? "DoT" : "Debuff";
+	j["power"] = power;
+	j["leftRound"] = leftRound;
+	return j;
 }
 
 /**
