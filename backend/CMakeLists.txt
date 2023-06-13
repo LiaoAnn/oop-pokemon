@@ -6,16 +6,19 @@ set(Boost_INCLUDE_DIR
 	"path/to/boost/root/dir"
 	"C:/local/boost_1_82_0"
 	# Add your own Boost include path here
+	"C:/library/boost_1_82_0"
 )
 set(Boost_LIBRARY_DIR 
 	"path/to/boost/libs/dir"
 	"C:/local/boost_1_82_0/stage/lib"
 	# Add your own Boost library path here
+	"C:/library/boost_1_82_0/stage/lib"
 )
 set(WebSocketpp
 	"path/to/websocketpp/root/dir"
 	"C:/local/websocketpp-0.8.2"
 	# Add your own WebSocketpp include path here
+	"C:/library/websocketpp-master"
 )
 
 set(Lib

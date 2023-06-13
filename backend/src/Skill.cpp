@@ -3,7 +3,7 @@
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-05-30
  * Editor: BING-JIA TAN (B11115001)
- * Update Date: 2023-05-30
+ * Update Date: 2023-06-13
  * Description: Implementation for Skill
 ************************************************************************/
 #include "Skill.h"
@@ -188,6 +188,7 @@ int findSkillByName(string name)
 void Skill::useSkill(Pokemon& user, Pokemon& target)
 {
 	srand(time(NULL));
+	//set basic containment
 	float critical = 1, stab = 1;
 	int level = 50;
 	int userhp = user.getHp(), targethp = target.getHp();
@@ -195,19 +196,25 @@ void Skill::useSkill(Pokemon& user, Pokemon& target)
 	int targetatk = target.getAttack(), targetspatk = target.getSpAttack(), targetdef = target.getDefence(), targetspdef = target.getSpDefence();
 	int userdamage, targetdamage;
 	bool userfirst, sametype = false, escape;
-	if (user.getSpeed() >= target.getSpeed()) {
+	
+	if (user.getSpeed() >= target.getSpeed()) //judge speed
+	{
 		userfirst = true;
 	}
-	else {
+	else 
+	{
 		userfirst = false;
 	}
 	set<int>usertype = user.getType();
 	set<int>targettype = target.getType();
 
 
-	for (auto i : usertype) {
-		for (auto j : targettype) {
-			if (i == j) {
+	for (auto i : usertype)
+	{
+		for (auto j : targettype)
+		{
+			if (i == j)
+			{
 				stab = 1.5;
 				sametype = true;
 				break;
@@ -215,44 +222,58 @@ void Skill::useSkill(Pokemon& user, Pokemon& target)
 		}
 		if (sametype)break;
 	}
-	while (userhp <= 0 || targethp <= 0) {
+	while (userhp > 0 || targethp > 0) //或是收回寶可夢
+	{
 
-		if (userfirst) {
-			if (criticalchance(critical)) {
+		if (userfirst) //judge who goes first
+		{
+			if (criticalchance(critical)) //set critical chance
+			{
 				critical = 1.5;
 			}
-			else {
+			else
+			{
 				critical = 1;
 			}
-			if (escapechance(escape)) {
+			if (escapechance(escape))//set escape chance
+			{
 				escape = true;
 			}
-			else {
+			else
+			{
 				escape = false;
 			}
 			userdamage = ((2 * level + 10) / 250 * useratk * (userspatk / targetdef) + 2) * critical * stab * type;
-			if (!escape) {
-				targethp -= userdamage;
+			if (!escape) 
+			{
+				targethp -= userdamage;//judge the damage is hit
 			}
-
+			
 		}
-		else {
-			if (criticalchance(critical)) {
+		else 
+		{
+			if (criticalchance(critical)) 
+			{
 				critical = 1.5;
 			}
-			else {
+			else
+			{
 				critical = 1;
 			}
-			if (escapechance(escape)) {
+			if (escapechance(escape)) 
+			{
 				escape = true;
 			}
-			else {
+			else
+			{
 				escape = false;
 			}
 			targetdamage = (2 * level + 10) / 250 * targetatk * ((targetspatk / userdef) + 2) * critical * stab * type;
-			if (!escape) {
-				userhp -= targetdamage;
+			if (!escape) 
+			{
+				userhp -= targetdamage;//judge the damage is hit
 			}
+
 		}
 	}
 	//userdamage = ((2 * level + 10) / 250 * useratk * (userspatk / targetdef) + 2) * critical * stab * type;

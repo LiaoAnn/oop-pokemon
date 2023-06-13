@@ -1,4 +1,13 @@
-﻿#include "FileLoad.h"
+﻿/***********************************************************************
+ * File: Chance.cpp
+ * Author: BING-JIA TAN (B11115001)
+ * Create Date: 2023-05-30
+ * Editor: BING-JIA TAN (B11115001)
+ * Update Date: 2023-06-12
+ * Description: file load
+************************************************************************/
+
+#include "FileLoad.h"
 #include "Pokemon.h"
 #include "Move.h"
 #include <vector>
@@ -71,12 +80,12 @@ bool FileLoad::loadMonsterLibraryFile(string name)
 	while (getline(in, describe)) {
 		stringstream ss(describe);
 		string name, type;
-		int typeCount, typeIndex, HP, ATK, DEF, SPATK, SPDEF, SPD;
+		int typeCount, typeIndex, HP, ATK, DEF, SPATK, SPDEF, SPD;//basic capability
 		set<int> typeSet;
 
 		ss >> name;
-
-		getline(in, describe);
+		
+		getline(in, describe);//next line
 		ss = stringstream(describe);
 		ss >> typeCount;
 		for (size_t i = 0; i < typeCount; i++)
@@ -87,14 +96,14 @@ bool FileLoad::loadMonsterLibraryFile(string name)
 			typeSet.insert(typeIndex);
 		}
 
-		getline(in, describe);
+		getline(in, describe);//next line
 		ss = stringstream(describe);
 		ss >> HP >> ATK >> DEF >> SPATK >> SPDEF >> SPD;
 		Pokemon pokemon(name, typeCount, typeSet, HP, ATK, DEF, SPATK, SPDEF, SPD);
 		pokemonList.push_back(pokemon);
 	}
-
-	this->MonsterLibName = name;
+	
+	this->MonsterLibName = name;//set the monsterlib 
 	this->isLoadMonsterLib = true;
 	return this->canBeBattle();
 }
@@ -146,8 +155,8 @@ bool FileLoad::loadMoveLibraryFile(string name)
 		}
 		skillList.push_back(skill);
 	}
-
-	this->MoveLibName = name;
+	
+	this->MoveLibName = name;//set MoveLib file
 	this->isLoadMoveLib = true;
 	return this->canBeBattle();
 }
@@ -207,14 +216,14 @@ bool FileLoad::loadGameDataFile(string name)
 					Skill skill = skillList[skillIndex];
 					pokemon.addSkill(skill);
 				}
-				player.addPokemon(pokemon);
+				player.addPokemon(pokemon);// player added pokemon 
 			}
 			else
 			{
-				throw string("Pokemon not found");
+				throw string("Pokemon not found");//error
 			}
 
-			player.addPokemon(pokemon);
+			player.addPokemon(pokemon);// player added pokemon 
 		}
 
 		// Set the game.player if it is the first player
@@ -229,7 +238,7 @@ bool FileLoad::loadGameDataFile(string name)
 		}
 	}
 
-	this->GameDataName = name;
+	this->GameDataName = name;//set GameData file
 	this->isLoadGameData = true;
 	return this->canBeBattle();
 }
@@ -315,7 +324,7 @@ void FileLoad::loadCaseFile(string name)
 				continue;
 			}
 
-			if (!secondPokemon.isCanNotMove(isSecondPlayerOpposing))
+			if (!secondPokemon.isCanNotMove(isSecondPlayerOpposing))//judge the pokemon which can move
 			{
 				secondPokemon[AISkill].useSkill(secondPokemon, firstPokemon);
 			}
@@ -423,10 +432,10 @@ void FileLoad::loadCaseFile(string name)
 
 			for (int i = 0; i < skills.size(); i++)
 			{
-				logs += skills[i].getName() + " ";
+				logs += skills[i].getName() + " ";//set logs 
 				logs += to_string(skills[i].getPP());
 
-				if (i != skills.size() - 1)
+				if (i != skills.size() - 1)//judge is not the final words
 				{
 					logs += " ";
 				}

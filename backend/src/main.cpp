@@ -1,3 +1,12 @@
+/***********************************************************************
+ * File: Skill.cpp
+ * Author: BING-JIA TAN (B11115001)
+ * Create Date: 2023-05-30
+ * Editor: BING-JIA TAN (B11115001)
+ * Update Date: 2023-06-13
+ * Description:main
+************************************************************************/
+
 #include "main.h"
 //#include "Type.h"
 #include "Game.h"
@@ -17,7 +26,7 @@ int main()
 
 	try
 	{
-		file.loadCaseFile("case.txt");
+		file.loadCaseFile("case.txt");//file case.txt
 	}
 	catch (string& e)
 	{
@@ -25,7 +34,7 @@ int main()
 	}
 	for (int i = 0; i < game.battleLog.size(); i++)
 	{
-		cout << game.battleLog[i] << endl;
+		cout << game.battleLog[i] << endl;//go to pokemon battle
 	}
 
 	webServer = new WebServer(WEBROOT, WEBPORT);
@@ -38,16 +47,30 @@ int main()
 	game.join();
 	return 0;
 }
-
+/**
+ * Intent: webserver
+ * Pre: None
+ * Post: run
+ */
 void webServerThread()
 {
 	webServer->run();
 
 }
+/**
+ * Intent: websocket server
+ * Pre: None
+ * Post: run const int WSPORT
+ */
 void webSocketServerThread()
 {
 	webSocketServer->run(WSPORT);
 }
+/**
+ * Intent: game tread
+ * Pre: None
+ * Post: get message or have message
+ */
 void gameThread()
 {
 	while (true)
