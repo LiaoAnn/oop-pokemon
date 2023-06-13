@@ -48,6 +48,7 @@ static double typeEffectiveness[18][18] =
 };
 
 enum TYPE_EFFECT_CATEGORY {
+	NO_EFFECT,
 	NOT_VERY_EFFECTIVE,
 	NORMALLY_EFFECTIVE,
 	SUPER_EFFECTIVE,
