@@ -73,14 +73,172 @@ void webSocketServerThread()
  */
 void gameThread()
 {
+	json result, recive;
 	while (true)
 	{
-		string test;
+		string message, type;
 		while (!webSocketServer->hasMessage())
 		{
 		}
 
-		test = webSocketServer->getMessage();
-		// Write code here
+		message = webSocketServer->getMessage();
+		recive = stringToJson(message);
+		type = recive["type"];
+
+		if (type == "init")
+		{
+			game.player = Player();
+			game.AI = Player();
+			game.battleLog.clear();
+			skillList.clear();
+			pokemonList.clear();
+			game.turn = 1;
+
+			file.isLoadMoveLib = false;
+			file.isLoadMonsterLib = false;
+			file.isLoadGameData = false;
+
+			result = json();
+			result["type"] = "init";
+			result["success"] = true;
+			webSocketServer->send(jsonToString(result));
+		}
+
+		if (type == "load_monster")
+		{
+			bool canBattle = false;
+			try
+			{
+				canBattle = file.loadMonsterLibraryFile(recive["file"]);
+			}
+			catch (string& e)
+			{
+				result = json();
+				result["type"] = "load_monster";
+				result["success"] = false;
+				result["message"] = e;
+				webSocketServer->send(jsonToString(result));
+				continue;
+			}
+
+			result = json();
+			result["type"] = "load_monster";
+			result["success"] = true;
+			result["can_battle"] = canBattle;
+			webSocketServer->send(jsonToString(result));
+		}
+
+		if (type == "load_move")
+		{
+			bool canBattle = false;
+			try
+			{
+				file.loadMoveLibraryFile(recive["file"]);
+			}
+			catch (string& e)
+			{
+				result = json();
+				result["type"] = "load_move";
+				result["success"] = false;
+				result["message"] = e;
+				webSocketServer->send(jsonToString(result));
+				continue;
+			}
+
+			result = json();
+			result["type"] = "load_move";
+			result["success"] = true;
+			result["can_battle"] = canBattle;
+			webSocketServer->send(jsonToString(result));
+		}
+
+		if (type == "load_game_data")
+		{
+			bool canBattle = false;
+			if (!(file.isLoadMonsterLib && file.isLoadMoveLib))
+			{
+				result = json();
+				result["type"] = "load_game_data";
+				result["success"] = false;
+				result["message"] = "Monster library or move library not loaded";
+				webSocketServer->send(jsonToString(result));
+				continue;
+			}
+			try
+			{
+				canBattle = file.loadGameDataFile(recive["file"]);
+			}
+			catch (string& e)
+			{
+				result = json();
+				result["type"] = "load_game";
+				result["success"] = false;
+				result["message"] = e;
+				webSocketServer->send(jsonToString(result));
+				continue;
+			}
+
+			result = json();
+			result["type"] = "load_game";
+			result["success"] = true;
+			result["can_battle"] = canBattle;
+			webSocketServer->send(jsonToString(result));
+		}
+
+		// Commands needs to load data before execute
+		if (!file.canBeBattle())
+		{
+			result = json();
+			result["type"] = "init_team";
+			result["success"] = false;
+			result["message"] = "No pokemon can be battle";
+			webSocketServer->send(jsonToString(result));
+			continue;
+		}
+
+		if (type == "init_attack")
+		{
+			vector<Pokemon> playerPokemonList = game.player.getPokemonList();
+			vector<Pokemon> opposingPokemonList = game.AI.getPokemonList();
+
+			result["type"] = "init_attack";
+			result["success"] = true;
+
+			result["myMonster"] = json::array();
+			for (int i = 0; i < playerPokemonList.size(); i++)
+			{
+				result["playerPokemon"].push_back(playerPokemonList[i].toJson());
+			}
+
+			result["otherMonster"] = json::array();
+			for (int i = 0; i < opposingPokemonList.size(); i++)
+			{
+				result["otherMonster"].push_back(opposingPokemonList[i].toJson());
+			}
+		}
+
+		if (type == "init_team")
+		{
+			vector<Pokemon> playerPokemonList = game.player.getPokemonList();
+			vector<Pokemon> opposingPokemonList = game.AI.getPokemonList();
+
+			game.player.restoreAllPokemon();
+			game.AI.restoreAllPokemon();
+
+			result["type"] = "init_team";
+			result["success"] = true;
+
+			result["myMonster"] = json::array();
+			for (int i = 0; i < playerPokemonList.size(); i++)
+			{
+				result["playerPokemon"].push_back(playerPokemonList[i].toJson());
+			}
+
+			result["otherMonster"] = json::array();
+			for (int i = 0; i < opposingPokemonList.size(); i++)
+			{
+				result["otherMonster"].push_back(opposingPokemonList[i].toJson());
+			}
+		}
 	}
 }
