@@ -317,8 +317,9 @@ void FileLoad::loadCaseFile(string name)
 
 			Pokemon& firstPokemon = firstPlayer.getCurrentPokemon();
 			Pokemon& secondPokemon = secondPlayer.getCurrentPokemon();
-			Skill& firstSkill = firstPokemon[playerSkill];
 
+			string firstSkillName = firstPlayer.getIsOpposing() ? AISkill : playerSkill;
+			Skill& firstSkill = firstPokemon[firstSkillName];
 			firstSkill.reducePP();
 			if (!firstPokemon.isCanNotMove(isFristPlayerOpposing))
 			{
@@ -337,10 +338,13 @@ void FileLoad::loadCaseFile(string name)
 				continue;
 			}
 
+			string secondSkillName = secondPlayer.getIsOpposing() ? AISkill : playerSkill;
+			Skill& secondSkill = secondPokemon[secondSkillName];
+			secondSkill.reducePP();
 			//judge the pokemon which can move
 			if (!secondPokemon.isCanNotMove(isSecondPlayerOpposing))
 			{
-				secondPokemon[AISkill].useSkill
+				secondSkill.useSkill
 				(
 					secondPokemon, firstPokemon, isSecondPlayerOpposing
 				);
