@@ -201,6 +201,45 @@ void gameThread()
 			continue;
 		}
 
+		if (type == "load_case")
+		{
+			string caseFile = recive["file"];
+			try
+			{
+				file.loadCaseFile(caseFile);
+			}
+			catch (const std::exception& e)
+			{
+				result = json();
+				result["type"] = "load_case";
+				result["success"] = false;
+				result["message"] = e.what();
+				webSocketServer->send(jsonToString(result));
+				continue;
+			}
+
+			result = json();
+			result["type"] = "load_case";
+			result["success"] = true;
+			result["battle_log"] = game.battleLog;
+
+			vector<Pokemon> playerPokemonList = game.player.getPokemonList();
+			vector<Pokemon> opposingPokemonList = game.AI.getPokemonList();
+
+			result["myMonsters"] = json::array();
+			for (int i = 0; i < playerPokemonList.size(); i++)
+			{
+				result["myMonster"].push_back(playerPokemonList[i].toJson());
+			}
+
+			result["otherMonsters"] = json::array();
+			for (int i = 0; i < opposingPokemonList.size(); i++)
+			{
+				result["otherMonster"].push_back(opposingPokemonList[i].toJson());
+			}
+			webSocketServer->send(jsonToString(result));
+		}
+
 		if (type == "init_attack")
 		{
 			Pokemon& myMonster = game.player.getCurrentPokemon();
