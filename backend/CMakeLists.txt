@@ -16,12 +16,16 @@ set(WebSocketpp
 	"path/to/websocketpp/root/dir"
 	"C:/local/websocketpp-0.8.2"
 	# Add your own WebSocketpp include path here
+
+set(Lib
+	${CMAKE_CURRENT_SOURCE_DIR}/lib
 )
 
 # 添加 Boost 的庫和頭文件的搜索路徑
 link_directories(${Boost_LIBRARY_DIR})
 include_directories(${Boost_INCLUDE_DIR})
 include_directories(${WebSocketpp})
+include_directories(${Lib})
 
 # 設置項目的可執行文件
 add_executable(myapp "")
@@ -32,7 +36,7 @@ file(GLOB_RECURSE CPP_SOURCES "src/*.cpp")
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # 添加所有的 .cpp 和 .h 文件到可執行文件中
-target_sources(myapp PRIVATE ${CPP_SOURCES} ${HEADER_FILES} "src/Pokemon.cpp" "src/Gamestatus.h" "src/Gamestatus.cpp" "src/Move.cpp")
+target_sources(myapp PRIVATE ${CPP_SOURCES} ${HEADER_FILES})
 
 # 鏈接 Boost 庫
 target_link_libraries(myapp PRIVATE ${Boost_LIBRARIES})
