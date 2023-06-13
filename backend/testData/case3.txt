@@ -3,8 +3,8 @@ MoveLib.txt
 GameData.txt
 Test
 Battle
-PoisonPowder
-PoisonPowder
+VineWhip
+WaterGun
 Battle
 PoisonPowder
 FlashCannon
@@ -18,3 +18,4 @@ Pokemon
 Blastoise
 FlashCannon
 Status
+Run
