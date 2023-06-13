@@ -1,4 +1,4 @@
-/***********************************************************************
+﻿/***********************************************************************
  * File: Chance.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-06-12
@@ -29,10 +29,12 @@ bool checkChance(double probability)
 	uniform_real_distribution<> dis(0.0, 1.0);
 
 	// if the random number is less than or equal to the given probability, then return true
-	if (dis(gen) <= probability) {
+	if (dis(gen) <= probability)
+	{
 		return true;
 	}
-	else {
+	else
+	{
 		return false;
 	}
 }
