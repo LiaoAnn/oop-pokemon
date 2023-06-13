@@ -494,7 +494,7 @@ bool Pokemon::isHurtByDot(bool isOpposing)
 	{
 		string log;
 		bool isHurt = false;
-		// Paralysis
+		// Burn
 		if (this->currentStat[i] == skillEffectList[BURN])
 		{
 			isHurt = true;
