@@ -1,10 +1,10 @@
 ﻿/***********************************************************************
- * File: GameStatus.cpp
+ * File: Game.cpp
  * Author: Alan
  * Create Date: 2023-06-06
  * Editor: BING-JIA TAN (B11115001), Alan
  * Update Date: 2023-06-06
- * Description: Describe here
+ * Description: game basic function
 ************************************************************************/
 #include"Game.h"
 
