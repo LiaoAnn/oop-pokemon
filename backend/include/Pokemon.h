@@ -113,6 +113,9 @@ public:
 
 	// Check if pokemon has skill
 	bool hasSkill(string skillName);
+
+	// Random a skill
+	Skill& randomSkill();
 };
 
 extern vector <Pokemon> pokemonList; // list of all pokemon

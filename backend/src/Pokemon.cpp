@@ -597,3 +597,14 @@ void Pokemon::hurtHp(int points)
 	if (hp < 0)
 		hp = 0;
 }
+
+/**
+ * Intent: Random a skill for the Pokemon
+ * Pre: None
+ * Post: Return the random skill
+ */
+Skill& Pokemon::randomSkill()
+{
+	int index = rand() % skillList.size();
+	return skillList[index];
+}
