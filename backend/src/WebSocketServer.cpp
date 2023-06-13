@@ -8,7 +8,6 @@
 ***********************************************************************/
 #include "WebSocketServer.h"
 #include <istream>
-//#include "Json.h"
 
 // Intent: WebSocketServer constructor
 // Pre: no variable required
@@ -16,7 +15,7 @@
 WebSocketServer::WebSocketServer()
 {
 	// set logging settings (all except message payloads)
-	mServer.set_access_channels(websocketpp::log::alevel::all); 
+	mServer.set_access_channels(websocketpp::log::alevel::all);
 	mServer.clear_access_channels(websocketpp::log::alevel::frame_header);
 	mServer.clear_access_channels(websocketpp::log::alevel::frame_payload);
 	// Initialize Asio
