@@ -203,6 +203,11 @@ void Player::pokemonFainted(bool isOpposing)
 	currentPokemon = nextPokemon;
 }
 
+/**
+ * Intent: Check if the player is opposing
+ * Pre: None
+ * Post: Return true if the player is opposing
+ */
 bool Player::getIsOpposing() const
 {
 	return isOpposing;
