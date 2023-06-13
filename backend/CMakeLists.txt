@@ -16,6 +16,7 @@ set(WebSocketpp
 	"path/to/websocketpp/root/dir"
 	"C:/local/websocketpp-0.8.2"
 	# Add your own WebSocketpp include path here
+)
 
 set(Lib
 	${CMAKE_CURRENT_SOURCE_DIR}/lib
