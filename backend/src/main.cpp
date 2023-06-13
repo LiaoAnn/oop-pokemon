@@ -266,17 +266,19 @@ void gameThread()
 			result["type"] = "init_team";
 			result["success"] = true;
 
-			result["myMonster"] = json::array();
+			result["myMonsters"] = json::array();
 			for (int i = 0; i < playerPokemonList.size(); i++)
 			{
 				result["playerPokemon"].push_back(playerPokemonList[i].toJson());
 			}
 
-			result["otherMonster"] = json::array();
+			result["otherMonsters"] = json::array();
 			for (int i = 0; i < opposingPokemonList.size(); i++)
 			{
 				result["otherMonster"].push_back(opposingPokemonList[i].toJson());
 			}
+
+			webSocketServer->send(jsonToString(result));
 		}
 
 		if (type == "attack")
