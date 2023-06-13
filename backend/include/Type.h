@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <map>
+#include <string>
 using namespace std;
 enum type {
 	normal,
@@ -22,7 +23,7 @@ enum type {
 	fairy
 };
 
-const map <string, int >typeMap =
+map<string, int>typeMap =
 {
 	{"normal", normal},
 	{"fire", fire},
