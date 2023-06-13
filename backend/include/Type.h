@@ -53,4 +53,11 @@ enum TYPE_EFFECT_CATEGORY {
 	NORMALLY_EFFECTIVE,
 	SUPER_EFFECTIVE,
 };
-extern map<double,int> typeEffectMap;
+
+const double TYPE_EFFECT_POWER[4] =
+{
+	0,
+	0.5,
+	1,
+	2
+};

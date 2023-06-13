@@ -29,11 +29,3 @@ map<string, int>typeMap =
 	{"steel", steel},
 	{"fairy", fairy}
 };
-
-map<double, int> typeEffectMap =
-{
-	{0.0, NO_EFFECT},
-	{0.5, NOT_VERY_EFFECTIVE},
-	{1.0, NORMALLY_EFFECTIVE},
-	{2.0, SUPER_EFFECTIVE}
-};
