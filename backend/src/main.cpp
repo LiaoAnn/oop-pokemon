@@ -41,10 +41,10 @@ int main()
 	webSocketServer = new WebSocketServer();
 	thread web(webServerThread);
 	thread ws(webSocketServerThread);
-	thread game(gameThread);
+	thread gameT(gameThread);
 	web.join();
 	ws.join();
-	game.join();
+	gameT.join();
 	return 0;
 }
 /**
