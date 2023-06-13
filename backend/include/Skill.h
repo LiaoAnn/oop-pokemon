@@ -63,6 +63,9 @@ public:
 
 	// Use skill
 	void useSkill(Pokemon& user, Pokemon& target);
+
+	// To JSON
+	json toJson();
 };
 
 extern vector<Skill> skillList;  // List of all skills

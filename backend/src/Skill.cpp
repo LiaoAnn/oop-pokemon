@@ -1,4 +1,4 @@
-﻿/***********************************************************************
+/***********************************************************************
  * File: Skill.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-05-30
@@ -8,6 +8,9 @@
 ************************************************************************/
 #include "Skill.h"
 #include <iostream>
+#include "SkillCategory.h"
+#include "Map.h"
+#include "Type.h"
 
 using namespace std;
 
@@ -316,4 +319,26 @@ bool escapechance(int escape) {
 int Skill::getMaxPP() const
 {
 	return maxPP;
+}
+
+/**
+ * Intent: Turn skill into a JSON object
+ * Pre: None
+ * Post: Return a JSON object
+ */
+json Skill::toJson()
+{
+	json j;
+	string attackKind = getKeyFromValue<string>(skillCategoryMap, this->category);
+	string attribute = getKeyFromValue<string>(typeMap, this->type);
+
+	j["name"] = name;
+	j["attribute"] = attribute;
+	j["attackKind"] = attackKind;
+	j["power"] = power;
+	j["accuracy"] = accuracy;
+	j["currentPP"] = pp;
+	j["totalPP"] = maxPP;
+	j["effect"] = effect->toJson();
+	return j;
 }
