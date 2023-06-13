@@ -3,6 +3,8 @@
 #include "Game.h"
 #include "FileLoad.h"
 #include "Skill.h"
+#include "json.h"
+
 int main()
 {
 	/*string filename;
@@ -27,14 +29,14 @@ int main()
 		cout << game.battleLog[i] << endl;
 	}
 
-	/*webServer = new WebServer(WEBROOT, WEBPORT);
+	webServer = new WebServer(WEBROOT, WEBPORT);
 	webSocketServer = new WebSocketServer();
 	thread web(webServerThread);
 	thread ws(webSocketServerThread);
 	thread game(gameThread);
 	web.join();
 	ws.join();
-	game.join();*/
+	game.join();
 	return 0;
 }
 
@@ -49,5 +51,14 @@ void webSocketServerThread()
 }
 void gameThread()
 {
+	while (true)
+	{
+		string test;
+		while (!webSocketServer->hasMessage())
+		{
+		}
 
+		test = webSocketServer->getMessage();
+		// Write code here
+	}
 }
