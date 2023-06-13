@@ -1,10 +1,12 @@
-PokemonLib.txt
+﻿PokemonLib.txt
 MoveLib.txt
 GameData.txt
 Test
+Status
 Battle
 VineWhip
 AquaTail
+Status
 Battle
 PoisonPowder
 WaterPulse
@@ -21,6 +23,8 @@ AquaTail
 Pokemon
 Blastoise
 AirSlash
+Status
+Status
 Status
 Battle
 AquaTail
@@ -49,3 +53,4 @@ Status
 Battle
 Flamethrower
 SolarBeam
+Status

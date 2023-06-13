@@ -5,9 +5,11 @@ Test
 Battle
 PoisonPowder
 PoisonPowder
+Status
 Battle
 PoisonPowder
 FlashCannon
+Status
 Bag
 Potion
 Venusaur
