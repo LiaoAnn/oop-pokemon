@@ -77,7 +77,10 @@ bool FileLoad::loadMonsterLibraryFile(string name)
 	ifstream in;
 	in.open(name);
 	string describe;
-	while (getline(in, describe)) {
+
+	pokemonList.clear();
+	while (getline(in, describe))
+	{
 		stringstream ss(describe);
 		string name, type;
 		int typeCount, typeIndex, HP, ATK, DEF, SPATK, SPDEF, SPD;//basic capability
@@ -121,11 +124,14 @@ bool FileLoad::loadMoveLibraryFile(string name)
 	*	Vine Whip Grass Physical 45 100 25
 	*	...
 	*/
-
+	
 	ifstream in;
 	in.open(name);
 	string describe;
-	while (getline(in, describe)) {
+
+	skillList.clear();
+	while (getline(in, describe))
+	{
 		stringstream ss(describe);
 		string name, type, category, con;
 		int typeIndex, categoryIndex, power, accuracy, pp, effectIndex;
@@ -175,6 +181,8 @@ bool FileLoad::loadGameDataFile(string name)
 	in.open(name);
 	string describe;
 
+	game.player = Player();
+	game.AI = Player();
 	while (in >> pokemonCount)
 	{
 		Player player;
