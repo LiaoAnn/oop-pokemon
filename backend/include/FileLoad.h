@@ -57,3 +57,5 @@ public:
 	// Return true if the file is loaded
 	bool canBeBattle();
 };
+
+extern FileLoad file;

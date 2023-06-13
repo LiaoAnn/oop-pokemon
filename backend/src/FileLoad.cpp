@@ -16,6 +16,8 @@
 
 using namespace std;
 
+FileLoad file = FileLoad();
+
 /**
  * Intent: Default constructor
  * Pre: None

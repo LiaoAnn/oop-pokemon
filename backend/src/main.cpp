@@ -1,4 +1,4 @@
-﻿#include "main.h"
+#include "main.h"
 //#include "Type.h"
 #include "Game.h"
 #include "FileLoad.h"
@@ -15,7 +15,6 @@ int main()
 	filetest.Movesfile();
 	filetest.Gamedata();*/
 
-	FileLoad file;
 	try
 	{
 		file.loadCaseFile("case.txt");
