@@ -1,4 +1,4 @@
-﻿/***********************************************************************
+/***********************************************************************
  * File: Skill.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-05-30
@@ -282,11 +282,17 @@ void Skill::useSkill(Pokemon& userPokemon, Pokemon& targetPokemon, bool isOpposi
 			game << log + "A critical hit!";
 
 		if (typeEffectPower == TYPE_EFFECT_POWER[NO_EFFECT])
-			game << "It's not effective!";
-		if (typeEffectPower == TYPE_EFFECT_POWER[NOT_VERY_EFFECTIVE])
-			game << "It's not very effective!";
-		if (typeEffectPower == TYPE_EFFECT_POWER[NORMAL])
+			game << "It's not effective...";
+
+		if (typeEffectPower > TYPE_EFFECT_POWER[NO_EFFECT] &&
+			typeEffectPower <= TYPE_EFFECT_POWER[NOT_VERY_EFFECTIVE]
+			)
+			game << "It's not very effective...";
+
+		if (typeEffectPower > TYPE_EFFECT_POWER[NOT_VERY_EFFECTIVE] &&
+			typeEffectPower < TYPE_EFFECT_POWER[SUPER_EFFECTIVE])
 			game << "It's effective!";
+
 		if (typeEffectPower >= TYPE_EFFECT_POWER[SUPER_EFFECTIVE])
 			game << "It's super effective!";
 
