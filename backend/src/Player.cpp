@@ -212,3 +212,16 @@ bool Player::getIsOpposing() const
 {
 	return isOpposing;
 }
+
+/**
+ * Intent: Restore the player's Pokemon
+ * Pre: None
+ * Post: None
+ */
+void Player::restoreAllPokemon()
+{
+	for (int i = 0; i < pokemonList.size(); i++)
+	{
+		pokemonList[i].restore();
+	}
+}

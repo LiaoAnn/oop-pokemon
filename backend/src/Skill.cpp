@@ -342,3 +342,13 @@ json Skill::toJson()
 	j["effect"] = effect->toJson();
 	return j;
 }
+
+/**
+ * Intent: Restore the skill to the original state
+ * Pre: None
+ * Post: None
+ */
+void Skill::restore()
+{
+	pp = maxPP;
+}

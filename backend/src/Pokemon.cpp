@@ -548,3 +548,18 @@ json Pokemon::toJson()
 	}
 	return j;
 }
+
+/**
+ * Intent: Restore the Pokemon to the original state
+ * Pre: None
+ * Post: None
+ */
+void Pokemon::restore()
+{
+	hp = maxHp;
+	currentStat.clear();
+	for (int i = 0; i < skillList.size(); i++)
+	{
+		skillList[i].restore();
+	}
+}

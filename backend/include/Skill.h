@@ -67,6 +67,9 @@ public:
 
 	// To JSON
 	json toJson();
+
+	// Restore to original state
+	void restore();
 };
 
 extern vector<Skill> skillList;  // List of all skills

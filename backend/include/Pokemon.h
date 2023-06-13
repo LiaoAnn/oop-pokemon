@@ -83,6 +83,9 @@ public:
 	// Heal the pokemon
 	void healHp(int points);
 
+	// Restore the pokemon to the original state
+	void restore();
+
 	// Add a stat to the current stat list
 	void addCurrentStat(SkillEffect* stat);
 	// Scan the current stat list and remove the stat if it turns to 0

@@ -62,6 +62,9 @@ public:
 
 	// Is the player opposing
 	bool getIsOpposing() const;
+
+	// Restore all Pokemon to original state
+	void restoreAllPokemon();
 private:
 	string name;  // Name of the player
 	vector<Pokemon> pokemonList;  // List of Pokemon owned by the player
