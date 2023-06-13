@@ -199,23 +199,15 @@ void gameThread()
 
 		if (type == "init_attack")
 		{
-			vector<Pokemon> playerPokemonList = game.player.getPokemonList();
-			vector<Pokemon> opposingPokemonList = game.AI.getPokemonList();
+			Pokemon& myMonster = game.player.getCurrentPokemon();
+			Pokemon& otherMonster = game.AI.getCurrentPokemon();
 
 			result["type"] = "init_attack";
 			result["success"] = true;
 
-			result["myMonster"] = json::array();
-			for (int i = 0; i < playerPokemonList.size(); i++)
-			{
-				result["playerPokemon"].push_back(playerPokemonList[i].toJson());
-			}
-
-			result["otherMonster"] = json::array();
-			for (int i = 0; i < opposingPokemonList.size(); i++)
-			{
-				result["otherMonster"].push_back(opposingPokemonList[i].toJson());
-			}
+			result["myMonster"] = game.player.getCurrentPokemon().toJson();
+			result["otherMonster"] = game.AI.getCurrentPokemon().toJson();
+			webSocketServer->send(jsonToString(result));
 		}
 
 		if (type == "init_team")
