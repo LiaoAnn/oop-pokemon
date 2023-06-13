@@ -13,6 +13,7 @@
 #include "FileLoad.h"
 #include "Skill.h"
 #include "json.h"
+#include "Command.h"
 
 int main()
 {
@@ -297,6 +298,15 @@ void gameThread()
 				secondPlayer.pokemonFainted(isSecondPlayerOpposing);
 				game.playerDotCheck();
 				game.turn++;
+
+				result = attactCommandResult
+				(
+					firstPokemon, secondPokemon,
+					firstSkill, secondSkill,
+					firstAttack, secondAttack,
+					firstPlayerIndex
+				);
+				webSocketServer->send(jsonToString(result));
 				continue;
 			}
 
@@ -316,12 +326,31 @@ void gameThread()
 				firstPlayer.pokemonFainted(isFristPlayerOpposing);
 				game.playerDotCheck();
 				game.turn++;
+
+				result = attactCommandResult
+				(
+					firstPokemon, secondPokemon,
+					firstSkill, secondSkill,
+					firstAttack, secondAttack,
+					firstPlayerIndex
+				);
+				webSocketServer->send(jsonToString(result));
 				continue;
 			}
 
 			// DOT check -- Player first AI second
 			game.playerDotCheck();
 			game.turn++;
+
+
+			result = attactCommandResult
+			(
+				firstPokemon, secondPokemon,
+				firstSkill, secondSkill,
+				firstAttack, secondAttack,
+				firstPlayerIndex
+			);
+			webSocketServer->send(jsonToString(result));
 		}
 	}
 }
