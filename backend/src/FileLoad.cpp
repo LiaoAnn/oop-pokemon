@@ -1,4 +1,4 @@
-﻿/***********************************************************************
+/***********************************************************************
  * File: Chance.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-05-30
@@ -401,8 +401,8 @@ void FileLoad::loadCaseFile(string name)
 
 			// Change Pokemon
 			game.player.setCurrentPokemon(playerPokemonName);
-			playerPokemon = game.player.getCurrentPokemon();
-			game << "Go! " + playerPokemon.getName() + "!";
+			Pokemon& nextPlayerPokemon = game.player.getCurrentPokemon();
+			game << "Go! " + nextPlayerPokemon.getName() + "!";
 
 			// Opposing Pokemon use a skill
 			Pokemon& AIPokemon = game.AI.getCurrentPokemon();
@@ -410,7 +410,7 @@ void FileLoad::loadCaseFile(string name)
 			skill.reducePP();
 			if (!AIPokemon.isCanNotMove(true))
 			{
-				skill.useSkill(AIPokemon, playerPokemon, true);
+				skill.useSkill(AIPokemon, nextPlayerPokemon, true);
 			}
 
 			// DOT check
