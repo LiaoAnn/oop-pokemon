@@ -300,14 +300,18 @@ void FileLoad::loadCaseFile(string name)
 			getline(in, AISkill);
 			int playerSpeed = game.player.getCurrentPokemon().getSpeed();
 			int AISpeed = game.AI.getCurrentPokemon().getSpeed();
+			Player* playerArray[2] = { &game.player, &game.AI };
+			int firstPlayerIndex = 0;
+			int secondPlayerIndex = 1;
 
-			Player& firstPlayer = game.player;
-			Player& secondPlayer = game.AI;
 			if (playerSpeed < AISpeed)
 			{
-				firstPlayer = game.AI;
-				secondPlayer = game.player;
+				firstPlayerIndex = 1;
+				secondPlayerIndex = 0;
 			}
+			Player& firstPlayer = *playerArray[firstPlayerIndex];
+			Player& secondPlayer = *playerArray[secondPlayerIndex];
+
 			bool isFristPlayerOpposing = firstPlayer.getIsOpposing();
 			bool isSecondPlayerOpposing = secondPlayer.getIsOpposing();
 
