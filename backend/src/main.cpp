@@ -103,6 +103,7 @@ void gameThread()
 			result["type"] = "init";
 			result["success"] = true;
 			webSocketServer->send(jsonToString(result));
+			continue;
 		}
 
 		if (type == "load_monster")
@@ -127,6 +128,7 @@ void gameThread()
 			result["success"] = true;
 			result["can_battle"] = canBattle;
 			webSocketServer->send(jsonToString(result));
+			continue;
 		}
 
 		if (type == "load_move")
@@ -151,6 +153,7 @@ void gameThread()
 			result["success"] = true;
 			result["can_battle"] = canBattle;
 			webSocketServer->send(jsonToString(result));
+			continue;
 		}
 
 		if (type == "load_game_data")
@@ -184,6 +187,7 @@ void gameThread()
 			result["success"] = true;
 			result["can_battle"] = canBattle;
 			webSocketServer->send(jsonToString(result));
+			continue;
 		}
 
 		// Commands needs to load data before execute
@@ -208,6 +212,7 @@ void gameThread()
 			result["myMonster"] = game.player.getCurrentPokemon().toJson();
 			result["otherMonster"] = game.AI.getCurrentPokemon().toJson();
 			webSocketServer->send(jsonToString(result));
+			continue;
 		}
 
 		if (type == "init_team")
