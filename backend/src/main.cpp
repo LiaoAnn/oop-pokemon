@@ -113,12 +113,12 @@ void gameThread()
 			{
 				canBattle = file.loadMonsterLibraryFile(recive["file"]);
 			}
-			catch (string& e)
+			catch (const std::exception& e)
 			{
 				result = json();
 				result["type"] = "load_monster";
 				result["success"] = false;
-				result["message"] = e;
+				result["message"] = e.what();
 				webSocketServer->send(jsonToString(result));
 				continue;
 			}
@@ -138,12 +138,12 @@ void gameThread()
 			{
 				file.loadMoveLibraryFile(recive["file"]);
 			}
-			catch (string& e)
+			catch (const std::exception& e)
 			{
 				result = json();
 				result["type"] = "load_move";
 				result["success"] = false;
-				result["message"] = e;
+				result["message"] = e.what();
 				webSocketServer->send(jsonToString(result));
 				continue;
 			}
@@ -172,12 +172,12 @@ void gameThread()
 			{
 				canBattle = file.loadGameDataFile(recive["file"]);
 			}
-			catch (string& e)
+			catch (const std::exception& e)
 			{
 				result = json();
 				result["type"] = "load_game";
 				result["success"] = false;
-				result["message"] = e;
+				result["message"] = e.what();
 				webSocketServer->send(jsonToString(result));
 				continue;
 			}
