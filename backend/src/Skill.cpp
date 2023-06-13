@@ -1,4 +1,4 @@
-/***********************************************************************
+﻿/***********************************************************************
  * File: Skill.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-05-30
@@ -192,7 +192,7 @@ int findSkillByName(string name)
  * Pre: isOpposing is a boolean if the userPokemon is opposing
  * Post: None
  */
-void Skill::useSkill(Pokemon& userPokemon, Pokemon& targetPokemon, bool isOpposing)
+int Skill::useSkill(Pokemon& userPokemon, Pokemon& targetPokemon, bool isOpposing)
 {
 	string log;
 	int level = userPokemon.getLevel(),
@@ -248,10 +248,10 @@ void Skill::useSkill(Pokemon& userPokemon, Pokemon& targetPokemon, bool isOpposi
 
 	if (category != STATUS)
 	{
-		double floatPower = 0;
-		floatPower = ((double)(2 * level + 10) / 250);
-		floatPower *= power;
-		floatPower *= ((double)userPokemonAttack / tarketPokemonDefense);
+		float floatPower = 0;
+		floatPower = ((float)(2 * level + 10) / 250);
+		floatPower *= (float)power;
+		floatPower *= ((float)userPokemonAttack / tarketPokemonDefense);
 		floatPower += 2;
 
 		floatPower *= isCritical ? CRITICAL_POWER : 1;
@@ -273,7 +273,7 @@ void Skill::useSkill(Pokemon& userPokemon, Pokemon& targetPokemon, bool isOpposi
 		{
 			targetPokemon.addCurrentStat(effect);
 			game << effect->printGotMessage(targetPokemon.getName(), !isOpposing);
-			return;
+			return 0;
 		}
 
 		targetPokemon.hurtHp(userDamage);
