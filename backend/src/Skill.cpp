@@ -182,15 +182,106 @@ int findSkillByName(string name)
  * Pre: user is a Pokemon object, target is a Pokemon object
  * Post: None
  */
+
 void Skill::useSkill(Pokemon& user, Pokemon& target)
 {
 	srand(time(NULL));
-	float crrtical = 1.5;
+	float critical = 1, stab = 1;
 	int level = 50;
-	int useratk = user.getAttack();
-	int userspatk = user.getSpAttack();
-	int targetdef = target.getDefence();
-	int damage;
-	//int type = user.getType();
-	//damage = ((2 * level + 10) / 250 * useratk * (userspatk / targetdef) + 2) * critical * stab * type;
+	int userhp = user.getHp(), targethp = target.getHp();
+	int useratk = user.getAttack(), userspatk = user.getSpAttack(), userdef = user.getDefence(), userspdef = user.getSpDefence();
+	int targetatk = target.getAttack(), targetspatk = target.getSpAttack(), targetdef = target.getDefence(), targetspdef = target.getSpDefence();
+	int userdamage, targetdamage;
+	bool userfirst, sametype = false, escape;
+	if (user.getSpeed() >= target.getSpeed()) {
+		userfirst = true;
+	}
+	else {
+		userfirst = false;
+	}
+	set<int>usertype = user.getType();
+	set<int>targettype = target.getType();
+	
+
+	for (auto i : usertype) {
+		for (auto j : targettype) {
+			if (i == j) {
+				stab = 1.5;
+				sametype = true;
+				break;
+			}
+		}
+		if (sametype)break;
+	}
+	while (userhp <= 0 || targethp <= 0) {
+
+		if (userfirst) {
+			if (criticalchance(critical)) {
+				critical = 1.5;
+			}
+			else {
+				critical = 1;
+			}
+			if (escapechance(escape)) {
+				escape = true;
+			}
+			else {
+				escape = false;
+			}
+			userdamage = ((2 * level + 10) / 250 * useratk * (userspatk / targetdef) + 2) * critical * stab * type;
+			if (!escape) {
+				targethp -= userdamage;
+			}
+
+		}
+		else {
+			if (criticalchance(critical)) {
+				critical = 1.5;
+			}
+			else {
+				critical = 1;
+			}
+			if (escapechance(escape)) {
+				escape = true;
+			}
+			else {
+				escape = false;
+			}
+			targetdamage = (2 * level + 10) / 250 * targetatk * ((targetspatk / userdef) + 2) * critical * stab * type;
+			if (!escape) {
+				userhp -= targetdamage;
+			}
+		}
+	}
+	//userdamage = ((2 * level + 10) / 250 * useratk * (userspatk / targetdef) + 2) * critical * stab * type;
+
+}
+/**
+ * Intent: add bool
+ * Pre: critical chances
+ * Post: None
+ */
+bool criticalchance(int criticalhit) {
+	
+	int criticalhit = rand() % 4;
+	if (criticalhit == 1) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+/**
+ * Intent: add bool
+ * Pre: escape chances
+ * Post: None
+ */
+bool escapechance(int escape) {
+	int escapechance = rand() % 5;
+	if (escapechance == 1) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
