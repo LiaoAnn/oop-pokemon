@@ -1,4 +1,4 @@
-/***********************************************************************
+﻿/***********************************************************************
  * File: Skill.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-05-30
@@ -11,6 +11,9 @@
 #include "SkillCategory.h"
 #include "Map.h"
 #include "Type.h"
+#include "Chance.h"
+#include "Game.h"
+#include "GameMode.h"
 
 using namespace std;
 
@@ -184,130 +187,121 @@ int findSkillByName(string name)
 
 /**
  * Intent: Use the skill
- * Pre: user is a Pokemon object, target is a Pokemon object
+ * Pre: user is a Pokemon object
+ * Pre: target is a Pokemon object
+ * Pre: isOpposing is a boolean if the userPokemon is opposing
  * Post: None
  */
-
-void Skill::useSkill(Pokemon& user, Pokemon& target)
+void Skill::useSkill(Pokemon& userPokemon, Pokemon& targetPokemon, bool isOpposing)
 {
-	srand(time(NULL));
-	//set basic containment
-	float critical = 1, stab = 1;
-	int level = 50;
-	int userhp = user.getHp(), targethp = target.getHp();
-	int useratk = user.getAttack(), userspatk = user.getSpAttack(), userdef = user.getDefence(), userspdef = user.getSpDefence();
-	int targetatk = target.getAttack(), targetspatk = target.getSpAttack(), targetdef = target.getDefence(), targetspdef = target.getSpDefence();
-	int userdamage, targetdamage;
-	bool userfirst, sametype = false, escape;
-	
-	if (user.getSpeed() >= target.getSpeed()) //judge speed
-	{
-		userfirst = true;
-	}
-	else 
-	{
-		userfirst = false;
-	}
-	set<int>usertype = user.getType();
-	set<int>targettype = target.getType();
+	string log;
+	int level = userPokemon.getLevel(),
+		userPokemonAttack = 0,
+		tarketPokemonDefense = 0,
+		userDamage = 0;
+	double
+		accuracyChance = (game.mode == TEST) ? 1 : getAccuracy() / 100.0,
+		criticalChance = (game.mode == TEST) ? 0 : CRITICAL_CHANCE,
+		typeEffectPower = 1;
+	bool
+		isHit = false,
+		isCritical = false,
+		isSTAB = false;
 
+	set<int>userPokemonType = userPokemon.getType();
+	set<int>targetPokemonType = targetPokemon.getType();
+	int skillType = this->type;
 
-	for (auto i : usertype)
+	// Check if the skill type is the same as the userPokemon type
+	for (set<int>::iterator it = userPokemonType.begin(); it != userPokemonType.end(); it++)
 	{
-		for (auto j : targettype)
+		if (*it == skillType)
 		{
-			if (i == j)
-			{
-				stab = 1.5;
-				sametype = true;
-				break;
-			}
-		}
-		if (sametype)break;
-	}
-	while (userhp > 0 || targethp > 0) //或是收回寶可夢
-	{
-
-		if (userfirst) //judge who goes first
-		{
-			if (criticalchance(critical)) //set critical chance
-			{
-				critical = 1.5;
-			}
-			else
-			{
-				critical = 1;
-			}
-			if (escapechance(escape))//set escape chance
-			{
-				escape = true;
-			}
-			else
-			{
-				escape = false;
-			}
-			userdamage = ((2 * level + 10) / 250 * useratk * (userspatk / targetdef) + 2) * critical * stab * type;
-			if (!escape) 
-			{
-				targethp -= userdamage;//judge the damage is hit
-			}
-			
-		}
-		else 
-		{
-			if (criticalchance(critical)) 
-			{
-				critical = 1.5;
-			}
-			else
-			{
-				critical = 1;
-			}
-			if (escapechance(escape)) 
-			{
-				escape = true;
-			}
-			else
-			{
-				escape = false;
-			}
-			targetdamage = (2 * level + 10) / 250 * targetatk * ((targetspatk / userdef) + 2) * critical * stab * type;
-			if (!escape) 
-			{
-				userhp -= targetdamage;//judge the damage is hit
-			}
-
+			isSTAB = true;
+			break;
 		}
 	}
-	//userdamage = ((2 * level + 10) / 250 * useratk * (userspatk / targetdef) + 2) * critical * stab * type;
 
-}
-/**
- * Intent: add bool
- * Pre: critical chances
- * Post: None
- */
-bool criticalchance(int criticalhit) {
-	int criticalhit = rand() % 4;
-	if (criticalhit == 1) {
-		return true;
+	// Check if the skill hits
+	isHit = checkChance(accuracyChance);
+	// Check if the skill is critical
+	isCritical = checkChance(criticalChance);
+
+	// Check for the current atk and def type for calculation
+	if (category == PHYSICAL)
+	{
+		userPokemonAttack = userPokemon.getAttack();
+		tarketPokemonDefense = targetPokemon.getDefence();
 	}
-	else {
-		return false;
+
+	if (category == SPECIAL)
+	{
+		userPokemonAttack = userPokemon.getSpAttack();
+		tarketPokemonDefense = targetPokemon.getSpDefence();
 	}
-}
-/**
- * Intent: add bool
- * Pre: escape chances
- * Post: None
- */
-bool escapechance(int escape) {
-	int escapechance = rand() % 5;
-	if (escapechance == 1) {
-		return true;
+
+	// Calulate the type effect power
+	for (set<int>::iterator it = targetPokemonType.begin(); it != targetPokemonType.end(); it++)
+	{
+		typeEffectPower *= typeEffectiveness[skillType][*it];
 	}
-	else {
-		return false;
+
+	if (category != STATUS)
+	{
+		double floatPower = 0;
+		floatPower = ((double)(2 * level + 10) / 250);
+		floatPower *= power;
+		floatPower *= ((double)userPokemonAttack / tarketPokemonDefense);
+		floatPower += 2;
+
+		floatPower *= isCritical ? CRITICAL_POWER : 1;
+		floatPower *= isSTAB ? STAB_POWER : 1;
+		floatPower *= typeEffectPower;
+
+		userDamage = (int)floatPower;
+	}
+
+	if (isOpposing)
+		log += OPPOSING_PREFIX;
+
+	if (isHit)
+	{
+		game << log + userPokemon.getName() + " used " + name + "!";
+
+		// Check if the skill is a status skill
+		if (category == STATUS)
+		{
+			targetPokemon.addCurrentStat(effect);
+			game << effect->printGotMessage(targetPokemon.getName(), !isOpposing);
+			return;
+		}
+
+		targetPokemon.hurtHp(userDamage);
+
+		if (isCritical)
+			game << log + "A critical hit!";
+
+		if (typeEffectPower == TYPE_EFFECT_POWER[NO_EFFECT])
+			game << "It's not effective!";
+		if (typeEffectPower == TYPE_EFFECT_POWER[NOT_VERY_EFFECTIVE])
+			game << "It's not very effective!";
+		if (typeEffectPower == TYPE_EFFECT_POWER[NORMAL])
+			game << "It's effective!";
+		if (typeEffectPower >= TYPE_EFFECT_POWER[SUPER_EFFECTIVE])
+			game << "It's super effective!";
+
+		if (effect != NULL)
+		{
+			targetPokemon.addCurrentStat(effect);
+			game << effect->printGotMessage(targetPokemon.getName(), !isOpposing);
+		}
+	}
+	else
+	{
+		string log;
+		if (isOpposing)
+			log = OPPOSING_PREFIX;
+		game << log + targetPokemon.getName() + " avoided the attack!";
 	}
 }
 
