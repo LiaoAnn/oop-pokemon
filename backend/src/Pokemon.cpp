@@ -1,4 +1,4 @@
-﻿/***********************************************************************
+/***********************************************************************
  * File: Pokemon.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-06-06
@@ -577,4 +577,16 @@ bool Pokemon::hasSkill(string skillName)
 			return true;
 	}
 	return false;
+}
+
+/**
+ * Intent: Hurt the Pokemon by a certain amount of HP
+ * Pre: points is an integer
+ * Post: None
+ */
+void Pokemon::hurtHp(int points)
+{
+	hp -= points;
+	if (hp < 0)
+		hp = 0;
 }

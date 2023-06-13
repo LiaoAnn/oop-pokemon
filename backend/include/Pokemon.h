@@ -82,6 +82,8 @@ public:
 	bool isAlive() const;
 	// Heal the pokemon
 	void healHp(int points);
+	// Hurt the pokemon
+	void hurtHp(int points);
 
 	// Restore the pokemon to the original state
 	void restore();
