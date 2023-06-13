@@ -11,5 +11,6 @@
 const double PARALYSIS_CHANCE = 0.5;
 const double CRITICAL_CHANCE = 0.2;
 const double CRITICAL_POWER = 1.5;
+const double STAB_POWER = 1.5;
 
 bool checkChance(double probability);
