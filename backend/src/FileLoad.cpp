@@ -314,10 +314,12 @@ void FileLoad::loadCaseFile(string name)
 
 			Pokemon& firstPokemon = firstPlayer.getCurrentPokemon();
 			Pokemon& secondPokemon = secondPlayer.getCurrentPokemon();
+			Skill& firstSkill = firstPokemon[playerSkill];
 
+			firstSkill.reducePP();
 			if (!firstPokemon.isCanNotMove(isFristPlayerOpposing))
 			{
-				firstPokemon[playerSkill].useSkill
+				firstSkill.useSkill
 				(
 					firstPokemon, secondPokemon, isFristPlayerOpposing
 				);
@@ -374,9 +376,11 @@ void FileLoad::loadCaseFile(string name)
 			item->useItem(assignedPokemon);
 
 			// Opposing Pokemon use a skill
+			Skill& skill = AIPokemon[AISkill];
+			skill.reducePP();
 			if (!AIPokemon.isCanNotMove(true))
 			{
-				AIPokemon[AISkill].useSkill(AIPokemon, playerPokemon, true);
+				skill.useSkill(AIPokemon, playerPokemon, true);
 			}
 
 			// DOT check
@@ -402,9 +406,11 @@ void FileLoad::loadCaseFile(string name)
 
 			// Opposing Pokemon use a skill
 			Pokemon& AIPokemon = game.AI.getCurrentPokemon();
+			Skill& skill = AIPokemon[AISkill];
+			skill.reducePP();
 			if (!AIPokemon.isCanNotMove(true))
 			{
-				AIPokemon[AISkill].useSkill(AIPokemon, playerPokemon, true);
+				skill.useSkill(AIPokemon, playerPokemon, true);
 			}
 
 			// DOT check
@@ -418,8 +424,10 @@ void FileLoad::loadCaseFile(string name)
 			Pokemon& AIPokemon = game.AI.getCurrentPokemon();
 
 			logs += userPokemon.getName() + " ";
-			logs += to_string(userPokemon.getHp()) + " ";
+			logs += to_string(userPokemon.getHp());
+
 			vector<SkillEffect*> stat = userPokemon.getCurrentStats();
+			if (stat.size() != 0) logs += " ";
 			for (int i = 0; i < stat.size(); i++)
 			{
 				string skillEffectName = stat[i]->getName();
@@ -435,9 +443,13 @@ void FileLoad::loadCaseFile(string name)
 				}
 			}
 
+			logs += " ";
+
 			logs += AIPokemon.getName() + " ";
-			logs += to_string(AIPokemon.getHp()) + " ";
+			logs += to_string(AIPokemon.getHp());
+
 			stat = AIPokemon.getCurrentStats();
+			if (stat.size() != 0) logs += " ";
 			for (int i = 0; i < stat.size(); i++)
 			{
 				string skillEffectName = stat[i]->getName();
@@ -471,6 +483,8 @@ void FileLoad::loadCaseFile(string name)
 					logs += " ";
 				}
 			}
+
+			game << logs;
 		}
 		else if (describe == "Run")
 		{
