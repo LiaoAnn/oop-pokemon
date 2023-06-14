@@ -15,14 +15,13 @@
 </template>
 
 <script setup lang="ts">
-import { NLayoutContent } from 'naive-ui';
-import { ref } from 'vue';
+import { NLayoutContent, useDialog } from 'naive-ui';
+import { h, ref } from 'vue';
 
 import BattleBackground from '@/assets/battle-background.png';
 import type { ReceiveMsg } from '@/common/useWebSocket';
-import { useWebSocket } from '@/common/useWebSocket';
-
-const gameDivRef = ref<HTMLElement | null>(null);
+import { ReceiveMsgType, SendMsgType, useWebSocket } from '@/common/useWebSocket';
+import TestFileSelectDialog from '@/components/game-page/TestFileSelectDialog.vue';
 
 //#region WebSocket
 const onMsg = (e: MessageEvent) => {
@@ -30,13 +29,54 @@ const onMsg = (e: MessageEvent) => {
   const msg = JSON.parse(data) as ReceiveMsg;
 
   switch (msg.type) {
+    case ReceiveMsgType.LoadCase:
+      console.log(msg);
+      break;
     default:
       break;
   }
 };
-
 const { openWs, sendMsg } = useWebSocket(onMsg);
+(async () => {
+  await openWs();
+  sendMsg({ type: SendMsgType.Init });
+})();
 //#endregion
+
+const gameDivRef = ref<HTMLElement | null>(null);
+const dialog = useDialog();
+
+const openTestFileSelectDialog = () => {
+  const testFileSelectDialog = dialog.info({
+    title: '選取測試檔案',
+    content: () =>
+      h(TestFileSelectDialog, {
+        onSubmit: (value) => {
+          const { Monster, Move, GameData, Case } = value;
+          console.log(Monster, Move, GameData, Case);
+          sendMsg({
+            type: SendMsgType.LoadMonster,
+            file: Monster
+          });
+          sendMsg({
+            type: SendMsgType.LoadMove,
+            file: Move
+          });
+          sendMsg({
+            type: SendMsgType.LoadGameData,
+            file: GameData
+          });
+          sendMsg({
+            type: SendMsgType.LoadCase,
+            file: Case
+          });
+          testFileSelectDialog.destroy();
+        }
+      })
+  });
+};
+
+openTestFileSelectDialog();
 </script>
 
 <style scoped>
