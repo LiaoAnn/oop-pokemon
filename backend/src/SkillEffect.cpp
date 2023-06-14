@@ -8,6 +8,8 @@
 ************************************************************************/
 #include "SkillEffect.h"
 #include "SkillEffectList.h"
+#include "json.h"
+#include "Player.h"
 
 /**
  * Intent: Default constructor
@@ -16,7 +18,7 @@
  */
 SkillEffect::SkillEffect()
 	:
-	name(""),
+	name("none"),
 	type(0),
 	leftRound(0)
 {}
@@ -26,10 +28,11 @@ SkillEffect::SkillEffect()
  * Pre: skillEffectAttack is an integer, skillEffectName
  * Post: A SkillEffect object
  */
-SkillEffect::SkillEffect(int type, string name,int leftRound)
+SkillEffect::SkillEffect(int type, string name, double power, int leftRound)
 	:
 	name(name),
 	type(type),
+	power(power),
 	leftRound(leftRound)
 {}
 
@@ -47,9 +50,24 @@ SkillEffect::~SkillEffect()
  * Pre: None
  * Post: A string
  */
-string SkillEffect::getSkillEffectName() const
+string SkillEffect::getName() const
 {
 	return name;
+}
+
+/**
+ * Intent:
+ * Pre:
+ * Post:
+ */
+json SkillEffect::toJson()
+{
+	json j;
+	j["name"] = name;
+	j["type"] = (type == DOT) ? "DoT" : "Debuff";
+	j["power"] = power;
+	j["leftRound"] = leftRound;
+	return j;
 }
 
 /**
@@ -82,25 +100,34 @@ void SkillEffect::reduceLeftRound()
 	leftRound--;
 }
 
-
 /**
- * Intent: Print message when get skill effect
+ * Intent: Check if pokemon has skill effect
  * Pre: None
- * Post: None
+ * Post: A boolean
  */
-string SkillEffect::printGotMessage(string pokemonName) const
+bool SkillEffect::operator==(const SkillEffect& skillEffect) const
 {
-	return "";
+	return name == skillEffect.name;
 }
 
 /**
- * Intent: Print message when skill effect affect
+ * Intent: Get the power of the skill effect
  * Pre: None
- * Post: None
+ * Post: A double
  */
-string SkillEffect::printAffactMessage(string pokemonName) const
+double SkillEffect::getPower() const
 {
-	return "";
+	return power;
+}
+
+/**
+ * Intent: operator overload
+ * Pre: effect1 and effect2 are SkillEffect objects
+ * Post: A boolean
+ */
+bool operator==(const SkillEffect& effect1, const SkillEffect& effect2)
+{
+	return effect1.getName() == effect2.getName();
 }
 
 /**
@@ -110,7 +137,7 @@ string SkillEffect::printAffactMessage(string pokemonName) const
  */
 Poison::Poison()
 	:
-	SkillEffect(DOT, "Poison")
+	SkillEffect(DOT, "psn", SKILL_EFFECT_DAMAGE_POWER[POISON])
 {}
 
 /**
@@ -120,7 +147,7 @@ Poison::Poison()
  */
 Poison::Poison(int leftRound)
 	:
-	SkillEffect(DOT, "Poison", leftRound)
+	SkillEffect(DOT, "psn", SKILL_EFFECT_DAMAGE_POWER[POISON], leftRound)
 {}
 
 /**
@@ -137,9 +164,13 @@ Poison::~Poison()
  * Pre: None
  * Post: None
  */
-string Poison::printGotMessage(string pokemonName) const
+string Poison::printGotMessage(string pokemonName, bool isOpposing) const
 {
-	return pokemonName + " was poisoned!";
+	string log = "";
+	if (isOpposing)
+		log += OPPOSING_PREFIX;
+
+	return log + pokemonName + " was poisoned!";
 }
 
 /**
@@ -147,9 +178,13 @@ string Poison::printGotMessage(string pokemonName) const
  * Pre: None
  * Post: None
  */
-string Poison::printAffactMessage(string pokemonName) const
+string Poison::printAffactMessage(string pokemonName, bool isOpposing) const
 {
-	return pokemonName + " is hurt by its poisoning!";
+	string log = "";
+	if (isOpposing)
+		log += OPPOSING_PREFIX;
+
+	return log + pokemonName + " is hurt by its poisoning!";
 }
 
 /**
@@ -159,7 +194,7 @@ string Poison::printAffactMessage(string pokemonName) const
  */
 Burn::Burn()
 	:
-	SkillEffect(DOT, "Burn")
+	SkillEffect(DOT, "brn", SKILL_EFFECT_DAMAGE_POWER[BURN])
 {}
 
 /**
@@ -169,7 +204,7 @@ Burn::Burn()
  */
 Burn::Burn(int leftRound)
 	:
-	SkillEffect(DOT, "Burn", leftRound)
+	SkillEffect(DOT, "brn", SKILL_EFFECT_DAMAGE_POWER[BURN], leftRound)
 {}
 
 /**
@@ -186,9 +221,13 @@ Burn::~Burn()
  * Pre: None
  * Post: None
  */
-string Burn::printGotMessage(string pokemonName) const
+string Burn::printGotMessage(string pokemonName, bool isOpposing) const
 {
-	return pokemonName + " was burned!";
+	string log = "";
+	if (isOpposing)
+		log += OPPOSING_PREFIX;
+
+	return log + pokemonName + " was burned!";
 }
 
 /**
@@ -196,9 +235,13 @@ string Burn::printGotMessage(string pokemonName) const
  * Pre: None
  * Post: None
  */
-string Burn::printAffactMessage(string pokemonName) const
+string Burn::printAffactMessage(string pokemonName, bool isOpposing) const
 {
-	return pokemonName + " is hurt by its burn!";
+	string log = "";
+	if (isOpposing)
+		log += OPPOSING_PREFIX;
+
+	return log + pokemonName + " is hurt by its burn!";
 }
 
 /**
@@ -208,7 +251,7 @@ string Burn::printAffactMessage(string pokemonName) const
  */
 Paralysis::Paralysis()
 	:
-	SkillEffect(DEBUFF, "Paralysis")
+	SkillEffect(DEBUFF, "par", SKILL_EFFECT_DAMAGE_POWER[PARALYSIS])
 {}
 
 /**
@@ -218,7 +261,7 @@ Paralysis::Paralysis()
  */
 Paralysis::Paralysis(int leftRound)
 	:
-	SkillEffect(DEBUFF, "Paralysis", leftRound)
+	SkillEffect(DEBUFF, "par", SKILL_EFFECT_DAMAGE_POWER[PARALYSIS], leftRound)
 {}
 
 /**
@@ -236,9 +279,13 @@ Paralysis::~Paralysis()
  * Pre: None
  * Post: None
  */
-string Paralysis::printGotMessage(string pokemonName) const
+string Paralysis::printGotMessage(string pokemonName, bool isOpposing) const
 {
-	return pokemonName + " is paralyzed, so it may be unable to move!";
+	string log = "";
+	if (isOpposing)
+		log += OPPOSING_PREFIX;
+
+	return log + pokemonName + " is paralyzed, so it may be unable to move!";
 }
 
 /**
@@ -246,7 +293,11 @@ string Paralysis::printGotMessage(string pokemonName) const
  * Pre: None
  * Post: None
  */
-string Paralysis::printAffactMessage(string pokemonName) const
+string Paralysis::printAffactMessage(string pokemonName, bool isOpposing) const
 {
-	return pokemonName + " is paralyzed!\r\nIt can't move!";
+	string log = "";
+	if (isOpposing)
+		log += OPPOSING_PREFIX;
+
+	return log + pokemonName + " is paralyzed!\r\nIt can't move!";
 }

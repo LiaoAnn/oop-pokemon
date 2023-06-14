@@ -1,8 +1,9 @@
-#pragma once
+﻿#pragma once
 #include <map>
+#include <string>
 using namespace std;
 enum type {
-	normal, 
+	normal,
 	fire,
 	water,
 	electric,
@@ -21,27 +22,9 @@ enum type {
 	steel,
 	fairy
 };
-const map <string , int >typeMap =
-{
-	{"normal", normal},
-	{"fire", fire},
-	{"water", water},
-	{"electric", electric},
-	{"grass", grass},
-	{"ice", ice},
-	{"fighting", fighting},
-	{"poison", poison},
-	{"ground", ground},
-	{"flying", flying},
-	{"psychic", psychic},
-	{"bug", bug},
-	{"rock", rock},
-	{"ghost", ghost},
-	{"dragon", dragon},
-	{"dark", dark},
-	{"steel", steel},
-	{"fairy", fairy}
-};
+
+extern map<string, int>typeMap;
+
 static double typeEffectiveness[18][18] =
 {
 	{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.5, 0.0, 1.0, 1.0, 0.5, 1.0},
@@ -62,4 +45,19 @@ static double typeEffectiveness[18][18] =
 	{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.5, 1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 0.5, 1.0, 0.5},
 	{1.0, 0.5, 0.5, 0.5, 1.0, 2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 1.0, 0.5, 2.0},
 	{1.0, 0.5, 1.0, 1.0, 1.0, 1.0, 2.0, 0.5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 0.5, 1.0}
+};
+
+enum TYPE_EFFECT_CATEGORY {
+	NO_EFFECT,
+	NOT_VERY_EFFECTIVE,
+	NORMALLY_EFFECTIVE,
+	SUPER_EFFECTIVE,
+};
+
+const double TYPE_EFFECT_POWER[4] =
+{
+	0,
+	0.5,
+	1,
+	2
 };

@@ -6,22 +6,30 @@ set(Boost_INCLUDE_DIR
 	"path/to/boost/root/dir"
 	"C:/local/boost_1_82_0"
 	# Add your own Boost include path here
+	"C:/library/boost_1_82_0"
 )
 set(Boost_LIBRARY_DIR 
 	"path/to/boost/libs/dir"
 	"C:/local/boost_1_82_0/stage/lib"
 	# Add your own Boost library path here
+	"C:/library/boost_1_82_0/stage/lib"
 )
 set(WebSocketpp
 	"path/to/websocketpp/root/dir"
 	"C:/local/websocketpp-0.8.2"
 	# Add your own WebSocketpp include path here
+	"C:/library/websocketpp-master"
+)
+
+set(Lib
+	${CMAKE_CURRENT_SOURCE_DIR}/lib
 )
 
 # 添加 Boost 的庫和頭文件的搜索路徑
 link_directories(${Boost_LIBRARY_DIR})
 include_directories(${Boost_INCLUDE_DIR})
 include_directories(${WebSocketpp})
+include_directories(${Lib})
 
 # 設置項目的可執行文件
 add_executable(myapp "")

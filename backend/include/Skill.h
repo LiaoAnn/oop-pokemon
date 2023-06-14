@@ -8,9 +8,14 @@
 ************************************************************************/
 #pragma once
 #include <string>
+#include <vector>
 #include "SkillEffect.h"
+#include "Pokemon.h"
+#include "json.h"
 
 using namespace std;
+
+class Pokemon;
 
 class Skill {
 private:
@@ -20,11 +25,13 @@ private:
 	int power;  // Power of the skill
 	int accuracy;  // Accuracy of the skill
 	int pp;  // PP value of the skill, indicating the number of times it can be used
+	int maxPP;  // Max PP value of the skill
 	SkillEffect* effect;  // Special effects of the skill, e.g. paralysis, Burn, Poison
 public:
 	// Default constructor
 	Skill();
 	// Constructor with parameters
+	Skill(string name, int type, int category, int power, int accuracy, int pp);
 	Skill(string name, int type, int category, int power, int accuracy, int pp, SkillEffect* effect);
 	// Destructor
 	~Skill();
@@ -42,8 +49,29 @@ public:
 	// Get Skill PP
 	int getPP() const;
 	// Get Skill effect
-	SkillEffect* Skill::getEffect() const;
+	SkillEffect* getEffect();
+	// Get Skill max PP
+	int getMaxPP() const;
+
+	// Set Skill Effect
+	void setEffect(SkillEffect* effect);
 
 	// Reduce PP by 1
 	void reducePP();
+
+	// Find Skill index in skillList by name
+	friend int findSkillByName(string name);
+
+	// Use skill
+	int useSkill(Pokemon& userPokemon, Pokemon& targetPokemon, bool isOpposing);
+
+	// To JSON
+	json toJson();
+
+	// Restore to original state
+	void restore();
 };
+
+extern vector<Skill> skillList;  // List of all skills
+
+int findSkillByName(string name);

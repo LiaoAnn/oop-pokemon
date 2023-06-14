@@ -9,6 +9,8 @@
 #pragma once
 
 #include <string>
+#include <vector>
+#include "json.h"
 using namespace std;
 
 class SkillEffect
@@ -17,28 +19,38 @@ private:
 	int type;
 	string name;
 	int leftRound;
+	double power;
 public:
 	// Default Constructor
 	SkillEffect();
 	// Constructor
-	SkillEffect(int type, string name, int leftRound = 5);
+	SkillEffect(int type, string name, double power, int leftRound = 5);
 	// Destructor
 	~SkillEffect();
 
 	// Get type of skill effect
 	int getSkillEffectType() const;
 	// Get name of skill effect
-	string getSkillEffectName() const;
+	string getName() const;
 	// Get left round of skill effect
 	int getLeftRound() const;
 
+	// Get Power of skill effect
+	double getPower() const;
+
 	// Reduce left round of skill effect
 	void reduceLeftRound();
+	// To JSON
+	json toJson();
+
+	// Check if pokemon has skill effect
+	bool operator==(const SkillEffect& skillEffect) const;
+	friend bool operator==(const SkillEffect& effect1, const SkillEffect& effect2);
 
 	// Print message when get skill effect
-	virtual string printGotMessage(string pokemonName) const;
+	virtual string printGotMessage(string pokemonName, bool isOpposing) const = 0;
 	// Print message when skill effect affect
-	virtual string printAffactMessage(string pokemonName) const;
+	virtual string printAffactMessage(string pokemonName, bool isOpposing) const = 0;
 };
 
 // Posion skill effect
@@ -53,9 +65,9 @@ public:
 	~Poison();
 
 	// Print message when get skill effect
-	string printGotMessage(string pokemonName) const override;
+	string printGotMessage(string pokemonName, bool isOpposing) const override;
 	// Print message when skill effect affect
-	string printAffactMessage(string pokemonName) const override;
+	string printAffactMessage(string pokemonName, bool isOpposing) const override;
 };
 
 // Burn skill effect
@@ -70,9 +82,9 @@ public:
 	~Burn();
 
 	// Print message when get skill effect
-	string printGotMessage(string pokemonName) const override;
+	string printGotMessage(string pokemonName, bool isOpposing) const override;
 	// Print message when skill effect affect
-	string printAffactMessage(string pokemonName) const override;
+	string printAffactMessage(string pokemonName, bool isOpposing) const override;
 };
 
 // Paralysis skill effect
@@ -87,9 +99,9 @@ public:
 	~Paralysis();
 
 	// Print message when get skill effect
-	string printGotMessage(string pokemonName) const override;
+	string printGotMessage(string pokemonName, bool isOpposing) const override;
 	// Print message when skill effect affect
-	string printAffactMessage(string pokemonName) const override;
+	string printAffactMessage(string pokemonName, bool isOpposing) const override;
 };
 
 
