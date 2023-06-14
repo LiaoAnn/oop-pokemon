@@ -82,6 +82,8 @@ void Game::setGameMode(int mode)
 bool Game::isLose()
 {
 	vector<Pokemon> temp = this->player.getPokemonList();
+	if (temp.size() == 0)
+		return false;
 	for (int i = 0; i < temp.size(); i++)
 	{
 		if (temp[i].getHp() > 0)
@@ -98,6 +100,8 @@ bool Game::isLose()
 bool Game::isWin()
 {
 	vector<Pokemon> temp = this->AI.getPokemonList();
+	if (temp.size() == 0)
+		return false;
 	for (int i = 0; i < temp.size(); i++)
 	{
 		if (temp[i].getHp() > 0)
