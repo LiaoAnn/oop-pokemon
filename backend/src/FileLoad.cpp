@@ -543,4 +543,5 @@ void FileLoad::loadCaseFile(string name)
 			break;
 		}
 	}
+	game.mode = NORMAL;
 }
