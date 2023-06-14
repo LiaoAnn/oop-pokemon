@@ -249,10 +249,11 @@ int Skill::useSkill(Pokemon& userPokemon, Pokemon& targetPokemon, bool isOpposin
 	if (category != STATUS)
 	{
 		float floatPower = 0;
-		floatPower = ((float)(2 * level + 10) / 250);
-		floatPower *= (float)power;
+		floatPower = (level * 2 + 10) / 250.0;
+		floatPower = (int)(floatPower * power * ((float)userPokemonAttack / tarketPokemonDefense) + 2);
+		/*floatPower *= (float)power;
 		floatPower *= ((float)userPokemonAttack / tarketPokemonDefense);
-		floatPower += 2;
+		floatPower += 2;*/
 
 		floatPower *= isCritical ? CRITICAL_POWER : 1;
 		floatPower *= isSTAB ? STAB_POWER : 1;
