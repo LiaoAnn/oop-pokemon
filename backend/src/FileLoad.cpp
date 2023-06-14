@@ -106,7 +106,8 @@ bool FileLoad::loadMonsterLibraryFile(string name)
 		pokemonList.push_back(pokemon);
 	}
 
-	this->MonsterLibName = name;//set the monsterlib 
+	//set the monsterlib 
+	this->MonsterLibName = name;
 	this->isLoadMonsterLib = true;
 	return this->canBeBattle();
 }
