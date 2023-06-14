@@ -85,6 +85,7 @@ void gameThread()
 		message = webSocketServer->getMessage();
 		recive = stringToJson(message);
 		type = recive["type"];
+		result = json();
 
 		if (type == "init")
 		{
