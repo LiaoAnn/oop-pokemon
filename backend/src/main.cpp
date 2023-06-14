@@ -462,6 +462,15 @@ void gameThread()
 				otherDamage = skill.useSkill(AIPokemon, playerPokemon, true);
 			}
 
+			// Check if the Second Player pokemon is alive
+			if (!playerPokemon.isAlive())
+			{
+				game.player.pokemonFainted(false);
+				game.playerDotCheck();
+				game.turn++;
+				continue;
+			}
+
 			// DOT check
 			game.playerDotCheck();
 			game.turn++;
@@ -514,6 +523,15 @@ void gameThread()
 			if (!AIPokemon.isCanNotMove(true))
 			{
 				otherDamage = skill.useSkill(AIPokemon, nextPlayerPokemon, true);
+			}
+
+			// Check if the Second Player pokemon is alive
+			if (!nextPlayerPokemon.isAlive())
+			{
+				game.player.pokemonFainted(false);
+				game.playerDotCheck();
+				game.turn++;
+				continue;
 			}
 
 			// DOT check
