@@ -5,10 +5,14 @@
         <div
           :class="`rel flex-grow:3 bg:url('${BattleBackground}') height:600px background-size:100% bg:no-repeat background-position:0%|100%`"
         >
-          <img v-if="initSuccess" :src="MyMonster" class="abs h:450px w:450px bottom:-5% left:5%" />
           <img
-            v-if="initSuccess"
-            :src="OthersMonster"
+            v-if="myMonster"
+            :src="GetMonsterImage(myMonster!, 'my')"
+            class="abs h:450px w:450px bottom:-5% left:5%"
+          />
+          <img
+            v-if="othersMonster"
+            :src="GetMonsterImage(othersMonster!, 'others')"
             class="abs h:300px w:300px top:10% right:12%"
           />
           <div v-if="myMonster" :class="`abs w:500px h:75px top:20% bg:${darkSecondaryColor}`">
@@ -88,11 +92,10 @@ import { useRouter } from 'vue-router';
 
 import mp3 from '@/assets/battle.mp3';
 import BattleBackground from '@/assets/battle-background.png';
-import MyMonster from '@/assets/my-monster.png';
-import OthersMonster from '@/assets/others-monster.png';
 import useTheme from '@/common/useTheme';
 import type { Monster, Move, Potion, ReceiveMsg } from '@/common/useWebSocket';
 import { ReceiveMsgType, SendMsgType, useWebSocket } from '@/common/useWebSocket';
+import helper from '@/components/game-page/helper';
 import BagPanel from '@/components/game-page/Panels/BagPanel.vue';
 import MonsterPanel from '@/components/game-page/Panels/MonsterPanel.vue';
 import MovePanel from '@/components/game-page/Panels/MovePanel.vue';
@@ -111,6 +114,7 @@ const { darkSecondaryColor } = useTheme();
 const router = useRouter();
 const battleBGM = new Audio(mp3);
 battleBGM.loop = true;
+const { GetMonsterImage } = helper;
 
 enum Panels {
   Move = 'Move',
