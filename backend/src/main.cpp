@@ -14,6 +14,7 @@
 #include "Skill.h"
 #include "json.h"
 #include "Command.h"
+#include "Item.h"
 
 int main()
 {
@@ -391,6 +392,30 @@ void gameThread()
 				firstPlayerIndex
 			);
 			webSocketServer->send(jsonToString(result));
+			continue;
+		}
+
+		if (type == "init_bag")
+		{
+			result["type"] = "init_bag";
+			result["success"] = true;
+			result["bag"] = json::array();
+
+			for (auto& item : itemMap)
+			{
+				result["bag"].push_back(item.second->toJson());
+			}
+
+			result["myMonsters"] = json::array();
+			for (auto& pokemon : game.player.getPokemonList())
+			{
+				result["myMonsters"].push_back(pokemon.toJson());
+			}
+
+			webSocketServer->send(jsonToString(result));
+			continue;
+		}
+
 		}
 	}
 }
