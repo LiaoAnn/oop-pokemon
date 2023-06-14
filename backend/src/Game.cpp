@@ -60,6 +60,7 @@ void Game::initGame()
 void Game::operator<<(string str)
 {
 	string temp = "[Turn " + to_string(this->turn) + "] " + str;
+	cout << temp << endl;
 	this->battleLog.push_back(temp);
 }
 
