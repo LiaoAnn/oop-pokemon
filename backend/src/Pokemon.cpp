@@ -605,6 +605,8 @@ void Pokemon::hurtHp(int points)
  */
 Skill& Pokemon::randomSkill()
 {
+	srand(time(nullptr));
+
 	int index = rand() % skillList.size();
 	return skillList[index];
 }
