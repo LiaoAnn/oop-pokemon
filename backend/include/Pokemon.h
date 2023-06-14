@@ -119,3 +119,5 @@ public:
 };
 
 extern vector <Pokemon> pokemonList; // list of all pokemon
+
+int findPokemonByName(string name);

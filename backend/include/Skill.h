@@ -49,7 +49,7 @@ public:
 	// Get Skill PP
 	int getPP() const;
 	// Get Skill effect
-	SkillEffect* Skill::getEffect();
+	SkillEffect* getEffect();
 	// Get Skill max PP
 	int getMaxPP() const;
 
@@ -73,3 +73,5 @@ public:
 };
 
 extern vector<Skill> skillList;  // List of all skills
+
+int findSkillByName(string name);

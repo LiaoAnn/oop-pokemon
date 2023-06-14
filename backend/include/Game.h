@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 #include "Pokemon.h"
-#include "Player.h""
-#include "fileLoad.h"
+#include "Player.h"
+#include "FileLoad.h"
 using namespace std;
 class Game {
 public:
