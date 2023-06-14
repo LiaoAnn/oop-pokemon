@@ -195,17 +195,6 @@ void gameThread()
 
 		if (type == "load_case")
 		{
-			game.player = Player();
-			game.AI = Player();
-			game.battleLog.clear();
-			skillList.clear();
-			pokemonList.clear();
-			game.turn = 1;
-
-			file.isLoadMoveLib = false;
-			file.isLoadMonsterLib = false;
-			file.isLoadGameData = false;
-
 			string caseFile = recive["file"];
 			try
 			{

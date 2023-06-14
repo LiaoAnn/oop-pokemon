@@ -281,6 +281,9 @@ void FileLoad::loadCaseFile(string name)
 		game << e;
 	}
 
+	game.battleLog.clear();
+	game.turn = 1;
+
 	/* Set the game mode */
 	getline(in, describe);
 	if (describe == "Test")
