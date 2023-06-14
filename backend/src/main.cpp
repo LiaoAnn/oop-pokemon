@@ -71,7 +71,6 @@ void gameThread()
 		if (checkWinOrLose(webSocketServer))
 			continue;
 
-
 		if (type == "init")
 		{
 			game.player = Player();
@@ -240,7 +239,7 @@ void gameThread()
 			webSocketServer->send(jsonToString(result));
 			continue;
 		}
-
+ 
 		if (type == "init_team")
 		{
 			vector<Pokemon> playerPokemonList = game.player.getPokemonList();
@@ -418,8 +417,17 @@ void gameThread()
 
 		if (type == "bag")
 		{
-			string itemName = recive["item"];
+			string itemName;
 			string pokemonName = recive["monster"];
+
+			for (auto& item : itemMap)
+			{
+				if (item.second->getName() == recive["item"])
+				{
+					itemName = (string)item.first;
+					break;
+				}
+			}
 
 			// Check if the Pokemon exist
 			if (!game.player.isPokemonExist(pokemonName))
