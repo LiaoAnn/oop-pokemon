@@ -187,6 +187,18 @@ const SwitchPanel = (panel: Panels) => {
       sendMsg({
         type: SendMsgType.RunAway
       });
+      dialog.success({
+        title: '逃跑成功',
+        content: '逃跑成功',
+        positiveText: '在玩一局',
+        negativeText: '回首頁',
+        onPositiveClick: () => {
+          location.reload();
+        },
+        onNegativeClick() {
+          router.push('/');
+        }
+      });
       break;
   }
 };
