@@ -66,7 +66,7 @@ json SkillEffect::toJson()
 	j["name"] = name;
 	j["type"] = (type == DOT) ? "DoT" : "Debuff";
 	j["power"] = power;
-	j["leftRound"] = leftRound;
+	//j["leftRound"] = leftRound;
 	return j;
 }
 
