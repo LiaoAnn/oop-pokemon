@@ -174,7 +174,7 @@ const onMsg = (e: MessageEvent) => {
 
   switch (msg.type) {
     case ReceiveMsgType.LoadCase:
-      battleLog.value = msg.battle_log!.reverse();
+      battleLog.value = msg.battle_log!;
       initSuccess.value = true;
       myMonsters.value = msg.myMonsters!;
       othersMonsters.value = msg.otherMonsters!;
@@ -184,7 +184,7 @@ const onMsg = (e: MessageEvent) => {
       });
       break;
     case ReceiveMsgType.InitAttack:
-      battleLog.value = msg.battle_log!.reverse();
+      battleLog.value = msg.battle_log!;
       myMonster.value = msg.myMonster!;
       othersMonster.value = msg.otherMonster!;
       currPanel.value = Panels.Move;
@@ -194,12 +194,12 @@ const onMsg = (e: MessageEvent) => {
       currPanel.value = Panels.Bag;
       break;
     case ReceiveMsgType.InitTeam:
-      battleLog.value = msg.battle_log!.reverse();
+      battleLog.value = msg.battle_log!;
       myMonsters.value = msg.myMonsters!;
       currPanel.value = Panels.Monster;
       break;
     case ReceiveMsgType.Attack:
-      battleLog.value = msg.battle_log!.reverse();
+      battleLog.value = msg.battle_log!;
       if (msg.attackFirst! == 'other') {
         myMonster.value = msg.myMonster!;
         setTimeout(() => {
@@ -216,7 +216,7 @@ const onMsg = (e: MessageEvent) => {
       currPanel.value = Panels.Monster;
       break;
     case ReceiveMsgType.SelectMonster:
-      battleLog.value = msg.battle_log!.reverse();
+      battleLog.value = msg.battle_log!;
       myMonster.value = msg.myMonster!;
       othersMonster.value = msg.otherMonster!;
       othersMonsters.value = msg.otherMonsters!;
@@ -254,7 +254,7 @@ const onMsg = (e: MessageEvent) => {
       });
       break;
     case ReceiveMsgType.Bag:
-      battleLog.value = msg.battle_log!.reverse();
+      battleLog.value = msg.battle_log!;
       myMonster.value = msg.myMonster!;
       othersMonster.value = msg.otherMonster!;
       break;
