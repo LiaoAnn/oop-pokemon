@@ -27,6 +27,16 @@
               </div>
               <div>{{ myMonster?.health }}/{{ myMonster?.maxHealth }}</div>
             </div>
+            <div class="flex flex:nowrap p:0|8 gap:8px">
+              <n-tag
+                v-for="statusCondition in myMonster.statusCondition"
+                :key="statusCondition.name"
+                :bordered="false"
+              >
+                {{ statusCondition.name }} | {{ statusCondition.power }} |
+                {{ statusCondition.type }}
+              </n-tag>
+            </div>
           </div>
           <div
             v-if="othersMonster"
@@ -42,6 +52,16 @@
                 ></div>
               </div>
               <div>{{ othersMonster?.health }}/{{ othersMonster?.maxHealth }}</div>
+            </div>
+            <div class="flex flex:nowrap p:0|8 gap:8px">
+              <n-tag
+                v-for="statusCondition in othersMonster.statusCondition"
+                :key="statusCondition.name"
+                :bordered="false"
+              >
+                {{ statusCondition.name }} | {{ statusCondition.power }} |
+                {{ statusCondition.type }}
+              </n-tag>
             </div>
           </div>
         </div>
@@ -86,7 +106,7 @@
 </template>
 
 <script setup lang="ts">
-import { NLayoutContent, useDialog } from 'naive-ui';
+import { NLayoutContent, NTag, useDialog } from 'naive-ui';
 import { h, onBeforeUnmount, ref } from 'vue';
 import { useRouter } from 'vue-router';
 

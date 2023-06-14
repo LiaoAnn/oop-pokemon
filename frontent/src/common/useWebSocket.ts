@@ -69,6 +69,12 @@ export interface Move {
   totalPP: number;
 }
 
+export interface StatusCondition {
+  name: string;
+  power: number;
+  type: string;
+}
+
 export interface Monster {
   attack: number;
   defense: number;
@@ -79,6 +85,7 @@ export interface Monster {
   s_attack: number;
   s_defense: number;
   speed: number;
+  statusCondition: StatusCondition[];
 }
 
 export function useWebSocket(onMsgCallback: (e: MessageEvent) => void) {
