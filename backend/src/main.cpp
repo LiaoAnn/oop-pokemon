@@ -262,9 +262,6 @@ void gameThread()
 			vector<Pokemon> playerPokemonList = game.player.getPokemonList();
 			vector<Pokemon> opposingPokemonList = game.AI.getPokemonList();
 
-			game.player.restoreAllPokemon();
-			game.AI.restoreAllPokemon();
-
 			result["type"] = "init_team";
 			result["success"] = true;
 
