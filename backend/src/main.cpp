@@ -28,7 +28,7 @@ int main()
 
 	try
 	{
-		file.loadCaseFile("case.txt");//file case.txt
+		file.loadCaseFile("case4.txt");//file case.txt
 	}
 	catch (string& e)
 	{
@@ -87,7 +87,7 @@ void gameThread()
 		// Check Win
 		if (checkWinOrLose(webSocketServer))
 			continue;
-		
+
 
 		if (type == "init")
 		{
@@ -193,19 +193,19 @@ void gameThread()
 			continue;
 		}
 
-		// Commands needs to load data before execute
-		if (!file.canBeBattle())
-		{
-			result = json();
-			result["type"] = "init_team";
-			result["success"] = false;
-			result["message"] = "No pokemon can be battle";
-			webSocketServer->send(jsonToString(result));
-			continue;
-		}
-
 		if (type == "load_case")
 		{
+			game.player = Player();
+			game.AI = Player();
+			game.battleLog.clear();
+			skillList.clear();
+			pokemonList.clear();
+			game.turn = 1;
+
+			file.isLoadMoveLib = false;
+			file.isLoadMonsterLib = false;
+			file.isLoadGameData = false;
+
 			string caseFile = recive["file"];
 			try
 			{
@@ -241,6 +241,17 @@ void gameThread()
 				result["otherMonsters"].push_back(opposingPokemonList[i].toJson());
 			}
 			webSocketServer->send(jsonToString(result));
+		}
+
+		// Commands needs to load data before execute
+		if (!file.canBeBattle())
+		{
+			result = json();
+			result["type"] = "init_team";
+			result["success"] = false;
+			result["message"] = "No pokemon can be battle";
+			webSocketServer->send(jsonToString(result));
+			continue;
 		}
 
 		if (type == "init_attack")
