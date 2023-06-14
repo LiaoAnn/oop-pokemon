@@ -55,3 +55,6 @@ If you don't want to install the dependencies on your machine, you can use docke
     ```
 
 Also, that is no need to install WebSocket++ and boost on your machine if using docker.
+
+### Note
+Please make sure your test file is in the same directory as the *.exe file. Otherwise, the program will not be able to find the file.
