@@ -1,4 +1,4 @@
-﻿PokemonLib.txt
+PokemonLib.txt
 MoveLib.txt
 GameData.txt
 Test
