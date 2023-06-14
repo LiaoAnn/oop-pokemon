@@ -12,9 +12,13 @@
 #include "Skill.h"
 
 // attach command result to json
-json attactCommandResult(
+json attactCommandResult
+(
 	Pokemon& firstPokemon, Pokemon& secondPokemon,
 	Skill& firstSkill, Skill& secondSkill,
 	int firstDamage, int secondDamage,
 	int firstPlayerIndex
 );
+
+// Player Pokemon fainted result
+json playerPokemonFainted(bool isOpposing);

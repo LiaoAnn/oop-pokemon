@@ -50,3 +50,25 @@ json attactCommandResult
 	result["battle_log"] = game.battleLog;
 	return result;
 }
+
+/**
+ * Intent: Player Pokemon fainted result
+ * Pre: isOpposing is boolen
+ * Post: Return a json object
+ */
+json playerPokemonFainted(bool isOpposing)
+{
+	json result;
+	if (isOpposing)
+	{
+		result["type"] = "other_select_monster";
+		result["otherMonster"] = game.AI.getCurrentPokemon().toJson();
+		return result;
+	}
+
+	if (!isOpposing)
+	{
+		result["type"] = "requirement_select_monster";
+		return result;
+	}
+}
