@@ -2,6 +2,7 @@
 #include "Pokemon.h"
 #include "Player.h"
 #include "FileLoad.h"
+#include "WebSocketServer.h"
 using namespace std;
 class Game {
 public:
@@ -27,7 +28,7 @@ public:
 	// Win check
 	bool isWin();
 	// Dot check
-	void playerDotCheck();
+	void playerDotCheck(WebSocketServer* socketServer = nullptr);
 
 	void operator<<(string str);
 };

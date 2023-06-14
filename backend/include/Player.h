@@ -58,7 +58,7 @@ public:
 	Pokemon& getPokemonByName(string name);
 
 	// Pokemon fainted
-	void pokemonFainted(bool isOpposing);
+	void pokemonFainted(bool isOpposing, bool requireCommand = false);
 
 	// Is the player opposing
 	bool getIsOpposing() const;
