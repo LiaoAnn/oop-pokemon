@@ -541,6 +541,19 @@ void gameThread()
 				continue;
 			}
 
+			// Same Pokemon
+			if (game.player.getCurrentPokemon().getName() == pokemonName)
+			{
+				result["type"] = "select_monster";
+				result["success"] = false;
+				result["battle_log"] = game.battleLog;
+				result["myMonster"] = game.player.getCurrentPokemon().toJson();
+				result["otherMonster"] = game.AI.getCurrentPokemon().toJson();
+				result["message"] = "Same Pokemon!";
+				webSocketServer->send(jsonToString(result));
+				continue;
+			}
+
 			// Return the current Pokemon
 			Pokemon& playerPokemon = game.player.getCurrentPokemon();
 			game << playerPokemon.getName() + ", switch out!";
