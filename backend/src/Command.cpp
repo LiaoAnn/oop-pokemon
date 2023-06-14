@@ -44,7 +44,7 @@ json attactCommandResult
 	result["myMove"] = myMoveJson;
 	result["myMonster"] = myMonsterJson;
 
-	result["otherDamage"] = (firstPlayerIndex == 0) ? myDamage : otherDamage;
+	result["otherDamage"] = (firstPlayerIndex != 0) ? myDamage : otherDamage;
 	result["otherMove"] = otherMoveJson;
 	result["otherMonster"] = otherMonsterJson;
 	result["battle_log"] = game.battleLog;
