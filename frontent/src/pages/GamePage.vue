@@ -86,6 +86,7 @@ import { NLayoutContent, useDialog } from 'naive-ui';
 import { h, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
+import mp3 from '@/assets/battle.mp3';
 import BattleBackground from '@/assets/battle-background.png';
 import MyMonster from '@/assets/my-monster.png';
 import OthersMonster from '@/assets/others-monster.png';
@@ -108,6 +109,8 @@ const othersMonsters = ref<Monster[]>([]);
 const myBag = ref<Potion[]>([]);
 const { darkSecondaryColor } = useTheme();
 const router = useRouter();
+const battleBGM = new Audio(mp3);
+battleBGM.loop = true;
 
 enum Panels {
   Move = 'Move',
@@ -291,6 +294,7 @@ const openTestFileSelectDialog = () => {
             file: Case
           });
           testFileSelectDialog.destroy();
+          battleBGM.play();
         }
       })
   });
