@@ -1,4 +1,4 @@
-﻿/***********************************************************************
+/***********************************************************************
  * File: Skill.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-05-30
@@ -586,7 +586,7 @@ void gameThread()
 			continue;
 		}
 
-		if (type == "init_battle")
+		if (type == "run_away")
 		{
 			game.turn = 1;
 			game.player.restoreAllPokemon();
