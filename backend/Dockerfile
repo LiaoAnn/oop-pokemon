@@ -30,6 +30,7 @@ RUN apk update && \
 
 # 從第一階段中拷貝生成的可執行文件到最終階段
 COPY --from=build /app/build/myapp /app/myapp
+COPY testData /app/testData
 
 # 指定工作目錄
 WORKDIR /app
