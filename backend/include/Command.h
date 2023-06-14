@@ -10,6 +10,7 @@
 #include "json.h"
 #include "Pokemon.h"
 #include "Skill.h"
+#include "WebSocketServer.h"
 
 // attach command result to json
 json attactCommandResult
@@ -22,3 +23,6 @@ json attactCommandResult
 
 // Player Pokemon fainted result
 json playerPokemonFainted(bool isOpposing);
+
+// Check win or lose
+bool checkWinOrLose(WebSocketServer* webSocketServer);

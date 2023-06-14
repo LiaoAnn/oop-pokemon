@@ -72,3 +72,32 @@ json playerPokemonFainted(bool isOpposing)
 		return result;
 	}
 }
+
+/**
+ * Intent: Check win or lose
+ * Pre: webSocketServer is WebSocketServer pointer
+ * Post: Return true if win or lose, false otherwise
+ */
+bool checkWinOrLose(WebSocketServer* webSocketServer)
+{
+	json result;
+
+	// Check Win
+	if (game.isWin())
+	{
+		game << "You win";
+		result["type"] = "win";
+		webSocketServer->send(jsonToString(result));
+		return true;
+	}
+
+	if (game.isLose())
+	{
+		game << "You lose";
+		result["type"] = "lose";
+		webSocketServer->send(jsonToString(result));
+		return true;
+	}
+
+	return false;
+}
