@@ -455,10 +455,11 @@ void gameThread()
 
 			// Opposing Pokemon use a skill
 			Skill& skill = AIPokemon.randomSkill();
+			int otherDamage = 0;
 			skill.reducePP();
 			if (!AIPokemon.isCanNotMove(true))
 			{
-				skill.useSkill(AIPokemon, playerPokemon, true);
+				otherDamage = skill.useSkill(AIPokemon, playerPokemon, true);
 			}
 
 			// DOT check
@@ -472,8 +473,11 @@ void gameThread()
 			result["otherMonster"] = game.AI.getCurrentPokemon().toJson();
 			result["targetMonster"] = assignedPokemon.toJson();
 			result["item"] = item->toJson();
+			result["otherDamage"] = otherDamage;
+			result["otherMove"] = skill.toJson();
 			webSocketServer->send(jsonToString(result));
 			continue;
 		}
+
 	}
 }
