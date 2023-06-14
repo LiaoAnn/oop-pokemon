@@ -87,7 +87,7 @@
 
 <script setup lang="ts">
 import { NLayoutContent, useDialog } from 'naive-ui';
-import { h, ref } from 'vue';
+import { h, onBeforeUnmount, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import mp3 from '@/assets/battle.mp3';
@@ -303,6 +303,10 @@ const openTestFileSelectDialog = () => {
       })
   });
 };
+
+onBeforeUnmount(() => {
+  battleBGM.pause();
+});
 
 openTestFileSelectDialog();
 </script>
