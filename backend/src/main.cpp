@@ -479,5 +479,57 @@ void gameThread()
 			continue;
 		}
 
+		if (type == "select_monster")
+		{
+			string pokemonName = recive["monster"];
+
+			// Check Pokemon is exist
+			if (!game.player.isPokemonExist(pokemonName))
+			{
+				result["type"] = "select_monster";
+				result["success"] = false;
+				result["battle_log"] = game.battleLog;
+				result["myMonster"] = game.player.getCurrentPokemon().toJson();
+				result["otherMonster"] = game.AI.getCurrentPokemon().toJson();
+				result["message"] = "Pokemon not found!";
+				webSocketServer->send(jsonToString(result));
+				continue;
+			}
+
+			// Return the current Pokemon
+			Pokemon& playerPokemon = game.player.getCurrentPokemon();
+			game << playerPokemon.getName() + ", switch out!";
+			game << "Come back! ";
+
+			// Change Pokemon
+			game.player.setCurrentPokemon(pokemonName);
+			Pokemon& nextPlayerPokemon = game.player.getCurrentPokemon();
+			game << "Go! " + nextPlayerPokemon.getName() + "!";
+
+			// Opposing Pokemon use a skill
+			Pokemon& AIPokemon = game.AI.getCurrentPokemon();
+			Skill& skill = AIPokemon.randomSkill();
+			int otherDamage = 0;
+			skill.reducePP();
+			if (!AIPokemon.isCanNotMove(true))
+			{
+				otherDamage = skill.useSkill(AIPokemon, nextPlayerPokemon, true);
+			}
+
+			// DOT check
+			game.playerDotCheck();
+			game.turn++;
+
+			result["type"] = "select_monster";
+			result["success"] = true;
+			result["battle_log"] = game.battleLog;
+			result["myMonster"] = game.player.getCurrentPokemon().toJson();
+
+			result["otherMonster"] = game.AI.getCurrentPokemon().toJson();
+			result["otherDamage"] = otherDamage;
+			result["otherMove"] = skill.toJson();
+			webSocketServer->send(jsonToString(result));
+			continue;
+		}
 	}
 }
