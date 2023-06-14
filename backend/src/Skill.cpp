@@ -302,6 +302,8 @@ int Skill::useSkill(Pokemon& userPokemon, Pokemon& targetPokemon, bool isOpposin
 			targetPokemon.addCurrentStat(effect);
 			game << effect->printGotMessage(targetPokemon.getName(), !isOpposing);
 		}
+
+		return userDamage;
 	}
 	else
 	{
@@ -309,6 +311,8 @@ int Skill::useSkill(Pokemon& userPokemon, Pokemon& targetPokemon, bool isOpposin
 		if (isOpposing)
 			log = OPPOSING_PREFIX;
 		game << log + targetPokemon.getName() + " avoided the attack!";
+
+		return -1;
 	}
 }
 
