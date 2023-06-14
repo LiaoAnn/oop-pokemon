@@ -277,6 +277,10 @@ void gameThread()
 				result["otherMonsters"].push_back(opposingPokemonList[i].toJson());
 			}
 
+			result["myMonster"] = game.player.getCurrentPokemon().toJson();
+			result["otherMonster"] = game.AI.getCurrentPokemon().toJson();
+
+			result["battle_log"] = game.battleLog;
 			webSocketServer->send(jsonToString(result));
 		}
 
