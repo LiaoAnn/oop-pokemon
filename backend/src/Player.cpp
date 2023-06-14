@@ -182,7 +182,7 @@ void Player::setCurrentPokemon(string name)
  * Pre: isOpposing is a boolean
  * Post: None
  */
-void Player::pokemonFainted(bool isOpposing)
+void Player::pokemonFainted(bool isOpposing, bool requireCommand)
 {
 	string log;
 	Pokemon& pokemon = getCurrentPokemon();
@@ -193,6 +193,9 @@ void Player::pokemonFainted(bool isOpposing)
 	game << log;
 
 	// Find the next Pokemon starting from the current Pokemon
+	if (requireCommand)
+		return;
+
 	int nextPokemon = currentPokemon;
 	int count = 0;
 	do

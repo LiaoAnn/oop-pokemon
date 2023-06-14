@@ -1,4 +1,4 @@
-/***********************************************************************
+﻿/***********************************************************************
  * File: Skill.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-05-30
@@ -333,10 +333,8 @@ void gameThread()
 			// Check if the Second Player pokemon is alive
 			if (!secondPokemon.isAlive())
 			{
-				secondPlayer.pokemonFainted(isSecondPlayerOpposing);
-				game.playerDotCheck();
-				game.turn++;
-
+				// Pokemon is fainted and send a require if player is not opposing
+				secondPlayer.pokemonFainted(isSecondPlayerOpposing, !isSecondPlayerOpposing);
 				result = attactCommandResult
 				(
 					firstPokemon, secondPokemon,
@@ -345,6 +343,13 @@ void gameThread()
 					firstPlayerIndex
 				);
 				webSocketServer->send(jsonToString(result));
+
+				// Send a require if player is not opposing
+				result = playerPokemonFainted(isSecondPlayerOpposing);
+				webSocketServer->send(jsonToString(result));
+
+				game.playerDotCheck(webSocketServer);
+				game.turn++;
 				continue;
 			}
 
@@ -361,10 +366,8 @@ void gameThread()
 			// Check if the First Player pokemon is alive
 			if (!firstPokemon.isAlive())
 			{
-				firstPlayer.pokemonFainted(isFristPlayerOpposing);
-				game.playerDotCheck();
-				game.turn++;
-
+				// Pokemon is fainted and send a require if player is not opposing
+				firstPlayer.pokemonFainted(isFristPlayerOpposing, !isFristPlayerOpposing);
 				result = attactCommandResult
 				(
 					firstPokemon, secondPokemon,
@@ -373,14 +376,17 @@ void gameThread()
 					firstPlayerIndex
 				);
 				webSocketServer->send(jsonToString(result));
+
+				// Send a require if player is not opposing
+				result = playerPokemonFainted(isFristPlayerOpposing);
+				webSocketServer->send(jsonToString(result));
+
+				game.playerDotCheck(webSocketServer);
+				game.turn++;
 				continue;
 			}
 
 			// DOT check -- Player first AI second
-			game.playerDotCheck();
-			game.turn++;
-
-
 			result = attactCommandResult
 			(
 				firstPokemon, secondPokemon,
@@ -389,6 +395,9 @@ void gameThread()
 				firstPlayerIndex
 			);
 			webSocketServer->send(jsonToString(result));
+
+			game.playerDotCheck(webSocketServer);
+			game.turn++;
 			continue;
 		}
 
@@ -465,15 +474,23 @@ void gameThread()
 			// Check if the Second Player pokemon is alive
 			if (!playerPokemon.isAlive())
 			{
-				game.player.pokemonFainted(false);
-				game.playerDotCheck();
+				game.player.pokemonFainted(false, true);
+				result["type"] = "bag";
+				result["success"] = true;
+				result["battle_log"] = game.battleLog;
+				result["myMonster"] = game.player.getCurrentPokemon().toJson();
+				result["otherMonster"] = game.AI.getCurrentPokemon().toJson();
+				result["targetMonster"] = assignedPokemon.toJson();
+				result["item"] = item->toJson();
+				result["otherDamage"] = otherDamage;
+				result["otherMove"] = skill.toJson();
+				result["battle_result"] = playerPokemonFainted(game.player.getIsOpposing());
+				webSocketServer->send(jsonToString(result));
+
+				game.playerDotCheck(webSocketServer);
 				game.turn++;
 				continue;
 			}
-
-			// DOT check
-			game.playerDotCheck();
-			game.turn++;
 
 			result["type"] = "bag";
 			result["success"] = true;
@@ -485,6 +502,10 @@ void gameThread()
 			result["otherDamage"] = otherDamage;
 			result["otherMove"] = skill.toJson();
 			webSocketServer->send(jsonToString(result));
+
+			// DOT check
+			game.playerDotCheck(webSocketServer);
+			game.turn++;
 			continue;
 		}
 
@@ -528,15 +549,22 @@ void gameThread()
 			// Check if the Second Player pokemon is alive
 			if (!nextPlayerPokemon.isAlive())
 			{
-				game.player.pokemonFainted(false);
-				game.playerDotCheck();
+				game.player.pokemonFainted(false, true);
+				result["type"] = "select_monster";
+				result["success"] = true;
+				result["battle_log"] = game.battleLog;
+				result["myMonster"] = game.player.getCurrentPokemon().toJson();
+
+				result["otherMonster"] = game.AI.getCurrentPokemon().toJson();
+				result["otherDamage"] = otherDamage;
+				result["otherMove"] = skill.toJson();
+				result["battle_result"] = playerPokemonFainted(game.player.getIsOpposing());
+				webSocketServer->send(jsonToString(result));
+
+				game.playerDotCheck(webSocketServer);
 				game.turn++;
 				continue;
 			}
-
-			// DOT check
-			game.playerDotCheck();
-			game.turn++;
 
 			result["type"] = "select_monster";
 			result["success"] = true;
@@ -547,6 +575,10 @@ void gameThread()
 			result["otherDamage"] = otherDamage;
 			result["otherMove"] = skill.toJson();
 			webSocketServer->send(jsonToString(result));
+
+			// DOT check
+			game.playerDotCheck(webSocketServer);
+			game.turn++;
 			continue;
 		}
 	}

@@ -7,6 +7,7 @@
  * Description: game basic function
 ************************************************************************/
 #include"Game.h"
+#include "Command.h"
 
 /**
  * Intent: Default constructor
@@ -110,24 +111,34 @@ bool Game::isWin()
  * Pre: None
  * Post: None
  */
-void Game::playerDotCheck()
+void Game::playerDotCheck(WebSocketServer* socketServer)
 {
-	Player& firstPlayer = game.player;
-	Pokemon& firstPokemon = firstPlayer.getCurrentPokemon();
+	Player& player = game.player;
+	Pokemon& playerPokemon = player.getCurrentPokemon();
 
-	Player& secondPlayer = game.AI;
-	Pokemon& secondPokemon = secondPlayer.getCurrentPokemon();
+	Player& opposing = game.AI;
+	Pokemon& opposingPokemon = opposing.getCurrentPokemon();
 
-	firstPokemon.isHurtByDot(false);
-	if (!firstPokemon.isAlive())
+	playerPokemon.isHurtByDot(false);
+	if (!playerPokemon.isAlive())
 	{
-		firstPlayer.pokemonFainted(false);
+		player.pokemonFainted(false, true);
+		if (socketServer != nullptr)
+		{
+			json result;
+			result = playerPokemonFainted(player.getIsOpposing());
+		}
 	}
 
-	secondPokemon.isHurtByDot(true);
-	if (!secondPokemon.isAlive())
+	opposingPokemon.isHurtByDot(true);
+	if (!opposingPokemon.isAlive())
 	{
-		secondPlayer.pokemonFainted(true);
+		opposing.pokemonFainted(true, false);
+		if (socketServer != nullptr)
+		{
+			json result;
+			result = playerPokemonFainted(opposing.getIsOpposing());
+		}
 	}
 }
 
