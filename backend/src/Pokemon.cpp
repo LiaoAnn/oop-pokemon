@@ -470,7 +470,7 @@ bool Pokemon::isCanNotMove(bool isOpposing)
 				if (isOpposing)
 					log += OPPOSING_PREFIX;
 
-				log += this->name + " is paralysed!";
+				log += this->name + " is paralyzed!";
 
 				game << log;
 				game << "It can't move!";
