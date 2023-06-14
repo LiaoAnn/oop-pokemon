@@ -439,7 +439,7 @@ void gameThread()
 			string pokemonName = recive["monster"];
 
 			// Check if the Pokemon exist
-			if (game.player.isPokemonExist(pokemonName))
+			if (!game.player.isPokemonExist(pokemonName))
 			{
 				result["type"] = "bag";
 				result["success"] = false;
