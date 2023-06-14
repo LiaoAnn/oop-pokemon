@@ -35,8 +35,8 @@ int main()
  */
 void webServerThread()
 {
+	system("start http://localhost");
 	webServer->run();
-
 }
 /**
  * Intent: websocket server
@@ -58,19 +58,19 @@ void gameThread()
 	while (true)
 	{
 		string message, type;
+		while (!webSocketServer->isConnected())
+		{
+
+		}
 		while (!webSocketServer->hasMessage())
 		{
+
 		}
 
 		message = webSocketServer->getMessage();
 		recive = stringToJson(message);
 		type = recive["type"];
 		result = json();
-
-		// Check Win
-		if (checkWinOrLose(webSocketServer))
-			continue;
-
 
 		if (type == "init")
 		{
@@ -91,6 +91,10 @@ void gameThread()
 			webSocketServer->send(jsonToString(result));
 			continue;
 		}
+
+		// Check Win
+		if (checkWinOrLose(webSocketServer))
+			continue;		
 
 		if (type == "load_monster")
 		{
