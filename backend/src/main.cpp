@@ -219,7 +219,7 @@ void gameThread()
 		if (!file.canBeBattle())
 		{
 			result = json();
-			result["type"] = "init_team";
+			result["type"] = "can_not_battle";
 			result["success"] = false;
 			result["message"] = "No pokemon can be battle";
 			webSocketServer->send(jsonToString(result));
