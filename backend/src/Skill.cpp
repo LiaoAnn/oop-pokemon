@@ -289,9 +289,9 @@ int Skill::useSkill(Pokemon& userPokemon, Pokemon& targetPokemon, bool isOpposin
 			)
 			game << "It's not very effective...";
 
-		if (typeEffectPower > TYPE_EFFECT_POWER[NOT_VERY_EFFECTIVE] &&
+		/*if (typeEffectPower > TYPE_EFFECT_POWER[NOT_VERY_EFFECTIVE] &&
 			typeEffectPower < TYPE_EFFECT_POWER[SUPER_EFFECTIVE])
-			game << "It's effective!";
+			game << "It's effective!";*/
 
 		if (typeEffectPower >= TYPE_EFFECT_POWER[SUPER_EFFECTIVE])
 			game << "It's super effective!";
