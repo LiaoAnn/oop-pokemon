@@ -581,5 +581,18 @@ void gameThread()
 			game.turn++;
 			continue;
 		}
+
+		if (type == "init_battle")
+		{
+			game.turn = 1;
+			game.player.restoreAllPokemon();
+			game.AI.restoreAllPokemon();
+			game.battleLog.clear();
+
+			result = json();
+			result["type"] = "init";
+			result["success"] = true;
+			webSocketServer->send(jsonToString(result));
+		}
 	}
 }
