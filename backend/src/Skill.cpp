@@ -339,7 +339,7 @@ json Skill::toJson()
 	j["accuracy"] = accuracy;
 	j["currentPP"] = pp;
 	j["totalPP"] = maxPP;
-	j["effect"] = effect->toJson();
+	j["effect"] = (effect != nullptr) ? effect->toJson() : NULL;
 	return j;
 }
 

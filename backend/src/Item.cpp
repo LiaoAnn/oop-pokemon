@@ -49,6 +49,19 @@ int Item::getPoints()
 	return points;
 }
 
+/**
+ * Intent: Convert the item to json
+ * Pre: None
+ * Post: A json object of the item
+ */
+json Item::toJson()
+{
+	json j;
+	j["name"] = name;
+	j["points"] = points;
+	return j;
+}
+
 map<string, Item*> itemMap = {
 	{"Potion", new NormalPotion()},
 	{"SuperPotion", new SuperPotion()},

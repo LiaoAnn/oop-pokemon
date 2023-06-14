@@ -14,6 +14,7 @@
 #include "Skill.h"
 #include "json.h"
 #include "Command.h"
+#include "Item.h"
 
 int main()
 {
@@ -85,6 +86,7 @@ void gameThread()
 		message = webSocketServer->getMessage();
 		recive = stringToJson(message);
 		type = recive["type"];
+		result = json();
 
 		if (type == "init")
 		{
@@ -269,13 +271,13 @@ void gameThread()
 			result["myMonsters"] = json::array();
 			for (int i = 0; i < playerPokemonList.size(); i++)
 			{
-				result["playerPokemon"].push_back(playerPokemonList[i].toJson());
+				result["myMonsters"].push_back(playerPokemonList[i].toJson());
 			}
 
 			result["otherMonsters"] = json::array();
 			for (int i = 0; i < opposingPokemonList.size(); i++)
 			{
-				result["otherMonster"].push_back(opposingPokemonList[i].toJson());
+				result["otherMonsters"].push_back(opposingPokemonList[i].toJson());
 			}
 
 			webSocketServer->send(jsonToString(result));
@@ -390,6 +392,91 @@ void gameThread()
 				firstPlayerIndex
 			);
 			webSocketServer->send(jsonToString(result));
+			continue;
+		}
+
+		if (type == "init_bag")
+		{
+			result["type"] = "init_bag";
+			result["success"] = true;
+			result["bag"] = json::array();
+
+			for (auto& item : itemMap)
+			{
+				result["bag"].push_back(item.second->toJson());
+			}
+
+			result["myMonsters"] = json::array();
+			for (auto& pokemon : game.player.getPokemonList())
+			{
+				result["myMonsters"].push_back(pokemon.toJson());
+			}
+
+			webSocketServer->send(jsonToString(result));
+			continue;
+		}
+
+		if (type == "bag")
+		{
+			string itemName = recive["item"];
+			string pokemonName = recive["monster"];
+
+			// Check if the Pokemon exist
+			if (game.player.isPokemonExist(pokemonName))
+			{
+				result["type"] = "bag";
+				result["success"] = false;
+				result["battle_log"] = game.battleLog;
+				result["myMonster"] = game.player.getCurrentPokemon().toJson();
+				result["otherMonster"] = game.AI.getCurrentPokemon().toJson();
+				result["message"] = "Pokemon not found!";
+				webSocketServer->send(jsonToString(result));
+				continue;
+			}
+
+			// Get the Pokemon
+			Pokemon& assignedPokemon = game.player.getPokemonByName(pokemonName);
+			Pokemon& playerPokemon = game.player.getCurrentPokemon();
+			Pokemon& AIPokemon = game.AI.getCurrentPokemon();
+
+			// Get the item
+			Item* item = itemMap[itemName];
+			if (item == NULL)
+			{
+				result["type"] = "bag";
+				result["success"] = false;
+				result["battle_log"] = game.battleLog;
+				result["myMonster"] = game.player.getCurrentPokemon().toJson();
+				result["otherMonster"] = game.AI.getCurrentPokemon().toJson();
+				result["message"] = "Item not found!";
+				webSocketServer->send(jsonToString(result));
+				continue;
+			}
+
+			// Player use a item
+			item->useItem(assignedPokemon);
+
+			// Opposing Pokemon use a skill
+			Skill& skill = AIPokemon.randomSkill();
+			skill.reducePP();
+			if (!AIPokemon.isCanNotMove(true))
+			{
+				skill.useSkill(AIPokemon, playerPokemon, true);
+			}
+
+			// DOT check
+			game.playerDotCheck();
+			game.turn++;
+
+			result["type"] = "bag";
+			result["success"] = true;
+			result["battle_log"] = game.battleLog;
+			result["myMonster"] = game.player.getCurrentPokemon().toJson();
+			result["otherMonster"] = game.AI.getCurrentPokemon().toJson();
+			result["targetMonster"] = assignedPokemon.toJson();
+			result["item"] = item->toJson();
+			webSocketServer->send(jsonToString(result));
+			continue;
 		}
 	}
 }

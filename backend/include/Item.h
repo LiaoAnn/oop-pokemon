@@ -12,6 +12,7 @@
 #include <string>
 #include <map>
 #include "Pokemon.h"
+#include "json.h"
 
 using namespace std;
 
@@ -25,6 +26,7 @@ public:
 	~Item();
 	string getName();
 	int getPoints();
+	json toJson();
 
 	virtual void useItem(Pokemon& pokemon) = 0;
 };

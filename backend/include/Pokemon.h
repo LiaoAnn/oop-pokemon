@@ -103,6 +103,7 @@ public:
 	// Add a skill to the skill list
 	void addSkill(Skill skill);
 
+	// Find pokemon by name
 	friend int findPokemonByName(string name);
 
 	// Pokemon actions

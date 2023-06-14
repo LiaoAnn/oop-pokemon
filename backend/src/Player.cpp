@@ -225,3 +225,20 @@ void Player::restoreAllPokemon()
 		pokemonList[i].restore();
 	}
 }
+
+/**
+ * Intent: Is a Pokemon existing in the player's Pokemon list
+ * Pre: name is a string
+ * Post: Return true if the Pokemon is existing
+ */
+bool Player::isPokemonExist(string name) const
+{
+	for (int i = 0; i < pokemonList.size(); i++)
+	{
+		if (pokemonList[i].getName() == name)
+		{
+			return true;
+		}
+	}
+	return false;
+}
