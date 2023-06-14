@@ -1,4 +1,4 @@
-﻿/***********************************************************************
+/***********************************************************************
  * File: Skill.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-05-30
@@ -244,7 +244,7 @@ void gameThread()
 			webSocketServer->send(jsonToString(result));
 			continue;
 		}
-
+ 
 		if (type == "init_team")
 		{
 			vector<Pokemon> playerPokemonList = game.player.getPokemonList();
@@ -422,8 +422,17 @@ void gameThread()
 
 		if (type == "bag")
 		{
-			string itemName = recive["item"];
+			string itemName;
 			string pokemonName = recive["monster"];
+
+			for (auto& item : itemMap)
+			{
+				if (item.second->getName() == recive["item"])
+				{
+					itemName = (string)item.first;
+					break;
+				}
+			}
 
 			// Check if the Pokemon exist
 			if (!game.player.isPokemonExist(pokemonName))
