@@ -65,6 +65,9 @@ public:
 
 	// Restore all Pokemon to original state
 	void restoreAllPokemon();
+
+	// Is a Pokemon existing in the player's Pokemon list
+	bool isPokemonExist(string name) const;
 private:
 	string name;  // Name of the player
 	vector<Pokemon> pokemonList;  // List of Pokemon owned by the player
