@@ -269,13 +269,13 @@ void gameThread()
 			result["myMonsters"] = json::array();
 			for (int i = 0; i < playerPokemonList.size(); i++)
 			{
-				result["playerPokemon"].push_back(playerPokemonList[i].toJson());
+				result["myMonsters"].push_back(playerPokemonList[i].toJson());
 			}
 
 			result["otherMonsters"] = json::array();
 			for (int i = 0; i < opposingPokemonList.size(); i++)
 			{
-				result["otherMonster"].push_back(opposingPokemonList[i].toJson());
+				result["otherMonsters"].push_back(opposingPokemonList[i].toJson());
 			}
 
 			webSocketServer->send(jsonToString(result));
