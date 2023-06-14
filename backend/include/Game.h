@@ -1,4 +1,12 @@
-﻿#include <iostream>
+﻿/***********************************************************************
+ * File: Game.h
+ * Author: 劉耀恩
+ * Create Date: 2023/06/15
+ * Editor: 劉耀恩
+ * Update Date: 2023/06/15
+ * Description: Definition of Game
+ ************************************************************************/
+#include <iostream>
 #include "Pokemon.h"
 #include "Player.h"
 #include "FileLoad.h"

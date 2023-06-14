@@ -12,7 +12,9 @@
 #include <iostream>
 
 using namespace std;
-
+// Intent: Convert string to json
+// Pre: str is a valid json string
+// Post: return a json object
 json stringToJson(string str) {
 	json j;
 	try {
@@ -24,7 +26,9 @@ json stringToJson(string str) {
 	}
 	return j;
 }
-
+// Intent: Convert json to string
+// Pre: j is a valid json object
+// Post: return a string
 string jsonToString(json j) {
 	return j.dump();
 }

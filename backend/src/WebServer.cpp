@@ -1,12 +1,24 @@
-﻿#include "WebServer.h"
+﻿/***********************************************************************
+ * File: WebServer.cpp
+ * Author: 劉耀恩
+ * Create Date: 2023/06/15
+ * Editor: 劉耀恩
+ * Update Date: 2023/06/15
+ * Description: Implementation for WebServer
+ ************************************************************************/
+#include "WebServer.h"
 
-
+// Intent: Constructor
+// Pre: root_directory is a string, port is an integer
+// Post: WebServer object
 WebServer::WebServer(string root_directory, int port)
 {
 	this->port = port;
 	this->root_directory = root_directory;
 }
-
+// Intent: get the content of the file
+// Pre: file_path is a string
+// Post: a string of the content of the file
 string WebServer::get_file_content(const string& file_path)
 {
 	ifstream file(file_path, ios::binary); // Open the file in binary mode
@@ -18,7 +30,9 @@ string WebServer::get_file_content(const string& file_path)
 	}
 	return "";
 }
-
+// Intent: get the content type of the file
+// Pre: file_path is a string
+// Post: a string of the content type of the file
 string WebServer::get_content_type(const string& file_path)
 {
 	static const unordered_map<string, string> contentTypes = {
@@ -43,7 +57,9 @@ string WebServer::get_content_type(const string& file_path)
 	}
 	return "application/octet-stream";
 }
-
+// Intent: handle the request
+// Pre: request is a http::request<http::string_body> object, response is a http::response<http::string_body> object
+// Post: None
 void WebServer::handle_request(const http::request<http::string_body>& request, http::response<http::string_body>& response)
 {
 	string path = request.target();
@@ -76,7 +92,9 @@ void WebServer::handle_request(const http::request<http::string_body>& request, 
 		}
 	}
 }
-
+// Intent: run the web server
+// Pre: None
+// Post: None
 void WebServer::run()
 {
 	boost::asio::io_context io;

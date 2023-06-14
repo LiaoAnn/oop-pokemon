@@ -33,16 +33,16 @@ Game::Game(Player player1, Player player2)
 
 /**
  * Intent: Start the game
- * Pre:
- * Post:
+ * Pre: None
+ * Post: None
  */
 void Game::startGame()
 {}
 
 /**
  * Intent: Initialize the game
- * Pre:
- * Post:
+ * Pre: None
+ * Post: None
  */
 void Game::initGame()
 {
