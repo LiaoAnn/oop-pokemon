@@ -1,4 +1,4 @@
-/***********************************************************************
+﻿/***********************************************************************
  * File: Skill.cpp
  * Author: BING-JIA TAN (B11115001)
  * Create Date: 2023-05-30
@@ -87,6 +87,11 @@ void gameThread()
 		recive = stringToJson(message);
 		type = recive["type"];
 		result = json();
+
+		// Check Win
+		if (checkWinOrLose(webSocketServer))
+			continue;
+		
 
 		if (type == "init")
 		{
@@ -354,6 +359,8 @@ void gameThread()
 
 				game.playerDotCheck(webSocketServer);
 				game.turn++;
+
+				checkWinOrLose(webSocketServer);
 				continue;
 			}
 
@@ -387,6 +394,8 @@ void gameThread()
 
 				game.playerDotCheck(webSocketServer);
 				game.turn++;
+
+				checkWinOrLose(webSocketServer);
 				continue;
 			}
 
@@ -402,6 +411,8 @@ void gameThread()
 
 			game.playerDotCheck(webSocketServer);
 			game.turn++;
+
+			checkWinOrLose(webSocketServer);
 			continue;
 		}
 
@@ -493,6 +504,8 @@ void gameThread()
 
 				game.playerDotCheck(webSocketServer);
 				game.turn++;
+
+				checkWinOrLose(webSocketServer);
 				continue;
 			}
 
@@ -510,6 +523,8 @@ void gameThread()
 			// DOT check
 			game.playerDotCheck(webSocketServer);
 			game.turn++;
+
+			checkWinOrLose(webSocketServer);
 			continue;
 		}
 
@@ -567,6 +582,8 @@ void gameThread()
 
 				game.playerDotCheck(webSocketServer);
 				game.turn++;
+
+				checkWinOrLose(webSocketServer);
 				continue;
 			}
 
@@ -583,6 +600,8 @@ void gameThread()
 			// DOT check
 			game.playerDotCheck(webSocketServer);
 			game.turn++;
+
+			checkWinOrLose(webSocketServer);
 			continue;
 		}
 
