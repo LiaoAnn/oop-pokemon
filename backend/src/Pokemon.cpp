@@ -553,6 +553,12 @@ json Pokemon::toJson()
 	{
 		j["moves"].push_back(skillList[i].toJson());
 	}
+
+	j["statusCondition"] = json::array();
+	for (int i = 0; i < currentStat.size(); i++)
+	{
+		j["statusCondition"].push_back(currentStat[i]->toJson());
+	}
 	return j;
 }
 
