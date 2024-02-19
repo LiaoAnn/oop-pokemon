@@ -6,3 +6,11 @@
 3. MoveLib.txt為技能名稱、寶可夢屬性和物理或特殊攻擊，後面則是傷害值，若是特殊攻擊會有特殊效果
 4. Gamedata.txt 第一行為寶可夢的數量，第二行為寶可夢名稱，第三行為攻擊招式的名稱
 ```
+
+## How to run
+
+### Docker Compose
+
+```bash
+docker-compose up -d
+```
