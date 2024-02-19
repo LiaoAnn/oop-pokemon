@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+  backend:
+    container_name: pokemon-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "9002:9002"
+    networks:
+      - pokemon-network
+
+  frontend:
+    container_name: pokemon-frontend
+    build:
+      context: ./frontent
+      dockerfile: dockerfile
+    ports:
+      - "81:80"
+    networks:
+      - pokemon-network
+
+networks:
+  pokemon-network:
+    driver: bridge
